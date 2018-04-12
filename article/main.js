@@ -8,8 +8,8 @@ const TrainingGraph = require('./visual/training_graph.js');
 const dl = require('deeplearn');
 
 //const assertDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
-const assertDirectory = '/blog-recurrent-units/';
-//const assertDirectory = '/';
+//const assertDirectory = '/blog-recurrent-units/';
+const assertDirectory = '/';
 
 async function setupArticleDemo(model) {
   const autocomplete = new AutoComplete(assertDirectory);
@@ -189,22 +189,25 @@ async function setupTrainingGraph() {
     height: 360
   });
 
-  const generate = new TrainingGraph({
-    container: document.querySelector('#ar-generate-training'),
-    assertDirectory: assertDirectory,
-    name: 'autocomplete',
-    filename: 'generate-training.csv',
-    ylim: [0.5, 5.5],
-    xlim: [-offset, 4 * hour + offset],
-    height: 360
-  });
+  let generate = null;
+  if (!!document.querySelector('#ar-generate-training')) {
+    generate = new TrainingGraph({
+      container: document.querySelector('#ar-generate-training'),
+      assertDirectory: assertDirectory,
+      name: 'autocomplete',
+      filename: 'generate-training.csv',
+      ylim: [0.5, 5.5],
+      xlim: [-offset, 4 * hour + offset],
+      height: 360
+    });
+  }
 
   await autocomplete.draw();
-  await generate.draw();
+  if (generate) await generate.draw();
 
   window.addEventListener('resize', async function () {
     await autocomplete.draw();
-    await generate.draw();
+    if (generate) await generate.draw();
   });
 }
 
