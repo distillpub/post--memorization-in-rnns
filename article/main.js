@@ -58,11 +58,10 @@ async function setupArticleDemo(model) {
 }
 
 async function setupRecurentUnitRNN() {
+  if (!document.querySelector('#ar-recurrent-unit-rnn')) return;
+
   const recurentUnitRNN = new VisualRNN({
     container: document.querySelector('#ar-recurrent-unit-rnn'),
-    caption: '<strong>Recurrent Neural Network:</strong> as used in ' +
-             'autocomplete example. Shows how the network in theory knows ' +
-             'about every part of the sequence that came before.',
     colorize: function (column, columnsTotal) {
 
       const colors = [];
@@ -99,7 +98,6 @@ async function setupRecurentUnitRNN() {
 async function setupMemorizationProblemRNN() {
   const memorizationProblemRNN = new VisualRNN({
     container: document.querySelector('#ar-memorization-problem-rnn'),
-    caption: '<strong>Vanishing Gradient:</strong> where the contribution from the earlier steps becomes insignificant.',
     colorize: function (column, columnsTotal) {
 
       const colors = [];

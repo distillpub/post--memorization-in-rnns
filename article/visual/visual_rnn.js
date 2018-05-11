@@ -14,7 +14,7 @@ function arange(length) {
 }
 
 class VisualRNN extends events.EventEmitter {
-  constructor({container, caption, colorize}) {
+  constructor({container, colorize}) {
     super();
 
     this._colorize = colorize;
@@ -83,10 +83,6 @@ class VisualRNN extends events.EventEmitter {
     this._input = this._svg
       .append('g')
       .attr('transform', 'translate(0, 180)')
-
-    const figcaption = this._container
-      .append('figcaption')
-      .html(caption)
   }
 
   _arrowId(direction) {
