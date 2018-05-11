@@ -33,10 +33,7 @@
     <figcaption id="ar-demo-output-caption">The output for the last character is used.</figcaption>
     <div id="ar-demo-output-content"></div>
 
-    <figcaption id="ar-demo-filter-caption">The most likely suggestions are extracted.</figcaption>
-    <div id="ar-demo-filter-content"></div>
-
-    <figcaption id="ar-demo-final-caption">The indices are looked up in a dictionary.</figcaption>
+    <figcaption id="ar-demo-final-caption">The most likely suggestions are extracted.</figcaption>
     <div id="ar-demo-final-content"></div>
 
     <figcaption id="ar-demo-caption">
@@ -95,7 +92,13 @@
     In theory, this type of network allows it in each iteration to know
     about every part of the sequence that came before.
   </p>
-  <figure id="ar-recurrent-unit-rnn"></figure>
+  <figure id="ar-recurrent-unit-rnn">
+    <figcaption>
+      <strong>Recurrent Neural Network:</strong> as used in
+      autocomplete example. Shows how the network in theory knows
+      about every part of the sequence that came before.
+    </figcaption>
+  </figure>
   <p>
     Given an input sequence <math-latex latex="\{x_t\}_{t=0}^T"></math-latex>,
     such model can be expressed using the following set of equations:
@@ -138,7 +141,12 @@
     such as the Rectified Linear Unit (ReLU), or adding residual connections
     <dt-cite key="he2015resnet"></dt-cite>.
   </p>
-  <figure id="ar-memorization-problem-rnn"></figure>
+  <figure id="ar-memorization-problem-rnn">
+    <figcaption>
+      <strong>Vanishing Gradient: </strong> where the contribution from the
+      earlier steps becomes insignificant.
+    </figcaption>
+  </figure>
   <p>
     In classic recurrent neural networks, this problem becomes much worse,
     due to the time dependencies as the time dependencies essentially unfold

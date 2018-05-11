@@ -11,9 +11,9 @@
 <script type="text/front-matter">
   title: "The effect of internal memory in RNNs"
   description: >
-    An analysis on the effect of the number of internal memory states in
-    recurrent units used in RNN, in terms of the contextual understanding in
-    texts.
+    A visualization method for contextual understanding in text, used for
+    comparing the effect of the number of internal memory states in different
+    recurrent units.
   authors:
   - Andreas Madsen: https://github.com/AndreasMadsen
   affiliations:
@@ -22,9 +22,10 @@
 
 <dt-article>
   <h1>The effect of internal memory in RNNs</h1>
-  <h2>An analysis on the effect of the number of internal memory states in
-  recurrent units used in RNN, in terms of the contextual understanding in
-  texts.</h2>
+  <h2>A visualization method for contextual understanding in text, used for
+  comparing the effect of the number of internal memory states in different
+  recurrent units.
+  </h2>
   <figure id="ar-demo">
     <figcaption id="ar-demo-input-caption">User types input sequence.</figcaption>
     <div id="ar-demo-input-content"></div>
@@ -43,7 +44,8 @@
       recurrent neural network can be used for autocompletion. The network uses
       past information and understands the next word should be a country. Try
       <a href="javascript:arDemoShort();">removing the last letters</a>
-      and see that the prediction uses contextual understanding
+      to see that the network understand that the next word should be a country.
+      This example shows the network is capable of contextual understanding.
       (<a href="javascript:arDemoReset();">reset</a>).
     </figcaption>
   </figure>
@@ -53,42 +55,37 @@
 <dt-article>
   <h2>Introduction</h2>
   <p>
-    Recent advances in handwriting recognition, speech recognition
-    <dt-cite key="hannun2015speach"></dt-cite>, and machine translation
-    <dt-cite key="sutskever2014seq2seq"></dt-cite> have with only a few
-    exceptions <dt-cite key="vaswani2017attention"></dt-cite>
-    <dt-cite key="kalchbrenner2017bytenet"></dt-cite> been based on
-    recurrent neural networks.
+    Memorization in Recurrent Neural Networks continues to pose a challenge
+    in many applications. The Long-Short-Term Memory (LSTM) unit and Gated
+    Recurrent Unit (GRU) are typically used to solve this problem, by
+    solving the vanishing gradient problem. However, the practical problem
+    of memorization still poses a challenge.
   </p>
   <p>
-    These networks may use additional techniques such as attention mechanisms
-    <dt-cite key="bahdanau2014attention"></dt-cite> to work with an unknown
-    alignment between the source and the target sequence.
+    Recently a new paper by Monzi et. al <dt-cite key="moniz2018nlstm"></dt-cite>
+    have proposed an extension of the LSTM unit, called Nested LSTM. In that
+    paper, they visualize an individual cell activation to show that the
+    Nested LSTM unit has a superior ability to memorize.
   </p>
   <p>
-    However, the foundation for these networks is still the recurrent neural
-    network. Likewise, a common challenge for many of these applications
-    is to get the network to memorize past content from the input sequences
-    and use this for contextual understanding later in the sequence.
+    This visualization is inspired by another paper
+    <dt-cite key="karpathy2015rnnvis"></dt-cite> where they identify cells
+    that captures a specific feature. This visualization approach is good
+    for identifying specific features. However, it is not a good argument for
+    memorization in general as the output is entirely dependent on which feature
+    the specific cell captures.
   </p>
-  <p style="text-decoration: underline rgba(0, 255, 0, 0.5);">
-    This challenge comes from the vanishing gradient problem and is often solved
-    by using eiter Long-Short-Term Memory (LSTM) units or Gated Recurrent Units
-    (GRU). However, while these units solve the vanishing gradient problem
-    the practical problem of memorization still poses challenges.
+  <p>
+    This article proposes a better visualization method of connectivity for
+    showing memorization and contextual understanding. Furthermore, the
+    autocomplete problem is used as the main problem, as the output is much
+    easier to reason about compared to more standard problems such as
+    Penn Treebank, Chinese Poetry Generation, or text8 generation.
   </p>
-  <p style="text-decoration: underline rgba(0, 255, 0, 0.5);">
-    Recent an new paper by Monzi et. al <dt-cite key="moniz2018nlstm"></dt-cite>
-    have proposed an extension of the LSTM unit, called Nested LSTM. In this
-    article, this new recurrent unit is evaluated on the autocomplete problem
-    as seen above. This is to see what effect the number of internal memory
-    states have on the unit's ability to learn contextual understanding.
-  </p>
-  <p style="text-decoration: underline rgba(0, 255, 0, 0.5);">
-    The evaluation is done by using a visualization of the connectivity,
-    between the desired output and the input. This visualization shows new
-    insight into how well the different recurrent units memorizes and
-    understands past information.
+  <p>
+    It is the hope that the connectivity visualization used on the
+    autocomplete problem, will help advance the dialogue around contextual
+    understanding in recurrent units.
   </p>
 </dt-article>
 
@@ -104,22 +101,10 @@
     from the previous layer in the same "time" iteration.
   </p>
   <p>
-    In theory, this type of network allows it in each iteration to know
-    about every part of the sequence that came before.
-  </p>
-  <figure id="ar-recurrent-unit-rnn">
-    <figcaption>
-      <strong>Recurrent Neural Network:</strong> as used in
-      autocomplete example. Shows how the network in theory knows
-      about every part of the sequence that came before.
-    </figcaption>
-  </figure>
-  <p>
     Given an input sequence <math-latex latex="\{x_t\}_{t=0}^T"></math-latex>,
     such model can be expressed using the following set of equations:
   <math-latex display-mode latex="\begin{aligned}
-    h_{0}^t &= x_t \\
-    h_{\ell}^{t} &= \mathrm{Unit}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \\
+    h_{\ell}^{t} &= \mathrm{Unit}(h_{\ell-1}^{t}, h_{\ell}^{t-1}), \text{ where: } h_{0}^t = x_t \\
     y^t &= \mathrm{Softmax}(h_L^t) \\
     \mathcal{L} &= - \frac{1}{T} \sum_{t=1}^T \ln(y^t_k)
   \end{aligned}"></math-latex>
@@ -127,7 +112,8 @@
     <math-latex latex="h_\ell^{t-1}"></math-latex>
     ) and the output from the previous layer in the same iteration (
     <math-latex latex="h_{\ell-1}^t"></math-latex>
-    ) are combined, is abstracted away.
+    ) are combined, it is abstracted away. This abstraction is the foundation
+    for the Nested LSTM unit which is explained later.
   </p>
   <p>
     For a vanilla recurrent neural network, the recurrent unit
@@ -137,52 +123,29 @@
     h_{\ell}^{t} = \mathrm{RNN}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq \sigma(W_{\ell-1,\ell}h_{\ell-1}^t + W_{\ell,\ell}h_{\ell}^{t-1})
   "></math-latex>
   </p>
-</dt-article>
-
-<dt-article>
-  <h2>Vanishing Gradient Problem</h2>
   <p>
-    Deep neural networks can suffer from a vanishing gradient problem where
-    the gradient used in optimization becomes minuscule. This is because the
-    <math-latex latex="\delta_\ell"></math-latex> used in backpropagation
-    ends up being multiplicatively depending on the
-    <math-latex latex="\delta_\ell"></math-latex> of the next layer.
-    <math-latex display-mode latex="
-    \frac{\partial \mathcal{L}}{\partial h_\ell} = \delta_\ell = \sigma(z_\ell) \odot W_{\ell, \ell+1} \delta_{\ell+1}
-    "></math-latex>
-    This problem can be mitigated through careful initialization of the weights
-    <math-latex latex="W_{\ell-1, \ell}"></math-latex>, by choosing an
-    activation function <math-latex latex="\sigma"></math-latex>
-    such as the Rectified Linear Unit (ReLU), or adding residual connections
-    <dt-cite key="he2015resnet"></dt-cite>.
+    In theory, the time dependency allows it in each iteration to know
+    about every part of the sequence that came before. However, because
+    of this time dependency it is very common for the network to suffer from a
+    vanishing gradient problem, that causes the training to ignore long-term
+    dependencies.
   </p>
   <figure id="ar-memorization-problem-rnn">
     <figcaption>
       <strong>Vanishing Gradient: </strong> where the contribution from the
-      earlier steps becomes insignificant.
+      earlier steps becomes insignificant in the gradient:
+      <math-latex latex="
+      \frac{\partial \mathcal{L}}{\partial h_\ell^t} = \delta_\ell^t = \sigma(z_\ell^t) \odot \left( W_{\ell, \ell+1} \delta_{\ell+1}^t +  W_{\ell, \ell} \delta_{\ell}^{t+1}\right)
+      "></math-latex>
     </figcaption>
   </figure>
   <p>
-    In classic recurrent neural networks, this problem becomes much worse,
-    due to the time dependencies as the time dependencies essentially unfold
-    into a potentially infinite deep neural network.
-    <math-latex display-mode latex="
-    \frac{\partial \mathcal{L}}{\partial h_\ell^t} = \delta_\ell^t = \sigma(z_\ell^t) \odot \left( W_{\ell, \ell+1} \delta_{\ell+1}^t +  W_{\ell, \ell} \delta_{\ell}^{t+1}\right)
-    "></math-latex>
-  </p>
-  <p>
-    An intutive way of viewing this problem is that the vanilla recurrent
-    network forces an update of the state <math-latex latex="
-    h_{\ell}^t"></math-latex>. This forced update, is what courses the vanishing
-    gradient problem.
-    This forced update is also insufficient as irrelevant input data, such as
-    skip words, blur out important information from previous iterations.
-  </p>
-  <p style="text-decoration: underline rgba(0, 255, 0, 0.5);">
     The Long Short-Term Memory (LSTM) unit and Gated Recurret Unit (GRU)
     solves this vanishing gradient problem by using gates. These gates control
-    how much the new state value should be updated. Both LSTM and GRU are well
-    known and <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
+    how much the new state value should be updated and thereby allows it
+    to selectively memorize <dt-cite key="graves2008phd"></dt-cite>
+    <dt-cite key="cho2014gru"></dt-cite>. Both LSTM and GRU are well known and
+    also <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
     thoroughly explained in the literature</a> and therefore not discussed here.
   </p>
 </dt-article>
@@ -223,7 +186,7 @@
     <math-latex display-mode latex="
       c_\ell^t = \mathrm{LSTM}(i_\ell^t \odot z_\ell^t, f_\ell^t \odot c_\ell^{t-1})
     "></math-latex>
-    <span style="text-decoration: underline rgba(0, 255, 0, 0.5);">See the defintion of <math-latex latex="
+    <span>See the defintion of <math-latex latex="
     \mathrm{LSTM}(\cdot, \cdot)"></math-latex> <a href="#appendix-lstm">
     in the appendix</a>. </span>
   </p>
@@ -252,19 +215,19 @@
   </p>
   <p>
     The abstraction, of how to combine the input with the cell value, allows
-    a lot of flexibility. Using this abstraction, it is not only possible
+    for a lot of flexibility. Using this abstraction, it is not only possible
     to add one extra internal memory state but the internal
     <math-latex latex="\mathrm{LSTM}(\cdot, \cdot)"></math-latex> unit can
-    recursively be replaced as many internal
+    recursively be replaced by as many internal
     <math-latex latex="\mathrm{NLSTM}(\cdot, \cdot)"></math-latex> units as
     one would wish, thereby adding even more internal memory.
   </p>
   <p>
     From a theoretical view, whether or not the Nested LSTM unit improves long-term
     memorization is not really clear. The LSTM unit theoretically solves the vanishing
-    gradient problem and a network of LSTM units is Turing complete. In theory,
-    using LSTM units should be sufficient for solving problems that require
-    long-term memorization.
+    gradient problem and a network of LSTM units is Turing complete. Therefore,
+    in theory, using LSTM units should be sufficient for solving problems that
+    require long-term memorization.
   </p>
   <p>
     That being said, it is often very difficult to train LSTM and GRU based
@@ -282,13 +245,15 @@
     different memorization.
   </p>
   <p>
-    A good problem for analyzing the contextual understanding, should have
-    a humanly interpretive output and depend both on long and short memorization.
+    A good problem for qualitatively analyzing the contextual understanding,
+    should have a humanly interpretable output and depend both on long and
+    short memorization.
   </p>
   <p>
     To this end, the autocomplete problem is used. Each character is mapped
     to a target that represents the entire word. To make it extra difficult,
-    the space leading up to the word should also map to that word.
+    the space leading up to the word should also map to that word. This
+    prediction, is in particular useful for showing contextual understanding.
   </p>
   <h3>Autocomplete Problem</h3>
   <p>
@@ -329,10 +294,10 @@
     </figcaption>
   </figure>
   <p>
-    There are 508583 sequences in the training dataset and a batch size
+    There are 456896 sequences in the training dataset and a batch size
     of 64 observations is used. A single iteration over the entire dataset
-    then corresponds to 7946 epochs, which is enogth to train the network,
-    therefore the models only trained for 7946 epochs. For training, Adam
+    then corresponds to 7139 epochs, which is enogth to train the network,
+    therefore the models only trained for 7139 epochs. For training, Adam
     optimization is used with default parameters.
   </p>
   <figure>
@@ -340,7 +305,9 @@
     <figcaption>
       <strong>Model training:</strong> shows the training loss and
       validation loss for the GRU, LSTM, and Nested LSTM models when training
-      on the autocomplete problem.
+      on the autocomplete problem. The x-axis is
+      <a href="javascript:setTrainingGraphXAxis('time')">time</a> or
+      <a href="javascript:setTrainingGraphXAxis('epochs')">epochs</a>.
     </figcaption>
   </figure>
   <figure class="ar-table-container">
@@ -363,25 +330,19 @@
     As seen from the results the models are more or less equally fast.
     Surprisingly the Nested LSTM is not better than the LSTM or GRU models.
     This somewhat contradicts the results found in the Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, although they tested model
+    <dt-cite key="moniz2018nlstm"></dt-cite>, although they tested the models
     on different problems and therefore the results are not exactly comparable.
     Never or less one would still expect the Nested LSTM model to perform
     better for this problem, where long-term memorization is important for
     the contextual understanding.
   </p>
-  <p>
-    An unexpected result is that the Nested LSTM model initially
-    converges much faster than the LSTM and GRU models. This, combined with
-    the worse performance, indicates that the Nested LSTM optimizes forwards
-    an unideal local minimum.
-  </p>
   <h3>Connectivity in the Autocomplete Problem</h3>
   <p>
-  To get a better idea of how well each model memorizes and uses that for
+  To get a better idea of how well each model memorizes and uses memory for
   contextual understanding, the connectivity between the desired output and
   the input should be analyzed. This is calculated as the magnitude of
   the gradient, between the logits for the desired output
-  <math-latex latex="(h_L^t)_k"></math-latex> and the input
+  <math-latex latex="(h_L^{\tilde{t}})_k"></math-latex> and the input
   <math-latex latex="x^t"></math-latex>.
   <math-latex display-mode latex="
     \textrm{connectivity}(t, \tilde{t}) =
@@ -429,7 +390,7 @@
 
   For the second occurrence, there is much more text for the models to
   understand the context of the word. The GRU model is thus able to predict
-  the word "grammar" with only <a href="javascript:connectivitySetIndex(149);">
+  the word "grammar" with only <a href="javascript:connectivitySetIndex(159);">
   1 character from the word itself</a>. While the LSTM and Nested LSTM again
   needs <a href="javascript:connectivitySetIndex(162);">4 characters</a>.
     </li>
@@ -448,21 +409,24 @@
     interesting. A reasonable high accuracy can be obtained, with reasonably
     low contextual understanding. It is only for the first couple of characters,
     that long-term memorization and contextual understanding really matters.
+    More traditional problems like Penn Treebank, Chinese Poetry Generation, or
+    text8 generation are therefore just as suited for this kind of analysis.
   </p>
   <p>
-    A more qualitative analysis of the connectivity together with the prediction,
-    reveals that the Nested LSTM model isn't capable of long-term contextual
-    understanding. This contradicts the design decisions for the model and the
-    findings in the original paper <dt-cite key="moniz2018nlstm"></dt-cite>.
-    In fact, the GRU model, which has no internal memory, is the model that
-    has the highest accuracy and shows the most contextual understanding in the
-    connectivity analysis.
+    The more qualitative analysis of the connectivity together with the
+    autocomplete predictions, reveals that the Nested LSTM model isn't capable
+    of long-term contextual understanding. This contradicts the design decisions
+    for the model and the findings in the original paper
+    <dt-cite key="moniz2018nlstm"></dt-cite>. In fact, the GRU model, which has
+    no internal memory, is the model that has the highest accuracy and shows
+    the most contextual understanding in the connectivity analysis.
   </p>
   <p>
     It is entirely possible, that the results are highly dependent on the
-    random initialization and the specific problem. However, the results still
-    show that more internal memory per recurrent unit does not necessarily
-    improve long-term memorization.
+    random initialization and the specific application. However, the results
+    still show that more internal memory per recurrent unit does not necessarily
+    improve long-term memorization as hypothesized in the Nested LSTM paper
+    <dt-cite key="moniz2018nlstm"></dt-cite>.
   </p>
 </dt-article>
 
@@ -474,6 +438,11 @@
     and David Krueger. Even though our findings weren't the same, they
     have inspired much of this article and shown that something as used
     as the recurrent unit is still an open research area.
+  </p>
+  <p>
+    I'm also grateful for the excellent feedback and patience by
+    Christopher Olah from the Distill team. His feedback has dramatically
+    improved the quality of the article.
   </p>
   <h3 id="appendix-lstm">Long Short-Term Memory</h3>
   <figure>
@@ -511,52 +480,20 @@
 </dt-appendix>
 
 <script type="text/bibliography">
-  @article{hannun2015speach,
-    title={Deep Speech: Scaling up end-to-end speech recognition},
-    author={Awni Hannun and Carl Case and Jared Casper and Bryan Catanzaro and Greg Diamos and Erich Elsen and Ryan Prenger and Sanjeev Satheesh and Shubho Sengupta and Adam Coates and Andrew Y. Ng},
-    journal={arXivreprint arXiv:1412.5567},
-    year={2014},
-    url={https://arxiv.org/pdf/1412.5567.pdf}
-  }
-
-  @article{sutskever2014seq2seq,
-    title={Sequence to Sequence Learning with Neural Networks},
-    author={Ilya Sutskever and Oriol Vinyals and Quoc V. Le},
-    journal={arXivreprint arXiv:1409.3215},
-    year={2014},
-    url={https://arxiv.org/pdf/1409.3215.pdf}
-  }
-
-  @article{vaswani2017attention,
-    title={Attention Is All You Need},
-    author={Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
-    journal={arXivreprint arXiv:1706.03762},
-    year={2017},
-    url={https://arxiv.org/pdf/1706.03762.pdf}
-  }
-
-  @article{kalchbrenner2017bytenet,
-    title={Neural Machine Translation in Linear Time},
-    author={Nal Kalchbrenner and Lasse Espeholt and Karen Simonyan and Aaron van den Oord and Alex Gravesand Koray Kavukcuoglu},
-    journal={arXivreprint arXiv:1610.10099},
-    year={2017},
-    url={https://arxiv.org/pdf/1610.10099.pdf}
-  }
-
-  @article{bahdanau2014attention,
-    title={Neural Machine Translation by Jointly Learning to Align and Translate},
-    author={Dzmitry Bahdanau and Kyunghyun Cho and Yoshua Bengio},
-    journal={arXivreprint arXiv:1409.0473},
-    year={2014},
-    url={https://arxiv.org/pdf/1409.0473.pdf}
-  }
-
   @article{moniz2018nlstm,
     title={Nested LSTMs},
     author={Joel Ruben Antony Moniz and David Krueger},
     journal={arXivreprint arXiv:1801.10308},
     year={2018},
     url={https://arxiv.org/pdf/1801.10308.pdf}
+  }
+
+  @article{karpathy2015rnnvis,
+    title={Visualizing and Understanding Recurrent Networks},
+    author={Andrej Karpathy and Justin Johnson and Li Fei-Fei},
+    journal={arXivreprint arXiv:1506.02078},
+    year={2015},
+    url={https://arxiv.org/pdf/1506.02078.pdf}
   }
 
   @article{graves2008phd,
@@ -567,18 +504,10 @@
   }
 
   @article{cho2014gru,
-    title={Supervised Sequence Labelling with Recurrent Neural Networks},
+    title={Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation},
     author={Kyunghyun Cho and Bart van Merrienboer and Caglar Gulcehre and Dzmitry Bahdanau and Fethi Bougares and Holger Schwenk and Yoshua Bengio},
     journal={arXivreprint arXiv:1406.1078},
     year={2014},
     url={https://arxiv.org/pdf/1406.1078.pdf}
-  }
-
-  @article{he2015resnet,
-    title={Supervised Sequence Labelling with Recurrent Neural Networks},
-    author={Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
-    journal={arXivreprint arXiv:1512.03385},
-    year={2015},
-    url={https://arxiv.org/pdf/1512.03385.pdf}
   }
 </script>

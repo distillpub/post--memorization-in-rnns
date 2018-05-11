@@ -8,8 +8,10 @@ const xAxisHeight = 20;
 const xLabelHeight = 20;
 
 class SubGraph {
-  constructor({ container, topName, name, lineSetup, outerHeight, drawXAxis, xlim, ylim }) {
+  constructor({ container, topName, name, lineSetup, outerHeight, drawXAxis, xlimTime, xlimEpochs, ylim }) {
     this.height = outerHeight - margin.top - margin.bottom;
+    this.xlimTime = xlimTime;
+    this.xlimEpochs = xlimEpochs;
 
     this.lineSetup = lineSetup;
     this.container = container;
@@ -30,9 +32,10 @@ class SubGraph {
       .append('textPath')
       .attr('startOffset', '50%')
       .attr('href', `#ar-training-graph-${topName}-${name}-facet-text`)
-      .attr(':xlink:href', `#ar-training-graph-${topName}-${name}-facet-text`)
       .attr('text-anchor', 'middle')
       .text(name);
+    facetText.node()
+      .setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#ar-training-graph-${topName}-${name}-facet-text`);
 
     // Create background
     this.background = this.graph.append("rect")
@@ -40,16 +43,11 @@ class SubGraph {
       .attr("height", this.height);
 
     // define scales
-    this.xScale = d3.scaleTime()
-      .domain(xlim);
     this.yScale = d3.scaleLinear()
       .domain(ylim)
       .range([this.height, 0]);
 
     // create grid
-    this.xGrid = d3.axisBottom(this.xScale)
-      .ticks(d3.timeMinute.every(30))
-      .tickSize(-this.height);
     this.xGridElement = this.graph.append("g")
         .attr("class", "grid")
         .attr("transform", "translate(0," + this.height + ")");
@@ -61,12 +59,6 @@ class SubGraph {
         .attr("class", "grid");
 
     // define axis
-    this.xAxis = d3.axisBottom(this.xScale)
-      .ticks(d3.timeMinute.every(60))
-      .tickFormat(function (d) {
-        const hour = Math.floor(d.getTime() / (60 * 60 * 1000));
-        return `0${hour}:00:00`;
-      });
     this.xAxisElement = this.graph.append('g')
       .attr("class", "axis")
       .classed('hide-axis', !drawXAxis)
@@ -83,7 +75,7 @@ class SubGraph {
     const self = this;
     for (let i = 0; i < lineSetup.length; i++) {
       const lineDrawer = d3.line()
-          .x((d) => self.xScale(d.sec))
+          .x((d) => self.xScale(d[this.dataColumn]))
           .y((d) => this.yScale(d.lossSmooth));
 
       this.lineDrawers.push(lineDrawer);
@@ -104,8 +96,52 @@ class SubGraph {
     }
   }
 
+  setXAxis(xAxisName) {
+    this.xAxisName = xAxisName;
+
+    if (xAxisName === 'time') {
+      this.dataColumn = 'sec';
+      this.xScale = d3.scaleTime()
+        .domain(this.xlimTime);
+      this.xGrid = d3.axisBottom(this.xScale)
+        .ticks(d3.timeMinute.every(30))
+        .tickSize(-this.height);
+      this.xAxis = d3.axisBottom(this.xScale)
+        .ticks(d3.timeMinute.every(60))
+        .tickFormat(function (d) {
+          const hour = Math.floor(d.getTime() / (60 * 60 * 1000));
+          return `0${hour}:00:00`;
+        });
+    } else if (xAxisName === 'epochs') {
+      this.dataColumn = 'step';
+      this.xScale = d3.scaleLinear()
+        .domain(this.xlimEpochs);
+      this.xGrid = d3.axisBottom(this.xScale)
+        .ticks(8)
+        .tickSize(-this.height);
+      this.xAxis = d3.axisBottom(this.xScale)
+        .ticks(4);
+    }
+  }
+
+  xTicksMajors() {
+    if (this.xAxisName === 'time') {
+      const xTicksMajors = this.xScale.ticks(d3.timeMinute.every(60))
+        .map((d) => d.getTime());
+
+      return function (d) {
+        return !xTicksMajors.includes(d.getTime());
+      }
+    } else if (this.xAxisName === 'epochs') {
+      const xTicksMajors = this.xScale.ticks(4)
+
+      return function (d) {
+        return !xTicksMajors.includes(d);
+      }
+    }
+  }
+
   draw({ outerWidth, outerHeight }) {
-    const self = this;
     const graphWidth = outerWidth - facetWidth - margin.left - margin.right;
 
     // set background
@@ -121,21 +157,17 @@ class SubGraph {
 
     // update grid
     this.yGrid.tickSize(-graphWidth);
-    const yTicksMajors = self.yScale.ticks(4);
+    const yTicksMajors = this.yScale.ticks(4);
     this.yGridElement.call(this.yGrid);
     this.yGridElement
       .selectAll('.tick')
       .classed('minor', function (d) {
         return !yTicksMajors.includes(d);
       })
-    const xTicksMajors = self.xScale.ticks(d3.timeMinute.every(60))
-      .map((d) => d.getTime());
-    this.xGridElement.call(this.xGrid)
+    this.xGridElement.call(this.xGrid);
     this.xGridElement
       .selectAll('.tick')
-      .classed('minor', function (d) {
-        return !xTicksMajors.includes(d.getTime());
-      })
+      .classed('minor', this.xTicksMajors());
 
     // update axis
     this.xAxisElement.call(this.xAxis);
@@ -149,7 +181,7 @@ class SubGraph {
 }
 
 class TrainingGraph {
-  constructor({ container, assertDirectory, name, filename, height, xlim, ylim }) {
+  constructor({ container, assertDirectory, name, filename, height, xlimTime, xlimEpochs, ylim }) {
     this._data = d3.csv(
       assertDirectory + 'data/' + filename,
       (d) => ({
@@ -158,7 +190,8 @@ class TrainingGraph {
         lossSmooth: parseFloat(d['loss smooth']),
         model: d.model,
         sec: new Date(parseFloat(d.sec) * 1000),
-        time: new Date(parseFloat(d['wall time']) * 1000)
+        time: new Date(parseFloat(d['wall time']) * 1000),
+        step: parseInt(d.step)
       })
     );
     this._dataLoaded = false;
@@ -182,7 +215,8 @@ class TrainingGraph {
       lineSetup: lineSetup,
       outerHeight: graphHeight,
       drawXAxis: false,
-      xlim: xlim,
+      xlimTime: xlimTime,
+      xlimEpochs: xlimEpochs,
       ylim: ylim
     });
     this._valid = new SubGraph({
@@ -193,7 +227,8 @@ class TrainingGraph {
       lineSetup: lineSetup,
       outerHeight: graphHeight,
       drawXAxis: true,
-      xlim: xlim,
+      xlimTime: xlimTime,
+      xlimEpochs: xlimEpochs,
       ylim: ylim
     });
 
@@ -211,12 +246,11 @@ class TrainingGraph {
       .append('textPath')
       .attr('startOffset', '50%')
       .attr('href', `#ar-training-graph-${name}-ylabel`)
-      .attr(':xlink:href', `#ar-training-graph-${name}-ylabel`)
       .attr('text-anchor', 'middle')
       .text('cross entropy loss');
-    this._xLabel = this._labels
-      .append('text')
-      .text('time')
+    this._yLabel.node()
+      .setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#ar-training-graph-${name}-ylabel`);
+    this._xLabel = this._labels.append('text')
       .attr('text-anchor', 'middle')
       .attr('y', combinedOuterHeight - 12);
 
@@ -247,6 +281,16 @@ class TrainingGraph {
       currentOffset += 30 + textWidth + 20;
     }
     this._legendWidth = currentOffset - 20;
+
+    // Default config
+    this._xAxisName = '';
+    this.setXAxis('time');
+  }
+
+  setXAxis (xAxisName) {
+    this._xAxisName = xAxisName;
+    this._train.setXAxis(xAxisName);
+    this._valid.setXAxis(xAxisName);
   }
 
   getGraphWidth () {
@@ -278,7 +322,8 @@ class TrainingGraph {
       outerWidth: outerWidth
     });
     this._xLabel
-      .attr('x', innerWidth / 2 + margin.left);
+      .attr('x', innerWidth / 2 + margin.left)
+      .text(this._xAxisName);
     this._legendOfsset
       .attr('transform', `translate(${(innerWidth - this._legendWidth) / 2}, 0)`)
   }

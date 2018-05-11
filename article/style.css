@@ -1,13 +1,46 @@
 
+@media only screen and (max-width: 600px) {
+  math-latex[display-mode] {
+    font-size: 90%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  math-latex[display-mode] {
+    font-size: 80%;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion {
+    text-align: center;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .word {
+    float: none;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .properbility {
+    display: none;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 60%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  math-latex[display-mode] {
+    font-size: 70%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 50%;
+  }
+}
+
 #ar-demo {
   display: grid;
   grid-template-columns: 20% auto;
-  grid-template-rows: repeat(5, 60px);
+  grid-template-rows: repeat(4, 60px);
   grid-template-areas:
     "input-caption input-content"
     "rnn-caption rnn-content"
     "output-caption output-content"
-    "filter-caption filter-content"
     "final-caption final-content"
     ". caption";
   grid-column-gap: 10px;
@@ -34,8 +67,6 @@ figcaption#ar-demo-rnn-caption { grid-area: rnn-caption; }
 #ar-demo-rnn-content { grid-area: rnn-content; }
 figcaption#ar-demo-output-caption { grid-area: output-caption; }
 #ar-demo-output-content { grid-area: output-content; }
-figcaption#ar-demo-filter-caption { grid-area: filter-caption; }
-#ar-demo-filter-content { grid-area: filter-content; }
 figcaption#ar-demo-final-caption { grid-area: final-caption; }
 #ar-demo-final-content { grid-area: final-content; }
 
@@ -99,6 +130,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 
   background: none;
   border: none;
+  padding: 0;
   font-size: 1em;
   letter-spacing: 0.1em;
   font-family: "Courier New", monospace;
@@ -135,39 +167,6 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   text-align: center;
 }
 
-#ar-demo-filter-content div.suggestions {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  grid-column-gap: 10px;
-  height: 30px;
-}
-
-#ar-demo-filter-content div.suggestions div.suggestion {
-  background: #f3f3f3;
-  border: solid 1px #e3e3e3;
-  box-sizing: border-box;
-  padding: 0px 8px;
-  font-size: 0.8em;
-  overflow: hidden;
-  line-height: 30px;
-  height: 30px;
-}
-
-#ar-demo-filter-content div.suggestions div.suggestion span.index {
-  float: left;
-}
-
-
-#ar-demo-filter-content div.suggestions div.suggestion span.properbility {
-  float: right;
-}
-
-#ar-demo-filter-content svg path {
-  fill: rgb(70, 130, 180);
-  opacity: 0.2;
-}
-
 #ar-demo-final-content div.suggestions {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -181,11 +180,19 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   border: solid 1px #e3e3e3;
   box-sizing: border-box;
   padding: 0px 8px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   overflow: hidden;
-  height: 30px;
   line-height: 30px;
-  text-align: center;
+  height: 30px;
+}
+
+#ar-demo-final-content div.suggestions div.suggestion span.word {
+  float: left;
+}
+
+
+#ar-demo-final-content div.suggestions div.suggestion span.properbility {
+  float: right;
 }
 
 #ar-demo-final-content svg path {
@@ -196,7 +203,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 .ar-visual-rnn {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 240px 2em;
+  grid-template-rows: 240px auto;
   grid-template-areas:
     "content-caption content"
     ". caption";
@@ -204,13 +211,14 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 }
 
 .ar-visual-rnn .descriptions {
+  display: grid;
+  grid-template-rows: 60px 60px 60px 60px;
+  align-items: center;
   grid-area: content-caption;
 }
 
 .ar-visual-rnn .descriptions figcaption {
-  height: 60px;
   text-align: right;
-  line-height: 60px;
 }
 
 .ar-visual-rnn svg {

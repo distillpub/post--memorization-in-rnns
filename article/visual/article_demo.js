@@ -127,30 +127,6 @@ class ArticleDemo extends events.EventEmitter {
       .data([0, 0, 0])
       .enter().append('path')
 
-    this._filterContainer = d3.select('#ar-demo-filter-content');
-    this._filterFlowInSvg = this._filterContainer
-      .append('svg')
-      .attr('height', 15)
-      .attr('width', '100%');
-    this._filterFlowInGroup = this._filterFlowInSvg
-      .append('g')
-      .attr('transform', 'translate(0, -15)')
-    this._filterFlowInGroup
-      .selectAll('path')
-      .data([0, 0, 0])
-      .enter().append('path')
-    this._filterSuggestions = this._filterContainer
-      .append('div')
-      .classed('suggestions', true);
-    this._filterFlowOutSvg = this._filterContainer
-      .append('svg')
-      .attr('height', 15)
-      .attr('width', '100%');
-    this._filterFlowOutSvg
-      .selectAll('path')
-      .data([0, 0, 0])
-      .enter().append('path')
-
     this._finalContainer = d3.select('#ar-demo-final-content');
     this._finalFlowInSvg = this._finalContainer
       .append('svg')
@@ -260,8 +236,7 @@ class ArticleDemo extends events.EventEmitter {
     const cellSizing = this._getCellSizing();
     this._drawRnn(cellSizing);
     this._drawOutput(cellSizing, properbility, mostLikelyWords);
-    this._drawFilter(properbility, mostLikelyWords);
-    this._drawFinal(mostLikelyWords);
+    this._drawFinal(properbility, mostLikelyWords);
   }
 
   _getCellSizing() {
@@ -400,7 +375,7 @@ class ArticleDemo extends events.EventEmitter {
     }
   }
 
-  _drawFilter(properbility, mostLikelyWords) {
+  _drawFinal(properbility, mostLikelyWords) {
     const parentWidth = this._outputContainer
       .node()
       .clientWidth;
@@ -408,7 +383,7 @@ class ArticleDemo extends events.EventEmitter {
     const wordsPerPixed = Math.floor(properbility.length / (parentWidth / 4));
 
     // draw flow
-    const flowInSelection = this._filterFlowInGroup
+    const flowInSelection = this._finalFlowInGroup
       .selectAll('path')
       .data(mostLikelyWords)
       .attr('d', (d, i) => smoothFlowPathNarrow({
@@ -418,23 +393,14 @@ class ArticleDemo extends events.EventEmitter {
         bottomWidth: suggestionWidth
       }));
 
-    const flowOutSelection = this._filterFlowOutSvg
-      .selectAll('path')
-      .data([0, 1, 2])
-      .attr('d', (i) => smoothFlowPathSameWidth({
-        x: (suggestionWidth + 10) * i,
-        borderWidth: suggestionWidth,
-        midWidth: suggestionWidth * 0.8
-      }));
-
     // draw content
-    const contentSelection = this._filterSuggestions
+    const contentSelection = this._finalSuggestions
       .selectAll('div.suggestion')
       .data(mostLikelyWords)
       .each(function (d) {
         d3.select(this)
-          .select('span.index')
-          .text(d.index)
+          .select('span.word')
+          .text(d.word)
         d3.select(this)
           .select('span.properbility')
           .text(`(${(d.properbility * 100).toFixed(2)}%)`)
@@ -445,42 +411,13 @@ class ArticleDemo extends events.EventEmitter {
       .each(function (d) {
         d3.select(this)
           .append('span')
-          .classed('index', true)
-          .text(d.index)
+          .classed('word', true)
+          .text(d.word)
         d3.select(this)
           .append('span')
           .classed('properbility', true)
           .text(`(${(d.properbility * 100).toFixed(2)}%)`)
       })
-    contentSelection.exit()
-      .remove()
-  }
-
-  _drawFinal(mostLikelyWords) {
-    const parentWidth = this._outputContainer
-      .node()
-      .clientWidth;
-    const suggestionWidth = (parentWidth - 20) / 3;
-
-    // draw flow
-    const flowInSelection = this._finalFlowInGroup
-      .selectAll('path')
-      .data([0, 1, 2])
-      .attr('d', (i) => smoothFlowPathSameWidth({
-        x: (suggestionWidth + 10) * i,
-        borderWidth: suggestionWidth,
-        midWidth: suggestionWidth * 0.8
-      }));
-
-    // draw content
-    const contentSelection = this._finalSuggestions
-      .selectAll('div.suggestion')
-      .data(mostLikelyWords)
-      .text((d) => d.word)
-    contentSelection.enter()
-      .append('div')
-      .classed('suggestion', true)
-      .text((d) => d.word)
     contentSelection.exit()
       .remove()
   }
