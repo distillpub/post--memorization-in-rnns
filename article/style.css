@@ -1,4 +1,38 @@
 
+@media only screen and (max-width: 600px) {
+  math-latex[display-mode] {
+    font-size: 90%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  math-latex[display-mode] {
+    font-size: 80%;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion {
+    text-align: center;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .word {
+    float: none;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .properbility {
+    display: none;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 60%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  math-latex[display-mode] {
+    font-size: 70%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 50%;
+  }
+}
+
 #ar-demo {
   display: grid;
   grid-template-columns: 20% auto;
@@ -96,6 +130,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 
   background: none;
   border: none;
+  padding: 0;
   font-size: 1em;
   letter-spacing: 0.1em;
   font-family: "Courier New", monospace;
@@ -168,7 +203,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 .ar-visual-rnn {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 240px 2em;
+  grid-template-rows: 240px auto;
   grid-template-areas:
     "content-caption content"
     ". caption";
@@ -176,13 +211,14 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 }
 
 .ar-visual-rnn .descriptions {
+  display: grid;
+  grid-template-rows: 60px 60px 60px 60px;
+  align-items: center;
   grid-area: content-caption;
 }
 
 .ar-visual-rnn .descriptions figcaption {
-  height: 60px;
   text-align: right;
-  line-height: 60px;
 }
 
 .ar-visual-rnn svg {

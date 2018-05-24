@@ -30,9 +30,10 @@ class SubGraph {
       .append('textPath')
       .attr('startOffset', '50%')
       .attr('href', `#ar-training-graph-${topName}-${name}-facet-text`)
-      .attr(':xlink:href', `#ar-training-graph-${topName}-${name}-facet-text`)
       .attr('text-anchor', 'middle')
       .text(name);
+    facetText.node()
+      .setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#ar-training-graph-${topName}-${name}-facet-text`);
 
     // Create background
     this.background = this.graph.append("rect")
@@ -211,9 +212,10 @@ class TrainingGraph {
       .append('textPath')
       .attr('startOffset', '50%')
       .attr('href', `#ar-training-graph-${name}-ylabel`)
-      .attr(':xlink:href', `#ar-training-graph-${name}-ylabel`)
       .attr('text-anchor', 'middle')
       .text('cross entropy loss');
+    this._yLabel.node()
+      .setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#ar-training-graph-${name}-ylabel`);
     this._xLabel = this._labels
       .append('text')
       .text('time')
