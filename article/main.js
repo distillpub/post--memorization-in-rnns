@@ -183,7 +183,8 @@ async function setupTrainingGraph() {
     name: 'autocomplete',
     filename: 'autocomplete-training.csv',
     ylim: [0.5, 10.5],
-    xlim: [-offset, 2.5 * hour + offset],
+    xlimTime: [-offset, 2.5 * hour + offset],
+    xlimEpochs: [-200, 7300],
     height: 360
   });
 
@@ -195,7 +196,8 @@ async function setupTrainingGraph() {
       name: 'autocomplete',
       filename: 'generate-training.csv',
       ylim: [0.5, 5.5],
-      xlim: [-offset, 4 * hour + offset],
+      xlimTime: [-offset, 4 * hour + offset],
+      xlimEpochs: [-200, 7300],
       height: 360
     });
   }
@@ -207,6 +209,14 @@ async function setupTrainingGraph() {
     await autocomplete.draw();
     if (generate) await generate.draw();
   });
+
+  window.setTrainingGraphXAxis = async function (xAxisName) {
+    autocomplete.setXAxis(xAxisName);
+    if (generate) generate.setXAxis(xAxisName);
+
+    await autocomplete.draw();
+    if (generate) await generate.draw();
+  };
 }
 
 document.addEventListener('DOMContentLoaded', async function () {

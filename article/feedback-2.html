@@ -293,10 +293,10 @@
     </figcaption>
   </figure>
   <p>
-    There are 508583 sequences in the training dataset and a batch size
+    There are 456896 sequences in the training dataset and a batch size
     of 64 observations is used. A single iteration over the entire dataset
-    then corresponds to 7946 epochs, which is enogth to train the network,
-    therefore the models only trained for 7946 epochs. For training, Adam
+    then corresponds to 7139 epochs, which is enogth to train the network,
+    therefore the models only trained for 7139 epochs. For training, Adam
     optimization is used with default parameters.
   </p>
   <figure>
@@ -304,7 +304,9 @@
     <figcaption>
       <strong>Model training:</strong> shows the training loss and
       validation loss for the GRU, LSTM, and Nested LSTM models when training
-      on the autocomplete problem.
+      on the autocomplete problem. The x-axis is
+      <a href="javascript:setTrainingGraphXAxis('time')">time</a> or
+      <a href="javascript:setTrainingGraphXAxis('epochs')">epochs</a>.
     </figcaption>
   </figure>
   <figure class="ar-table-container">

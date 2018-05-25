@@ -25,18 +25,20 @@ def read_tf_summary(name, alpha=0.25):
                 rows.append({
                     'dataset': 'train',
                     'wall time': event.wall_time,
-                    'loss': value.simple_value
+                    'loss': value.simple_value,
+                    'step': event.step
                 })
             elif value.tag == 'model_1/validation-loss':
                 rows.append({
                     'dataset': 'valid',
                     'wall time': event.wall_time,
-                    'loss': value.simple_value
+                    'loss': value.simple_value,
+                    'step': event.step
                 })
 
-    df = pd.DataFrame(rows, columns=('dataset', 'wall time', 'loss'))
+    df = pd.DataFrame(rows, columns=('dataset', 'wall time', 'loss', 'step'))
     df['sec'] = df['wall time'] - df['wall time'][0]
-    df.set_index(['dataset', 'wall time', 'sec'], inplace=True)
+    df.set_index(['dataset', 'wall time', 'sec', 'step'], inplace=True)
     df['loss smooth'] = df['loss'].ewm(alpha=alpha).mean()
 
     return df
@@ -51,7 +53,6 @@ autocomplete = pd.concat(
     keys=['GRU', 'LSTM', 'Nested LSTM'],
     names=['model']
 )
-print(path.join(article_data_dir, 'autocomplete-training.csv'))
 autocomplete.to_csv(path.join(article_data_dir, 'autocomplete-training.csv'))
 
 generate = pd.concat(
