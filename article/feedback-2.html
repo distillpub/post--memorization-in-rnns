@@ -112,7 +112,7 @@
     <math-latex latex="h_\ell^{t-1}"></math-latex>
     ) and the output from the previous layer in the same iteration (
     <math-latex latex="h_{\ell-1}^t"></math-latex>
-    ) are combined, is abstracted away. This abstraction is the foundation
+    ) are combined, it is abstracted away. This abstraction is the foundation
     for the Nested LSTM unit which is explained later.
   </p>
   <p>
@@ -215,7 +215,7 @@
   </p>
   <p>
     The abstraction, of how to combine the input with the cell value, allows
-    a lot of flexibility. Using this abstraction, it is not only possible
+    for a lot of flexibility. Using this abstraction, it is not only possible
     to add one extra internal memory state but the internal
     <math-latex latex="\mathrm{LSTM}(\cdot, \cdot)"></math-latex> unit can
     recursively be replaced by as many internal
@@ -245,8 +245,9 @@
     different memorization.
   </p>
   <p>
-    A good problem for analyzing the contextual understanding, should have
-    a humanly interpretive output and depend both on long and short memorization.
+    A good problem for qualitatively analyzing the contextual understanding,
+    should have a humanly interpretable output and depend both on long and
+    short memorization.
   </p>
   <p>
     To this end, the autocomplete problem is used. Each character is mapped
@@ -329,7 +330,7 @@
     As seen from the results the models are more or less equally fast.
     Surprisingly the Nested LSTM is not better than the LSTM or GRU models.
     This somewhat contradicts the results found in the Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, although they tested model
+    <dt-cite key="moniz2018nlstm"></dt-cite>, although they tested the models
     on different problems and therefore the results are not exactly comparable.
     Never or less one would still expect the Nested LSTM model to perform
     better for this problem, where long-term memorization is important for
@@ -337,7 +338,7 @@
   </p>
   <h3>Connectivity in the Autocomplete Problem</h3>
   <p>
-  To get a better idea of how well each model memorizes and uses that for
+  To get a better idea of how well each model memorizes and uses memory for
   contextual understanding, the connectivity between the desired output and
   the input should be analyzed. This is calculated as the magnitude of
   the gradient, between the logits for the desired output
@@ -424,7 +425,7 @@
     It is entirely possible, that the results are highly dependent on the
     random initialization and the specific application. However, the results
     still show that more internal memory per recurrent unit does not necessarily
-    improve long-term memorization as hypothesized in
+    improve long-term memorization as hypothesized in the Nested LSTM paper
     <dt-cite key="moniz2018nlstm"></dt-cite>.
   </p>
 </dt-article>
