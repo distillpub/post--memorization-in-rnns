@@ -5,8 +5,8 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
 
-<script defer src="bundle.js"></script>
-<link href="style.css" rel="stylesheet">
+<script defer src="feedback-bundle.js"></script>
+<link href="feedback-style.css" rel="stylesheet">
 
 <script type="text/front-matter">
   title: "Exploration of recurrent units in RNN"
@@ -168,7 +168,7 @@
 <dt-article>
   <h2>Long Short-Term Memory</h2>
   <figure>
-    <img src="graphics/lstm-web.svg" alt="Long Short Term Memory Diagram">
+    <img src="graphics/lstm-feedback-0-web.svg" alt="Long Short Term Memory Diagram">
     <figcaption>
       <strong>LSTM:</strong> (Long Short-Term Memory) allows for long-term
       memorization by gateing its update, thereby solving the vanishing gradient
@@ -208,7 +208,7 @@
 <dt-article>
   <h2>Gated Recurrent Unit</h2>
   <figure>
-    <img src="graphics/gru-web.svg" alt="Gated Recurrent Unit Diagram">
+    <img src="graphics/gru-feedback-0-web.svg" alt="Gated Recurrent Unit Diagram">
     <figcaption>
       <strong>GRU:</strong> (Gated Recurrent Unit) also solves the vanishing
       gradient problem but does so without depending on an internal memory state.
@@ -240,7 +240,7 @@
 <dt-article>
   <h2>Nested LSTM</h2>
   <figure>
-    <img src="graphics/nlstm-web.svg" alt="Nested Long Short Term Memory Diagram">
+    <img src="graphics/nlstm-feedback-0-web.svg" alt="Nested Long Short Term Memory Diagram">
     <figcaption>
       <strong>Nested LSTM:</strong> makes the cell update depend on another
       LSTM unit, supposedly this allows more long-term memory compared to
