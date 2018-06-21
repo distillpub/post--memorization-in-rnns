@@ -9,11 +9,12 @@
 <link href="style.css" rel="stylesheet">
 
 <script type="text/front-matter">
-  title: "The effect of internal memory in RNNs"
+  title: "Visualizing memorization in RNNs"
   description: >
-    A visualization method for contextual understanding in text, used for
-    comparing the effect of the number of internal memory states in different
-    recurrent units.
+    When do Recurrent Neural Networks use short-term memorization
+    or long-term memorization, and how do different architectures compare
+    in terms of this? Visualizing the gradient can be a powerful tool to
+    answer these questions.
   authors:
   - Andreas Madsen: https://github.com/AndreasMadsen
   affiliations:
@@ -21,32 +22,24 @@
 </script>
 
 <dt-article>
-  <h1>The effect of internal memory in RNNs</h1>
-  <h2>A visualization method for contextual understanding in text, used for
-  comparing the effect of the number of internal memory states in different
-  recurrent units.
+  <h1>Visualizing memorization in RNNs</h1>
+  <h2>When do Recurrent Neural Networks use short-term memorization
+  or long-term memorization, and how do different architectures compare
+  in terms of this? Visualizing the gradient can be a powerful tool to
+  answer these questions.
   </h2>
-  <figure id="ar-demo">
-    <figcaption id="ar-demo-input-caption">User types input sequence.</figcaption>
-    <div id="ar-demo-input-content"></div>
-
-    <figcaption id="ar-demo-rnn-caption">Recurrent neural network processes the sequence.</figcaption>
-    <div id="ar-demo-rnn-content"></div>
-
-    <figcaption id="ar-demo-output-caption">The output for the last character is used.</figcaption>
-    <div id="ar-demo-output-content"></div>
-
-    <figcaption id="ar-demo-final-caption">The most likely suggestions are extracted.</figcaption>
-    <div id="ar-demo-final-content"></div>
-
-    <figcaption id="ar-demo-caption">
-      <strong>Autocomplete:</strong> An example application, showing how a simple
-      recurrent neural network can be used for autocompletion. The network uses
-      past information and understands the next word should be a country. Try
-      <a href="javascript:arDemoShort();">removing the last letters</a>
-      to see that the network understand that the next word should be a country.
-      This example shows the network is capable of contextual understanding.
-      (<a href="javascript:arDemoReset();">reset</a>).
+  <figure id="ar-hero">
+    <div id="ar-hero-diagram-nlstm" class="ar-hero"></div>
+    <div id="ar-hero-diagram-lstm" class="ar-hero"></div>
+    <div id="ar-hero-diagram-gru" class="ar-hero"></div>
+    <figcaption><strong>Connectivity visualization:</strong> visualizes
+    the connectivity between the desired target and the input charecters,
+    for the <a href="#ar-section-autocomplete">autocomplete problem</a>. Notice
+    for example in the prediction of "gramma", how the RNN
+    <a href="javascript:heroSetIndex(28);">initially</a> uses long-term
+    memorization but as <a href="javascript:heroSetIndex(34);">more charecters
+    become available</a> the RNN switches to short-term memorization
+    (<a href="javascript:heroReset();">reset</a>).
     </figcaption>
   </figure>
   <dt-byline></dt-byline>
@@ -70,10 +63,10 @@
   <p>
     This visualization is inspired by another paper
     <dt-cite key="karpathy2015rnnvis"></dt-cite> where they identify cells
-    that captures a specific feature. This visualization approach is good
-    for identifying specific features. However, it is not a good argument for
-    memorization in general as the output is entirely dependent on which feature
-    the specific cell captures.
+    that captures a specific feature. For the purpose of identifying a specific
+    feature, this visualization approach works well. However, it is not a good
+    argument for memorization in general as the output is entirely dependent
+    on what feature the specific cell captures.
   </p>
   <p>
     This article proposes a better visualization method of connectivity for
@@ -85,7 +78,7 @@
   <p>
     It is the hope that the connectivity visualization used on the
     autocomplete problem, will help advance the dialogue around contextual
-    understanding in recurrent units.
+    understanding and memorization in recurrent units.
   </p>
 </dt-article>
 
@@ -94,11 +87,8 @@
   <p>
     Recurrent neural networks (RNNs) are well known and
     <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
-    thoroughly explained in literature</a>. To keep it short, recurrent
-    neural networks allows one to model a sequence of vectors. RNNs do this
-    by iterating over the sequence, where each layer uses the output from
-    the same layer in the previous "time" iteration, combined with the output
-    from the previous layer in the same "time" iteration.
+    thoroughly explained in literature</a>. For the purpose of introducing
+    Nested LSTM later, some basic notation needs to be established.
   </p>
   <p>
     Given an input sequence <math-latex latex="\{x_t\}_{t=0}^T"></math-latex>,
@@ -113,7 +103,7 @@
     ) and the output from the previous layer in the same iteration (
     <math-latex latex="h_{\ell-1}^t"></math-latex>
     ) are combined, it is abstracted away. This abstraction is the foundation
-    for the Nested LSTM unit which is explained later.
+    for the Nested LSTM unit.
   </p>
   <p>
     For a vanilla recurrent neural network, the recurrent unit
@@ -153,7 +143,7 @@
 <dt-article>
   <h2>Nested LSTM</h2>
   <figure>
-    <img src="graphics/nlstm-feedback-1-web.svg" alt="Nested Long Short Term Memory Diagram">
+    <img src="graphics/nlstm-web.svg" alt="Nested Long Short Term Memory Diagram">
     <figcaption>
       <strong>Nested LSTM:</strong> makes the cell update depend on another
       LSTM unit, supposedly this allows more long-term memory compared to
@@ -225,9 +215,10 @@
   <p>
     From a theoretical view, whether or not the Nested LSTM unit improves long-term
     memorization is not really clear. The LSTM unit theoretically solves the vanishing
-    gradient problem and a network of LSTM units is Turing complete. Therefore,
-    in theory, using LSTM units should be sufficient for solving problems that
-    require long-term memorization.
+    gradient problem and a network of LSTM units is Turing complete
+    <dt-cite key="graves2014turing"></dt-cite>. Therefore, in theory, using
+    LSTM units should be sufficient for solving problems that require long-term
+    memorization.
   </p>
   <p>
     That being said, it is often very difficult to train LSTM and GRU based
@@ -240,7 +231,7 @@
 <dt-article>
   <h2>Comparing Recurrent Units</h2>
   <p>
-    Comparing the different Recurrent Units is not a trivial task. Different
+    Comparing the different recurrent units is not a trivial task. Different
     problem requires different contextual understanding and therefore requires
     different memorization.
   </p>
@@ -249,67 +240,44 @@
     should have a humanly interpretable output and depend both on long and
     short memorization.
   </p>
-  <p>
+  <p id="ar-section-autocomplete">
     To this end, the autocomplete problem is used. Each character is mapped
     to a target that represents the entire word. To make it extra difficult,
-    the space leading up to the word should also map to that word. This
-    prediction, is in particular useful for showing contextual understanding.
+    the space leading up to the word should also map to that word. The
+    prediction for the space charecter, is in particular useful for showing
+    contextual understanding.
   </p>
-  <h3>Autocomplete Problem</h3>
-  <p>
-    The input vocabulary is a-z, space, and a padding symbol. The output
-    vocabulary consists of the <math-latex latex="2^{14} = 16384"></math-latex>
-    most frequent words, and two additional symbols, one for padding and one
-    for unknown words. The network is not penalized for predicting padding
-    and unknown words wrong.
-  </p>
-  <p>
-    The dataset is the full
-    <a href="http://mattmahoney.net/dc/textdata.html">text8</a> dataset, where
-    each observation consists of maximum 200 characters and is ensured to
-    not contain partial words. 90% of the observations are used for training,
-    5% for validation and 5% for testing.
-  </p>
-  <p>
-    The GRU, LSTM each have 2 layers of 600 units. Similarly, the Nested LSTM
-    model has 1 layer of 600 units but with 2 internal memory states.
-    Additionally, each model has an input embedding layer and a final dense
-    layer to match the vocabulary size.
-  </p>
-  <figure class="ar-table-container">
-    <table class="ar-table">
-      <thead>
-        <tr><th>Model</th><th>Units</th><th>Layers</th><th>Depth</th><th colspan="3">Parameters</th></tr>
-        <tr><th></th><th></th><th></th><th></th><th>Embedding</th><th>Recurrent</th><th>Dense</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>GRU</td><td>600</td><td>2</td><td>N/A</td><td>16200</td><td>4323600</td><td>9847986</td>
-        <tr><td>LSTM</td><td>600</td><td>2</td><td>N/A</td><td>16200</td><td>5764800</td><td>9847986</td>
-        <tr><td>Nested LSTM</td><td>600</td><td>1</td><td>2</td><td>16200</td><td>5764800</td><td>9847986</td>
-      </tbody>
-    </table>
-    <figcaption>
-      <strong>Model Configurations:</strong> shows the number of layers, units and parameters
-      for each model.
+  <figure id="ar-demo">
+    <figcaption id="ar-demo-input-caption">User types input sequence.</figcaption>
+    <div id="ar-demo-input-content"></div>
+
+    <figcaption id="ar-demo-rnn-caption">Recurrent neural network processes the sequence.</figcaption>
+    <div id="ar-demo-rnn-content"></div>
+
+    <figcaption id="ar-demo-output-caption">The output for the last character is used.</figcaption>
+    <div id="ar-demo-output-content"></div>
+
+    <figcaption id="ar-demo-final-caption">The most likely suggestions are extracted.</figcaption>
+    <div id="ar-demo-final-content"></div>
+
+    <figcaption id="ar-demo-caption">
+      <strong>Autocomplete:</strong> An application that has a humanly
+      interpretable output, while depending on both short and long term
+      contextual understanding. In this case, the network uses past information
+      and understands the next word should be a country. Try
+      <a href="javascript:arDemoShort();">removing the last letters</a> to see
+      that the network continues to give meaningful suggestions
+      (<a href="javascript:arDemoReset();">reset</a>).
+      <span style="font-style: italic" id="ar-demo-input-notice"></span>
     </figcaption>
   </figure>
   <p>
-    There are 456896 sequences in the training dataset and a batch size
-    of 64 observations is used. A single iteration over the entire dataset
-    then corresponds to 7139 epochs, which is enogth to train the network,
-    therefore the models only trained for 7139 epochs. For training, Adam
-    optimization is used with default parameters.
+    The autocomplete dataset is constructed from the full
+    <a href="http://mattmahoney.net/dc/textdata.html">text8</a> dataset. The
+    recurrent neural networks used to solve the problem have two layers, each
+    with 600 units. There are 3 models, using GRU, LSTM, and Nested LSTM.
+    See <a href="#appendix-autocomplete">the appendix</a> for more details.
   </p>
-  <figure>
-    <svg id="ar-autocomplete-training" class="ar-training"></svg>
-    <figcaption>
-      <strong>Model training:</strong> shows the training loss and
-      validation loss for the GRU, LSTM, and Nested LSTM models when training
-      on the autocomplete problem. The x-axis is
-      <a href="javascript:setTrainingGraphXAxis('time')">time</a> or
-      <a href="javascript:setTrainingGraphXAxis('epochs')">epochs</a>.
-    </figcaption>
-  </figure>
   <figure class="ar-table-container">
     <table class="ar-table">
       <thead>
@@ -326,16 +294,6 @@
       for the GRU, LSTM, and Nested LSTM models on the autocomplete problem.
     </figcaption>
   </figure>
-  <p>
-    As seen from the results the models are more or less equally fast.
-    Surprisingly the Nested LSTM is not better than the LSTM or GRU models.
-    This somewhat contradicts the results found in the Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, although they tested the models
-    on different problems and therefore the results are not exactly comparable.
-    Never or less one would still expect the Nested LSTM model to perform
-    better for this problem, where long-term memorization is important for
-    the contextual understanding.
-  </p>
   <h3>Connectivity in the Autocomplete Problem</h3>
   <p>
   To get a better idea of how well each model memorizes and uses memory for
@@ -409,24 +367,28 @@
     interesting. A reasonable high accuracy can be obtained, with reasonably
     low contextual understanding. It is only for the first couple of characters,
     that long-term memorization and contextual understanding really matters.
-    More traditional problems like Penn Treebank, Chinese Poetry Generation, or
-    text8 generation are therefore just as suited for this kind of analysis.
   </p>
   <p>
-    The more qualitative analysis of the connectivity together with the
+    A qualitative analysis, where one looks how previous input is used in
+    the prediction is therefore also important when judging models.
+    In this case, the connectivity visualization together with the
     autocomplete predictions, reveals that the Nested LSTM model isn't capable
-    of long-term contextual understanding. This contradicts the design decisions
-    for the model and the findings in the original paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>. In fact, the GRU model, which has
-    no internal memory, is the model that has the highest accuracy and shows
-    the most contextual understanding in the connectivity analysis.
+    of long-term contextual understanding. This contradicts the original
+    design hypothesis and findings for the Nested LSTM model: that more internal
+    memory leads to more long-term memorization <dt-cite key="moniz2018nlstm"></dt-cite>.
+    In fact, the GRU model, which has no internal memory, is the model that has
+    the highest accuracy and shows the most contextual understanding in the
+    connectivity analysis.
   </p>
   <p>
-    It is entirely possible, that the results are highly dependent on the
-    random initialization and the specific application. However, the results
-    still show that more internal memory per recurrent unit does not necessarily
-    improve long-term memorization as hypothesized in the Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>.
+    It is entirely possible, that these results are highly dependent on the
+    random initialization, hyperparameters, and the specific application.
+    The importance of this article is therefore not to judge Nested LSTM overall
+    but to show a better way of qualitatively comparing different RNNs in
+    terms of their memrozation abilities. In this case, the connectivity
+    visualization has revealed a much greater differences between the models,
+    than one would guess from just looking at the accuracy and cross entropy
+    loss alone.
   </p>
 </dt-article>
 
@@ -442,11 +404,12 @@
   <p>
     I'm also grateful for the excellent feedback and patience by
     Christopher Olah from the Distill team. His feedback has dramatically
-    improved the quality of the article.
+    improved the quality of this article.
   </p>
+
   <h3 id="appendix-lstm">Long Short-Term Memory</h3>
   <figure>
-    <img style="width: 100%;" src="graphics/lstm-feedback-1-web.svg" alt="Long Short Term Memory Diagram">
+    <img style="width: 100%;" src="graphics/lstm-web.svg" alt="Long Short Term Memory Diagram">
     <figcaption>
       <strong>LSTM:</strong> (Long Short-Term Memory) allows for long-term
       memorization by gateing its update, thereby solving the vanishing gradient
@@ -477,6 +440,62 @@
     \left(\sigma_z(\cdot) \text{ and } \sigma_h(\cdot)\right)
     "></math-latex> are usually <math-latex latex="\tanh(\cdot)"></math-latex>.
   </p>
+
+  <h3 id="appendix-autocomplete">Autocomplete Problem</h3>
+  <p>
+    The autocomplete dataset is constructed form the full
+    <a href="http://mattmahoney.net/dc/textdata.html">text8</a> dataset, where
+    each observation consists of maximum 200 characters and is ensured to
+    not contain partial words. 90% of the observations are used for training,
+    5% for validation and 5% for testing.
+  </p>
+  <p>
+    The input vocabulary is a-z, space, and a padding symbol. The output
+    vocabulary consists of the <math-latex latex="2^{14} = 16384"></math-latex>
+    most frequent words, and two additional symbols, one for padding and one
+    for unknown words. The network is not penalized for predicting padding
+    and unknown words wrong.
+  </p>
+  <p>
+    The GRU, LSTM each have 2 layers of 600 units. Similarly, the Nested LSTM
+    model has 1 layer of 600 units but with 2 internal memory states.
+    Additionally, each model has an input embedding layer and a final dense
+    layer to match the vocabulary size.
+  </p>
+  <figure class="ar-table-container">
+    <table class="ar-table">
+      <thead>
+        <tr><th>Model</th><th>Units</th><th>Layers</th><th>Depth</th><th colspan="3">Parameters</th></tr>
+        <tr><th></th><th></th><th></th><th></th><th>Embedding</th><th>Recurrent</th><th>Dense</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GRU</td><td>600</td><td>2</td><td>N/A</td><td>16200</td><td>4323600</td><td>9847986</td>
+        <tr><td>LSTM</td><td>600</td><td>2</td><td>N/A</td><td>16200</td><td>5764800</td><td>9847986</td>
+        <tr><td>Nested LSTM</td><td>600</td><td>1</td><td>2</td><td>16200</td><td>5764800</td><td>9847986</td>
+      </tbody>
+    </table>
+    <figcaption>
+      <strong>Model Configurations:</strong> shows the number of layers, units and parameters
+      for each model.
+    </figcaption>
+  </figure>
+  <p>
+    There are 456896 sequences in the training dataset and a batch size
+    of 64 observations is used. A single iteration over the entire dataset
+    then corresponds to 7139 epochs, which is enogth to train the network,
+    therefore the models only trained for 7139 epochs. For training, Adam
+    optimization is used with default parameters.
+  </p>
+  <figure>
+    <svg id="ar-autocomplete-training" class="ar-training"></svg>
+    <figcaption>
+      <strong>Model training:</strong> shows the training loss and
+      validation loss for the GRU, LSTM, and Nested LSTM models when training
+      on the autocomplete problem. The x-axis is
+      <a href="javascript:setTrainingGraphXAxis('time')">time</a> or
+      <a href="javascript:setTrainingGraphXAxis('epochs')">epochs</a>.
+    </figcaption>
+  </figure>
 </dt-appendix>
 
 <script type="text/bibliography">
@@ -509,5 +528,13 @@
     journal={arXivreprint arXiv:1406.1078},
     year={2014},
     url={https://arxiv.org/pdf/1406.1078.pdf}
+  }
+
+  @article{graves2014turing,
+    title={Neural Turing Machines},
+    author={Alex Graves and Greg Wayne and Ivo Danihelka},
+    journal={arXivreprint arXiv:1410.5401},
+    year={2014},
+    url={https://arxiv.org/pdf/1410.5401.pdf}
   }
 </script>

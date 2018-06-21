@@ -1,7 +1,7 @@
 
 const AutoComplete = require('./dataset/autocomplete.js');
 const PureGRU = require('./models/pure_gru.js');
-const ArticleDemo = require('./visual/article_demo.js');
+const AutoCompleteDemo = require('./visual/autocomplete_demo.js');
 const VisualRNN = require('./visual/visual_rnn.js');
 const Connectivity = require('./visual/connectivity.js');
 const TrainingGraph = require('./visual/training_graph.js');
@@ -13,7 +13,7 @@ const assertDirectory = '/';
 
 async function setupArticleDemo(model) {
   const autocomplete = new AutoComplete(assertDirectory);
-  const demo = new ArticleDemo(assertDirectory, model, autocomplete);
+  const demo = new AutoCompleteDemo(assertDirectory, model, autocomplete);
 
   let animationTimer = null;
   let inputText = '';

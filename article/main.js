@@ -1,8 +1,9 @@
 
 const AutoComplete = require('./dataset/autocomplete.js');
 const PureGRU = require('./models/pure_gru.js');
-const ArticleDemo = require('./visual/article_demo.js');
+const AutoCompleteDemo = require('./visual/autocomplete_demo.js');
 const VisualRNN = require('./visual/visual_rnn.js');
+const HeroConnectivity = require('./visual/hero_connectivity.js');
 const Connectivity = require('./visual/connectivity.js');
 const TrainingGraph = require('./visual/training_graph.js');
 const dl = require('deeplearn');
@@ -11,9 +12,69 @@ const dl = require('deeplearn');
 //const assertDirectory = '/blog-recurrent-units/';
 const assertDirectory = '/';
 
-async function setupArticleDemo(model) {
+async function setupHeroDiagram() {
+  const lstmConnectivity = new HeroConnectivity({
+    container: document.querySelector('#ar-hero-diagram-lstm'),
+    assertDirectory: assertDirectory,
+    filename: 'connectivity_lstm.json',
+    name: 'LSTM'
+  });
+  lstmConnectivity.on('mouseover', userInput);
+
+  const nlstmConnectivity = new HeroConnectivity({
+    container: document.querySelector('#ar-hero-diagram-nlstm'),
+    assertDirectory: assertDirectory,
+    filename: 'connectivity_nlstm.json',
+    name: 'Nested LSTM'
+  });
+  nlstmConnectivity.on('mouseover', userInput);
+
+  const gruConnectivity = new HeroConnectivity({
+    container: document.querySelector('#ar-hero-diagram-gru'),
+    assertDirectory: assertDirectory,
+    filename: 'connectivity_gru.json',
+    name: 'GRU'
+  });
+  gruConnectivity.on('mouseover', userInput);
+
+  async function drawConnectivity(i) {
+    lstmConnectivity.setSelected(i);
+    nlstmConnectivity.setSelected(i);
+    gruConnectivity.setSelected(i);
+    await lstmConnectivity.draw();
+    await nlstmConnectivity.draw();
+    await gruConnectivity.draw();
+  }
+
+  let animationTimer;
+  function animation(index, minIndex, maxIndex) {
+    drawConnectivity(index).catch((err) => { throw err; });
+
+    const nextLetterIndex = index >= maxIndex ? minIndex : index + 1;
+    animationTimer = setTimeout(animation, 200,
+                                nextLetterIndex, minIndex, maxIndex);
+  }
+
+  function userInput(i) {
+    clearTimeout(animationTimer);
+    drawConnectivity(i).catch((err) => { throw err; });
+  }
+
+  window.heroReset = function () {
+    clearTimeout(animationTimer);
+    animation(12, 12, 35);
+  };
+
+  window.heroSetIndex = function (i) {
+    userInput(i);
+  };
+
+  window.heroReset();
+}
+
+async function setupAutocompleteDemo(model) {
   const autocomplete = new AutoComplete(assertDirectory);
-  const demo = new ArticleDemo(assertDirectory, model, autocomplete);
+  const demo = new AutoCompleteDemo(assertDirectory, model, autocomplete);
 
   let animationTimer = null;
   let inputText = '';
@@ -29,11 +90,6 @@ async function setupArticleDemo(model) {
     await changeText(text);
   }
 
-  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
-  // Safari doesn't support a float texture, thus the backend is set to CPU.
-  // This is very slow, so skip the animation.
-  if (isSafari) dl.setBackend('cpu');
-
   (async function recursive(fullText, index) {
     await changeText(fullText.slice(0, index));
     if (index < fullText.length) {
@@ -41,7 +97,19 @@ async function setupArticleDemo(model) {
     }
   })('parts of north af', 0);
 
-  demo.on('input', userInput);
+
+  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
+  const inputNotice = document.querySelector('#ar-demo-input-notice');
+  // Safari doesn't support a float texture in WebGL, thus custom input is disabled.
+  // Just in case, the backend is also set to be CPU.
+  if (isSafari) {
+    dl.setBackend('cpu');
+    demo.disableInput();
+    inputNotice.innerHTML = 'Safari doesn\'t support custom text.';
+  } else {
+    demo.on('input', userInput);
+    inputNotice.innerHTML = 'You can also type in your own text.';
+  }
 
   window.addEventListener('resize', function () {
     demo.setText(inputText);
@@ -55,44 +123,6 @@ async function setupArticleDemo(model) {
   window.arDemoReset = function () {
     userInput('parts of north af').catch((err) => { throw err });
   };
-}
-
-async function setupRecurentUnitRNN() {
-  if (!document.querySelector('#ar-recurrent-unit-rnn')) return;
-
-  const recurentUnitRNN = new VisualRNN({
-    container: document.querySelector('#ar-recurrent-unit-rnn'),
-    colorize: function (column, columnsTotal) {
-
-      const colors = [];
-      for (let row = 0; row < 4; row++) {
-        const colorsRow = [];
-
-        for (let col = 0; col < columnsTotal; col++) {
-          if (row === 0) {
-            if (col === column) colorsRow.push(1);
-            else colorsRow.push(0);
-          } else {
-            if (col < column) colorsRow.push(0.5);
-            else if (col === column) colorsRow.push(1);
-            else colorsRow.push(0);
-          }
-        }
-        colors.push(colorsRow);
-      }
-
-      return colors;
-    }
-  });
-  recurentUnitRNN.draw();
-  recurentUnitRNN.on('mouseenter', function (column) {
-    recurentUnitRNN.setColorizeColumn(column);
-    recurentUnitRNN.draw();
-  });
-
-  window.addEventListener('resize', async function () {
-    recurentUnitRNN.draw();
-  });
 }
 
 async function setupMemorizationProblemRNN() {
@@ -126,7 +156,7 @@ async function setupMemorizationProblemRNN() {
     memorizationProblemRNN.draw();
   });
 
-  window.addEventListener('resize', async function () {
+  window.addEventListener('resize', function () {
     memorizationProblemRNN.draw();
   });
 }
@@ -169,7 +199,7 @@ async function setupConnectivity() {
 
   window.connectivitySetIndex = function (index) {
     drawConnectivity(index === null ? 105 : index)
-      .catch((err) => {throw err;});
+      .catch((err) => { throw err; });
   };
 }
 
@@ -188,34 +218,15 @@ async function setupTrainingGraph() {
     height: 360
   });
 
-  let generate = null;
-  if (!!document.querySelector('#ar-generate-training')) {
-    generate = new TrainingGraph({
-      container: document.querySelector('#ar-generate-training'),
-      assertDirectory: assertDirectory,
-      name: 'autocomplete',
-      filename: 'generate-training.csv',
-      ylim: [0.5, 5.5],
-      xlimTime: [-offset, 4 * hour + offset],
-      xlimEpochs: [-200, 7300],
-      height: 360
-    });
-  }
-
   await autocomplete.draw();
-  if (generate) await generate.draw();
 
-  window.addEventListener('resize', async function () {
-    await autocomplete.draw();
-    if (generate) await generate.draw();
+  window.addEventListener('resize', function () {
+    autocomplete.draw().catch((err) => { throw err; });
   });
 
-  window.setTrainingGraphXAxis = async function (xAxisName) {
+  window.setTrainingGraphXAxis = function (xAxisName) {
     autocomplete.setXAxis(xAxisName);
-    if (generate) generate.setXAxis(xAxisName);
-
-    await autocomplete.draw();
-    if (generate) await generate.draw();
+    autocomplete.draw().catch((err) => { throw err; });
   };
 }
 
@@ -230,9 +241,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   const model = new PureGRU(assertDirectory);
   await Promise.all([
-    setupArticleDemo(model),
-    setupRecurentUnitRNN(),
+    setupHeroDiagram(),
     setupMemorizationProblemRNN(),
+    setupAutocompleteDemo(model),
     setupConnectivity(),
     setupTrainingGraph()
   ]);

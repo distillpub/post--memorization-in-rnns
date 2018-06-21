@@ -22,7 +22,7 @@ function smoothFlowPathSameWidth({ x, borderWidth, midWidth }) {
   return path;
 }
 
-class ArticleDemo extends events.EventEmitter {
+class AutoCompleteDemo extends events.EventEmitter {
   constructor(assertDirectory, model, dataset) {
     super();
     this._model = model;
@@ -142,6 +142,10 @@ class ArticleDemo extends events.EventEmitter {
     this._finalSuggestions = this._finalContainer
       .append('div')
       .classed('suggestions', true);
+  }
+
+  disableInput() {
+    this._inputField.attr('disabled', 'disabled');
   }
 
   _getMaxLength() {
@@ -423,4 +427,4 @@ class ArticleDemo extends events.EventEmitter {
   }
 }
 
-module.exports = ArticleDemo;
+module.exports = AutoCompleteDemo;
