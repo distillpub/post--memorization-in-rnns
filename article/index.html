@@ -369,24 +369,24 @@
     that long-term memorization and contextual understanding really matters.
   </p>
   <p>
-    A qualitative analysis, where one looks how previous input is used in
-    the prediction is therefore also important when judging models.
-    In this case, the connectivity visualization together with the
-    autocomplete predictions, reveals that the Nested LSTM model isn't capable
-    of long-term contextual understanding. This contradicts the original
-    design hypothesis and findings for the Nested LSTM model: that more internal
-    memory leads to more long-term memorization <dt-cite key="moniz2018nlstm"></dt-cite>.
+    A qualitative analysis, where one looks at how previous input is used in
+    the prediction is therefore also important when judging models. In this
+    case, the connectivity visualization together with the autocomplete
+    predictions, reveals that the Nested LSTM model isn’t capable of long-term
+    contextual understanding. This contradicts the original design hypothesis
+    and findings for the Nested LSTM model, that more internal memory leads to
+    more long-term memorization <dt-cite key="moniz2018nlstm"></dt-cite>.
     In fact, the GRU model, which has no internal memory, is the model that has
     the highest accuracy and shows the most contextual understanding in the
     connectivity analysis.
   </p>
   <p>
     It is entirely possible, that these results are highly dependent on the
-    random initialization, hyperparameters, and the specific application.
-    The importance of this article is therefore not to judge Nested LSTM overall
+    random initialization, hyperparameters, and the specific application. The
+    importance of this article is therefore not to judge Nested LSTM overall
     but to show a better way of qualitatively comparing different RNNs in
-    terms of their memrozation abilities. In this case, the connectivity
-    visualization has revealed a much greater differences between the models,
+    terms of their memorization abilities. In this case, the connectivity
+    visualization has revealed much greater differences between the models,
     than one would guess from just looking at the accuracy and cross entropy
     loss alone.
   </p>
