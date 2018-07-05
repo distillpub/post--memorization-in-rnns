@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="142.57mm" height="104.96mm" version="1.1" viewBox="0 0 142.57474 104.95898" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="141.57mm" height="104.96mm" version="1.1" viewBox="0 0 141.57474 104.95898" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <marker id="h" overflow="visible" orient="auto">
    <path transform="scale(-.6)" d="m8.7186 4.0337-10.926-4.0177 10.926-4.0177c-1.7455 2.3721-1.7354 5.6175-6e-7 8.0354z" fill="#666" fill-rule="evenodd" stroke="#666" stroke-linejoin="round" stroke-width=".625"/>
@@ -129,54 +129,54 @@
   </symbol>
  </defs>
  <g transform="translate(-7.6046 16.334)">
-  <g transform="matrix(.26458 0 0 .26458 34.903 -88.086)" data-name="&lt;Group&gt;">
+  <g transform="matrix(.26458 0 0 .26458 34.903 -88.506)" data-name="&lt;Group&gt;">
    <rect x="42.34" y="309.41" width="241.85" height="304.72" rx="10" ry="10" fill="#f0f0f5" stroke="#e9e9e9" stroke-width="1.3795"/>
   </g>
   <g fill="none">
    <g stroke="#666">
     <g stroke-dasharray="0.365, 0.73" stroke-width=".365">
-     <path d="m58.134 29.28h-32.317v14.36"/>
-     <path d="m87.751 28.897h37.609v-3.2479"/>
-     <path d="m58.134 65.875h-31.788v-7.3354"/>
-     <path d="m87.751 65.491h37.609v-6.9521"/>
+     <path d="m58.134 28.561h-32.317v14.36"/>
+     <path d="m87.751 28.178h37.609v-3.2479"/>
+     <path d="m58.134 65.156h-31.788v-7.3354"/>
+     <path d="m87.751 64.772h37.609v-6.9521"/>
     </g>
-    <g transform="matrix(.26458 0 0 .26458 40.194 -103.96)" data-name="&lt;Group&gt;">
+    <g transform="matrix(.26458 0 0 .26458 40.194 -104.68)" data-name="&lt;Group&gt;">
      <path d="m177.92 501.61v12.468c0 5.54-4.46 10-10 10h-82.341c-5.54 0-10-4.46-10-10v-10.468" fill="none" stroke="#666" stroke-width="1.3795"/>
     </g>
    </g>
    <g stroke="#e9e9e9">
-    <g transform="matrix(.26458 0 0 .26458 45.393 -34.951)" stroke-width="1.3795" data-name="&lt;Group&gt;">
+    <g transform="matrix(.26458 0 0 .26458 45.393 -35.67)" stroke-width="1.3795" data-name="&lt;Group&gt;">
      <path d="m123.89 402.67v-108.92c0-5.54-4.46-10-10-10h-122.6" fill="none" stroke="#666" stroke-width="1.3795"/>
     </g>
-    <g transform="matrix(.26458 0 0 .26458 74.133 -53.69)" stroke-width="1.0016" data-name="&lt;Group&gt;">
+    <g transform="matrix(.26458 0 0 .26458 74.133 -54.409)" stroke-width="1.0016" data-name="&lt;Group&gt;">
      <path d="m82.998 334.98v128.43c0 5.54 4.46 10 10 10h58.47" fill="none" marker-end="url(#m)" stroke="#666" stroke-width="1.3795"/>
     </g>
-    <g transform="matrix(.26458 0 0 .26458 65.15 -34.87)" data-name="&lt;Group&gt;">
+    <g transform="matrix(.26458 0 0 .26458 65.15 -35.589)" data-name="&lt;Group&gt;">
      <path d="m83.352 375.65v-18.77c0-5.54 4.46-10 10-10h7.4151" fill="none" marker-end="url(#a)" stroke="#666" stroke-width="1.3795"/>
     </g>
-    <g transform="matrix(.26458 0 0 .26458 46.98 -34.951)" data-name="&lt;Group&gt;">
+    <g transform="matrix(.26458 0 0 .26458 46.98 -35.67)" data-name="&lt;Group&gt;">
      <path d="m83.352 402.67v-45.782c0-5.54 4.46-10 10-10h9.1404" fill="none" marker-end="url(#k)" stroke="#666" stroke-width="1.3795"/>
     </g>
    </g>
-   <path d="m87.168 66.061v2.8607c0 1.4658-1.18 2.6453-2.6458 2.6453l-41.434.00053" stroke="#666" stroke-width=".365"/>
-   <path d="m60.193 71.556v-27.214" marker-end="url(#e)" stroke="#666" stroke-width=".365"/>
+   <path d="m87.168 65.342v2.8607c0 1.4658-1.18 2.6453-2.6458 2.6453l-41.434.00053" stroke="#666" stroke-width=".365"/>
+   <path d="m60.193 70.837v-27.214" marker-end="url(#e)" stroke="#666" stroke-width=".365"/>
   </g>
-  <g transform="translate(6.7353 -133.24)">
+  <g transform="translate(6.7353 -133.96)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="translate(42.578 -116.45)">
+  <g transform="translate(42.578 -117.17)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="translate(24.657 -116.45)">
+  <g transform="translate(24.657 -117.17)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="matrix(.28591 0 0 .28591 98.198 33.283)">
+  <g transform="matrix(.28591 0 0 .28591 98.198 32.564)">
    <g transform="matrix(.35278 0 0 .35278 62.089 125.8)" fill="#666">
     <use x="-1.6388" y="31.248199" width="100%" height="100%" fill="#666666" xlink:href="#d"/>
    </g>
@@ -187,7 +187,7 @@
     <use x="19.0252" y="40.115002" width="100%" height="100%" fill="#666666" xlink:href="#b"/>
    </g>
   </g>
-  <g transform="matrix(.26289 0 0 .26289 14.897 38.089)" fill="#666">
+  <g transform="matrix(.26289 0 0 .26289 14.897 37.37)" fill="#666">
    <g transform="matrix(.35278 0 0 .35278 77.914 118.64)">
     <use x="-1.4084001" y="32.848202" width="100%" height="100%" fill="#666666" xlink:href="#aj"/>
    </g>
@@ -204,7 +204,7 @@
     <use x="19.2556" y="43.6698" width="100%" height="100%" fill="#666666" xlink:href="#ac"/>
    </g>
   </g>
-  <g transform="matrix(.28591 0 0 .28591 17.695 43.16)" fill="#666">
+  <g transform="matrix(.28591 0 0 .28591 17.695 42.441)" fill="#666">
    <g transform="matrix(.35278 0 0 .35278 112.62 124.85)">
     <use x="-0.99519998" y="31.248199" width="100%" height="100%" fill="#666666" xlink:href="#al"/>
    </g>
@@ -221,14 +221,14 @@
     <use x="54.091999" y="40.115002" width="100%" height="100%" fill="#666666" xlink:href="#p"/>
    </g>
   </g>
-  <g transform="translate(24.657 -115.16)">
+  <g transform="translate(24.657 -115.88)">
    <g stroke-width=".356">
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666"/>
     <text x="52.1124" y="181.86954" fill="#666666" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="52.1124" y="181.86954" fill="#666666" font-family="'Open Sans'" font-size="3.8806px" stroke-width=".356">σ<tspan baseline-shift="sub" font-family="'Open Sans'" font-size="2.1167px"/></tspan></text>
    </g>
   </g>
-  <g transform="translate(6.7353 -115.09)">
+  <g transform="translate(6.7353 -115.81)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -237,14 +237,14 @@
     </g>
    </g>
   </g>
-  <g transform="translate(15.696 -115.01)">
+  <g transform="translate(15.696 -115.73)">
    <g stroke-width=".356">
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666"/>
     <text x="52.1124" y="181.86954" fill="#666666" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="52.1124" y="181.86954" fill="#666666" font-family="'Open Sans'" font-size="3.8806px" stroke-width=".356">σ<tspan baseline-shift="sub" font-family="'Open Sans'" font-size="2.1167px"/></tspan></text>
    </g>
   </g>
-  <g transform="translate(42.578 -132.25)">
+  <g transform="translate(42.578 -132.97)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -253,7 +253,7 @@
     </g>
    </g>
   </g>
-  <g transform="translate(33.617 -115.46)">
+  <g transform="translate(33.617 -116.18)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -262,31 +262,31 @@
     </g>
    </g>
   </g>
-  <g transform="matrix(.26458 0 0 .26458 29.717 -20.234)" fill="none" stroke="#e9e9e9" data-name="&lt;Group&gt;">
+  <g transform="matrix(.26458 0 0 .26458 29.717 -20.953)" fill="none" stroke="#e9e9e9" data-name="&lt;Group&gt;">
    <path d="m83.352 372.67v-15.702c0-5.54 4.46-10.001 10-10.001h5.1404" fill="none" stroke="#666" stroke-width="1.3795"/>
   </g>
-  <g transform="matrix(.26458 0 0 -.26458 29.717 89.524)" fill="none" stroke="#e9e9e9" data-name="&lt;Group&gt;">
+  <g transform="matrix(.26458 0 0 -.26458 29.717 88.805)" fill="none" stroke="#e9e9e9" data-name="&lt;Group&gt;">
    <path d="m285.14 68.42v268.43c0 5.54-4.46 9.998-10 9.9981-60.595.002-121.19.004-181.79.004-5.54 0-10 4.5287-10 10.069v15.742" fill="none" marker-end="url(#l)" stroke="#666" stroke-width="1.3795"/>
   </g>
-  <rect x="103.22" y="39.346" width="3.7325" height="1.4647" rx="0" ry="0" fill="#f0f0f5"/>
+  <rect x="103.22" y="38.627" width="3.7325" height="1.4647" rx="0" ry="0" fill="#f0f0f5"/>
   <g fill="none" stroke="#e9e9e9">
-   <g transform="matrix(.26458 0 0 .26458 74.133 -90.432)" stroke-width="1.0016" data-name="&lt;Group&gt;">
+   <g transform="matrix(.26458 0 0 .26458 74.133 -91.151)" stroke-width="1.0016" data-name="&lt;Group&gt;">
     <path d="m82.998 354.98v128.43c0 5.54 4.46 10 10 10h58.47" fill="none" marker-end="url(#h)" stroke="#666" stroke-width="1.3795"/>
    </g>
-   <g transform="matrix(.26458 0 0 .26458 65.15 -71.611)" data-name="&lt;Group&gt;">
+   <g transform="matrix(.26458 0 0 .26458 65.15 -72.331)" data-name="&lt;Group&gt;">
     <path d="m83.352 375.65v-18.77c0-5.54 4.46-10 10-10h7.4151" fill="none" marker-end="url(#a)" stroke="#666" stroke-width="1.3795"/>
    </g>
-   <g transform="matrix(.26458 0 0 .26458 46.98 -71.692)" data-name="&lt;Group&gt;">
+   <g transform="matrix(.26458 0 0 .26458 46.98 -72.411)" data-name="&lt;Group&gt;">
     <path d="m83.352 422.67v-65.782c0-5.54 4.46-10 10-10h9.1404" fill="none" marker-end="url(#i)" stroke="#666" stroke-width="1.3795"/>
    </g>
   </g>
-  <rect x="103.22" y="2.6333" width="3.7325" height="1.4647" rx="0" ry="0" fill="#f0f0f5"/>
+  <rect x="103.22" y="1.9143" width="3.7325" height="1.4647" rx="0" ry="0" fill="#f0f0f5"/>
   <g fill="none" stroke="#666" stroke-width=".365">
-   <path d="m43.089 3.3761h71.12" marker-end="url(#g)"/>
-   <path d="m78.114 34.814v-27.214" marker-end="url(#f)"/>
-   <path d="m60.193 29.523v-21.923" marker-end="url(#j)"/>
+   <path d="m43.089 2.657h71.12" marker-end="url(#g)"/>
+   <path d="m78.114 34.095v-27.214" marker-end="url(#f)"/>
+   <path d="m60.193 28.804v-21.923" marker-end="url(#j)"/>
   </g>
-  <g transform="translate(24.657 -162.57)">
+  <g transform="translate(24.657 -163.29)">
    <circle cx="53.454" cy="165.95" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="165.95" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <g transform="translate(5.749 .71433)" fill="none" stroke="#666" stroke-width=".365">
@@ -294,22 +294,22 @@
     <path d="m47.705 164.16v2.1435"/>
    </g>
   </g>
-  <g transform="translate(6.7353 -169.98)">
+  <g transform="translate(6.7353 -170.7)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="translate(42.578 -153.19)">
+  <g transform="translate(42.578 -153.91)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="translate(24.657 -153.19)">
+  <g transform="translate(24.657 -153.91)">
    <circle cx="53.454" cy="173.36" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
    <circle cx="53.454" cy="173.36" r=".6" fill="#666"/>
   </g>
-  <g transform="matrix(.28591 0 0 .28591 32.207 -50.951)">
+  <g transform="matrix(.28591 0 0 .28591 32.207 -51.27)">
    <g transform="matrix(.35278 0 0 .35278 62.089 125.8)" fill="#666">
     <use x="-1.6388" y="31.248199" width="100%" height="100%" fill="#666666" xlink:href="#d"/>
    </g>
@@ -320,14 +320,14 @@
     <use x="19.0252" y="40.115002" width="100%" height="100%" fill="#666666" xlink:href="#b"/>
    </g>
   </g>
-  <g transform="translate(24.657 -151.91)">
+  <g transform="translate(24.657 -152.62)">
    <g stroke-width=".356">
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666"/>
     <text x="52.1124" y="181.86954" fill="#666666" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="52.1124" y="181.86954" fill="#666666" font-family="'Open Sans'" font-size="3.8806px" stroke-width=".356">σ<tspan baseline-shift="sub" font-family="'Open Sans'" font-size="2.1167px"/></tspan></text>
    </g>
   </g>
-  <g transform="translate(6.7353 -151.83)">
+  <g transform="translate(6.7353 -152.55)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -336,14 +336,14 @@
     </g>
    </g>
   </g>
-  <g transform="translate(15.696 -151.75)">
+  <g transform="translate(15.696 -152.47)">
    <g stroke-width=".356">
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666"/>
     <text x="52.1124" y="181.86954" fill="#666666" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="52.1124" y="181.86954" fill="#666666" font-family="'Open Sans'" font-size="3.8806px" stroke-width=".356">σ<tspan baseline-shift="sub" font-family="'Open Sans'" font-size="2.1167px"/></tspan></text>
    </g>
   </g>
-  <g transform="translate(42.578 -169)">
+  <g transform="translate(42.578 -169.71)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -352,7 +352,7 @@
     </g>
    </g>
   </g>
-  <g transform="translate(33.617 -152.2)">
+  <g transform="translate(33.617 -152.92)">
    <g>
     <circle cx="53.454" cy="180.77" r="3.2" fill="#f0f0f5" stroke="#f0f0f5" stroke-width=".356"/>
     <circle cx="53.454" cy="180.77" r="2.822" fill="#e0cef5" stroke="#666" stroke-width=".356"/>
@@ -361,24 +361,24 @@
     </g>
    </g>
   </g>
-  <g transform="translate(22.127 -58.913)">
+  <g transform="translate(22.127 -59.632)">
    <use transform="matrix(.10086 0 0 .10086 93.816 96.619)" x="-1.0648" y="31.248199" width="100%" height="100%" fill="#666666" xlink:href="#ak"/>
    <use transform="matrix(.10086 0 0 .10086 93.816 96.619)" x="14.4548" y="16.441401" width="100%" height="100%" fill="#666666" xlink:href="#af"/>
    <g transform="matrix(.10086 0 0 .10086 93.816 96.619)" fill="#666">
     <use x="14.4548" y="40.115002" width="100%" height="100%" fill="#666666" xlink:href="#z"/>
    </g>
   </g>
-  <g transform="translate(-86.899 -55.084)" fill="#666666">
+  <g transform="translate(-86.899 -55.804)" fill="#666666">
    <use transform="matrix(.092743 0 0 .092743 122.33 92.789)" x="-1.438" y="32.848202" width="100%" height="100%" xlink:href="#ao"/>
    <use transform="matrix(.092743 0 0 .092743 122.33 92.789)" x="14.0852" y="17.5086" width="100%" height="100%" xlink:href="#ag"/>
    <use transform="matrix(.092743 0 0 .092743 122.33 92.789)" x="24.917601" y="17.5086" width="100%" height="100%" xlink:href="#u"/>
    <use transform="matrix(.092743 0 0 .092743 122.33 92.789)" x="47.334801" y="17.5086" width="100%" height="100%" xlink:href="#q"/>
    <use transform="matrix(.092743 0 0 .092743 122.33 92.789)" x="14.0852" y="43.6698" width="100%" height="100%" xlink:href="#ab"/>
   </g>
-  <g transform="matrix(.26458 0 0 .26458 77.236 -108.01)" opacity=".313" data-name="&lt;Group&gt;">
+  <g transform="matrix(.26458 0 0 .26458 77.236 -108.72)" opacity=".313" data-name="&lt;Group&gt;">
    <rect x="-117.66" y="406.7" width="241.85" height="139.43" rx="0" ry="0" fill="#d9d9e6"/>
   </g>
-  <g transform="translate(14.686 -34.626)" fill="#666">
+  <g transform="translate(14.686 -35.145)" fill="#666">
    <g transform="matrix(.092743 0 0 .092743 20.743 35.289)">
     <use x="-0.64960003" y="32.848202" width="100%" height="100%" fill="#666666" xlink:href="#am"/>
    </g>
@@ -398,7 +398,7 @@
     <use x="14.0852" y="43.6698" width="100%" height="100%" fill="#666666" xlink:href="#t"/>
    </g>
   </g>
-  <g transform="translate(82.7 -31.901)" fill="#666">
+  <g transform="translate(82.7 -32.42)" fill="#666">
    <g transform="matrix(.10086 0 0 .10086 33.243 32.565)">
     <use x="-0.28" y="31.248199" width="100%" height="100%" fill="#666666" xlink:href="#an"/>
    </g>
@@ -415,7 +415,7 @@
    </g>
   </g>
   <g fill="#666" stroke-width="1px">
-   <g transform="matrix(.26458 0 0 .26458 -149.28 -115.37)" aria-label="Forget Gates: controls how much of the old cell value is used in the new cell value.">
+   <g transform="matrix(.26458 0 0 .26458 -149.28 -116.09)" aria-label="Forget Gates: controls how much of the old cell value is used in the new cell value.">
     <path d="m597.55 615.76h-1.5886v-7.6146h4.3646v1.3229h-2.776v1.9635h2.5833v1.3177h-2.5833z"/>
     <path d="m602.95 612.84q0 .86458.28125 1.3073.28645.44271.92708.44271.63542 0 .91146-.4375.28125-.44271.28125-1.3125 0-.86458-.28125-1.2969-.28125-.4323-.92188-.4323-.63541 0-.91666.4323-.28125.42708-.28125 1.2969zm4.026 0q0 1.4219-.75 2.224t-2.0885.80208q-.83855 0-1.4792-.36458-.64063-.36979-.98438-1.0573t-.34375-1.6042q0-1.4271.7448-2.2188.74479-.79167 2.0938-.79167.83854 0 1.4792.36459.64063.36458.98438 1.0469t.34375 1.599z"/>
     <path d="m611.54 609.83q.32291 0 .53646.0469l-.1198 1.4896q-.1927-.0521-.46875-.0521-.76041 0-1.1875.39062-.42187.39063-.42187 1.0938v2.9636h-1.5885v-5.8229h1.2031l.23438.97917h.0781q.27084-.48959.72917-.78646.46354-.30209 1.0052-.30209z"/>
@@ -485,7 +485,7 @@
     <path d="m719.7 650.59q-1.2656 0-2-.77083-.72916-.77084-.72916-2.1406 0-1.3802.67708-2.1927.68229-.8125 1.8281-.8125 1.0729 0 1.6979.70833.625.70313.625 1.8594v.54688h-3.9323q.026 1.0052.50521 1.526.48437.52083 1.3594.52083.92188 0 1.8229-.38542v.77084q-.45833.19791-.86979.28125-.40625.0885-.98438.0885zm-.23437-5.1927q-.6875 0-1.099.44792-.40625.44791-.47917 1.2396h2.9844q0-.81771-.36459-1.25-.36458-.4375-1.0417-.4375z"/>
     <path d="m723.15 649.94q0-.34896.15625-.52604.16146-.18229.45833-.18229.30209 0 .46875.18229.17188.17708.17188.52604 0 .33854-.17188.52083-.17187.18229-.46875.18229-.26562 0-.44271-.16145-.17187-.16667-.17187-.54167z"/>
    </g>
-   <g transform="matrix(.26458 0 0 .26458 -46.328 -115.16)" aria-label="Outer Output Gate: controls how much of the new cell value is outputted.">
+   <g transform="matrix(.26458 0 0 .26458 -46.328 -115.88)" aria-label="Outer Output Gate: controls how much of the new cell value is outputted.">
     <path d="m602.87 611.95q0 1.8906-.9375 2.9062-.9375 1.0156-2.6875 1.0156t-2.6875-1.0156q-.9375-1.0156-.9375-2.9167t.9375-2.901q.94271-1.0052 2.6979-1.0052t2.6823 1.0104q.93229 1.0104.93229 2.9062zm-5.5573 0q0 1.276.48438 1.9219.48437.64584 1.4479.64584 1.9323 0 1.9323-2.5677 0-2.5729-1.9219-2.5729-.96354 0-1.4531.65104-.48958.64584-.48958 1.9219z"/>
     <path d="m608.46 615.76-.21354-.7448h-.0833q-.25521.40625-.72396.63021-.46875.21875-1.0677.21875-1.026 0-1.5469-.54687-.52084-.55209-.52084-1.5833v-3.7969h1.5886v3.401q0 .63021.22395.94792.22396.3125.71355.3125.66666 0 .96354-.44271.29687-.44792.29687-1.4792v-2.7396h1.5885v5.8229z"/>
     <path d="m613.81 614.6q.41667 0 1-.18229v1.1823q-.59375.26562-1.4583.26562-.95313 0-1.3906-.47916-.43229-.48438-.43229-1.4479v-2.8073h-.76041v-.67188l.875-.53125.45833-1.2292h1.0156v1.2396h1.6302v1.1927h-1.6302v2.8073q0 .33854.1875.5.19271.16146.50521.16146z"/>
@@ -547,7 +547,7 @@
     <path d="m725.84 649.72h-.0469q-.59896.86979-1.7917.86979-1.1198 0-1.7448-.76563-.61979-.76562-.61979-2.1771t.625-2.1927 1.7396-.78125q1.1615 0 1.7812.84375h.0677l-.0365-.41146-.0208-.40104v-2.3229h.86458v8.1042h-.70312zm-1.7292.14583q.88542 0 1.2812-.47917.40104-.48437.40104-1.5573v-.18229q0-1.2135-.40625-1.7292-.40104-.52083-1.2865-.52083-.76041 0-1.1667.59375-.40105.58854-.40105 1.6667 0 1.0938.40105 1.651.40104.55729 1.1771.55729z"/>
     <path d="m728.38 649.94q0-.34896.15625-.52604.16146-.18229.45833-.18229.30209 0 .46875.18229.17188.17708.17188.52604 0 .33854-.17188.52083-.17187.18229-.46875.18229-.26562 0-.4427-.16145-.17188-.16667-.17188-.54167z"/>
    </g>
-   <g transform="matrix(.26458 0 0 .26458 -80.305 -84.885)" aria-label="Input Gates: controls how much of input is used in the new cell value.">
+   <g transform="matrix(.26458 0 0 .26458 -80.305 -85.604)" aria-label="Input Gates: controls how much of input is used in the new cell value.">
     <path d="m595.96 615.76v-7.6146h1.6146v7.6146z"/>
     <path d="m604.75 615.76h-1.5885v-3.401q0-.6302-.22396-.9427-.22396-.31771-.71354-.31771-.66667 0-.96354.44791-.29688.44271-.29688 1.474v2.7396h-1.5885v-5.8229h1.2135l.21354.74479h.0885q.26562-.42187.72916-.63542.46875-.21875 1.0625-.21875 1.0156 0 1.5417.55209.52604.54687.52604 1.5833z"/>
     <path d="m609.59 615.87q-1.026 0-1.6094-.74479h-.0833q.0833.72917.0833.84375v2.3594h-1.5886v-8.3854h1.2917l.22396.75521h.0729q.55729-.86459 1.651-.86459 1.0312 0 1.6146.79688.58333.79687.58333 2.2135 0 .93229-.27604 1.6198-.27083.6875-.77604 1.0469-.50521.35937-1.1875.35937zm-.46875-4.7656q-.58854 0-.85937.36458-.27084.35938-.28125 1.1927v.17187q0 .9375.27604 1.3438.28125.40625.88541.40625 1.0677 0 1.0677-1.7604 0-.85938-.26562-1.2865-.26042-.43229-.82292-.43229z"/>
@@ -608,9 +608,9 @@
    </g>
   </g>
   <g>
-   <path d="m72.621 66.183 1.2878.00038 5.4e-5 10.836 2.3519-.00038" fill="none" stroke="#666" stroke-dasharray="0.365, 0.73" stroke-width=".365"/>
-   <path d="m72.621 29.141 1.2878.00038 5.4e-5 36.766" fill="none" stroke="#666" stroke-dasharray="0.365, 0.73" stroke-width=".365"/>
-   <g transform="matrix(.26458 0 0 .26458 -46.328 -152.73)" fill="#666" stroke-width="1px" aria-label="Inner Output Gate: controls how much of the new inner cell value is outputted to the outer cell ">
+   <path d="m72.621 65.464 1.2878.00038 5.4e-5 10.836 2.3519-.00038" fill="none" stroke="#666" stroke-dasharray="0.365, 0.73" stroke-width=".365"/>
+   <path d="m72.621 28.422 1.2878.00038 5.4e-5 36.766" fill="none" stroke="#666" stroke-dasharray="0.365, 0.73" stroke-width=".365"/>
+   <g transform="matrix(.26458 0 0 .26458 -46.328 -153.45)" fill="#666" stroke-width="1px" aria-label="Inner Output Gate: controls how much of the new inner cell value is outputted to the outer cell ">
     <path d="m595.96 615.76v-7.6146h1.6146v7.6146z"/>
     <path d="m604.75 615.76h-1.5885v-3.401q0-.6302-.22396-.9427-.22396-.31771-.71354-.31771-.66667 0-.96354.44791-.29688.44271-.29688 1.474v2.7396h-1.5885v-5.8229h1.2135l.21354.74479h.0885q.26562-.42187.72916-.63542.46875-.21875 1.0625-.21875 1.0156 0 1.5417.55209.52604.54687.52604 1.5833z"/>
     <path d="m611.77 615.76h-1.5885v-3.401q0-.6302-.22396-.9427-.22395-.31771-.71354-.31771-.66666 0-.96354.44791-.29687.44271-.29687 1.474v2.7396h-1.5886v-5.8229h1.2136l.21354.74479h.0885q.26562-.42187.72917-.63542.46875-.21875 1.0625-.21875 1.0156 0 1.5417.55209.52604.54687.52604 1.5833z"/>
