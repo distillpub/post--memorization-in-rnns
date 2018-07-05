@@ -55,7 +55,7 @@
     of memorization still poses a challenge.
   </p>
   <p>
-    Recently a new paper by Monzi et. al <dt-cite key="moniz2018nlstm"></dt-cite>
+    Recently a new paper by Monzi et al. <dt-cite key="moniz2018nlstm"></dt-cite>
     have proposed an extension of the LSTM unit, called Nested LSTM. In that
     paper, they visualize an individual cell activation to show that the
     Nested LSTM unit has a superior ability to memorize.
@@ -85,33 +85,21 @@
 <dt-article>
   <h2>Recurrent Units</h2>
   <p>
-    Recurrent neural networks (RNNs) are well known and
-    <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
-    thoroughly explained in literature</a>. For the purpose of introducing
-    Nested LSTM later, some basic notation needs to be established.
-  </p>
-  <p>
-    Given an input sequence <math-latex latex="\{x_t\}_{t=0}^T"></math-latex>,
-    such model can be expressed using the following set of equations:
-  <math-latex display-mode latex="\begin{aligned}
-    h_{\ell}^{t} &= \mathrm{Unit}(h_{\ell-1}^{t}, h_{\ell}^{t-1}), \text{ where: } h_{0}^t = x_t \\
-    y^t &= \mathrm{Softmax}(h_L^t) \\
-    \mathcal{L} &= - \frac{1}{T} \sum_{t=1}^T \ln(y^t_k)
-  \end{aligned}"></math-latex>
-    Note how the output from the previous iteration (
-    <math-latex latex="h_\ell^{t-1}"></math-latex>
-    ) and the output from the previous layer in the same iteration (
-    <math-latex latex="h_{\ell-1}^t"></math-latex>
-    ) are combined, it is abstracted away. This abstraction is the foundation
-    for the Nested LSTM unit.
-  </p>
-  <p>
+    To express the different recurrent units as variations of the same RNN, the
+    following <math-latex latex="\mathrm{Unit}(\cdot, \cdot)"></math-latex>
+    notation is used:
+    <math-latex display-mode latex="\begin{aligned}
+      h_{\ell}^{t} &= \mathrm{Unit}(h_{\ell-1}^{t}, h_{\ell}^{t-1}), \text{ where: } h_{0}^t = x_t \\
+      y^t &= \mathrm{Softmax}(h_L^t) \\
+      \mathcal{L} &= - \frac{1}{T} \sum_{t=1}^T \ln(y^t_k)
+    \end{aligned}"></math-latex>
+
     For a vanilla recurrent neural network, the recurrent unit
     <math-latex latex="\mathrm{Unit}(\cdot, \cdot)"></math-latex>
     is:
-  <math-latex display-mode latex="
-    h_{\ell}^{t} = \mathrm{RNN}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq \sigma(W_{\ell-1,\ell}h_{\ell-1}^t + W_{\ell,\ell}h_{\ell}^{t-1})
-  "></math-latex>
+    <math-latex display-mode latex="
+      h_{\ell}^{t} = \mathrm{RNN}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq \sigma(W_{\ell-1,\ell}h_{\ell-1}^t + W_{\ell,\ell}h_{\ell}^{t-1})
+    "></math-latex>
   </p>
   <p>
     In theory, the time dependency allows it in each iteration to know
@@ -130,115 +118,64 @@
     </figcaption>
   </figure>
   <p>
-    The Long Short-Term Memory (LSTM) unit and Gated Recurret Unit (GRU)
-    solves this vanishing gradient problem by using gates. These gates control
-    how much the new state value should be updated and thereby allows it
-    to selectively memorize <dt-cite key="graves2008phd"></dt-cite>
-    <dt-cite key="cho2014gru"></dt-cite>. Both LSTM and GRU are well known and
-    also <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
-    thoroughly explained in the literature</a> and therefore not discussed here.
+    Several solutions to the vanishing gradient problem have been made over
+    the years. Most popular is the Long Short-Term Memory (LSTM)
+    <dt-cite key="graves2008phd"></dt-cite> unit and the
+    Gated Recurrent Unit (GRU)<dt-cite key="cho2014gru"></dt-cite>.
+    Recently, the Nested LSTM unit has also been proposed
+    <dt-cite key="moniz2018nlstm"></dt-cite>. Both LSTM and GRU are well known
+    and <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
+    thoroughly explained in the literature</a>. An explanation on Nested LSTM
+    can be found <a href="#appendix-nestedlstm">in the appendix</a>.
   </p>
-</dt-article>
-
-<dt-article>
-  <h2>Nested LSTM</h2>
-  <figure>
-    <img src="graphics/nlstm-web.svg" alt="Nested Long Short Term Memory Diagram">
-    <figcaption>
-      <strong>Nested LSTM:</strong> makes the cell update depend on another
+  <figure id="ar-recurrent-units" data-show="nlstm">
+    <img class="ar-recurrent-unit-nlstm" src="graphics/nlstm-web.svg" alt="Nested LSTM Diagram">
+    <figcaption class="ar-recurrent-unit-nlstm">
+      <strong>Recurrent Unit, Nested LSTM:</strong> makes the cell update depend on another
       LSTM unit, supposedly this allows more long-term memory compared to
       stacking LSTM layers.
     </figcaption>
+    <img class="ar-recurrent-unit-lstm" src="graphics/lstm-web.svg" alt="Long Short Term Memory Diagram">
+    <figcaption class="ar-recurrent-unit-lstm">
+      <strong>Recurrent Unit, LSTM:</strong> allows for long-term
+      memorization by gateing its update, thereby solving the vanishing gradient
+      problem.
+    </figcaption>
+    <img class="ar-recurrent-unit-gru" src="graphics/gru-web.svg" alt="Gated Recurrent Unit Diagram">
+    <figcaption class="ar-recurrent-unit-gru">
+      <strong>Recurrent Unit, GRU:</strong> solves the vanishing gradient
+        problem without depending on an internal memory state.
+    </figcaption>
   </figure>
   <p>
-    Even though the LSTM unit and GRU solves the vanishing gradient problem on a
-    theoretical level, long-term memorization continues to be a challenge in
-    recurrent neural networks.
+    It is not entirely clear why one recurrent unit is better than another
+    in some applications, while in other applications it is another type of
+    recurrent unit that is better. Theoretical they all solve the vanishing
+    gradient problem but in practice, their performance is very application
+    dependent.
   </p>
   <p>
-    The Nested LSTM unit attemps to solve the long-term memorization from a
-    more practical point of view. Where the classic LSTM unit solves the
-    vanishing gradient problem by adding internal memory, and the GRU attemps
-    to be a faster solution than LSTM by using no internal memory, the Nested
-    LSTM goes in the opposite direction of GRU by adding additional memory to
-    the unit <dt-cite key="moniz2018nlstm"></dt-cite>.
-  </p>
-  <p>
-    The idea here is that adding additional memory to the unit allows for more
-    long-term memorization.
-  </p>
-  <p>
-    The additional memory is integrated into the LSTM unit by changing how the
-    cell value <math-latex latex="c_\ell^t"></math-latex> is updated. Instead of
-    defining the cell value update as <math-latex latex="
-      c_\ell^t = i_\ell^t \odot z_\ell^t + f_\ell^t \odot c_\ell^{t-1}
-    "></math-latex>, as done in vanilla LSTM, it uses another LSTM unit:
-    <math-latex display-mode latex="
-      c_\ell^t = \mathrm{LSTM}(i_\ell^t \odot z_\ell^t, f_\ell^t \odot c_\ell^{t-1})
-    "></math-latex>
-    <span>See the defintion of <math-latex latex="
-    \mathrm{LSTM}(\cdot, \cdot)"></math-latex> <a href="#appendix-lstm">
-    in the appendix</a>. </span>
-  </p>
-  <p>
-    The complete set of equations then becomes:
-    <math-latex display-mode latex="\begin{aligned}
-      i_\ell^t &= \sigma_i(IW_{\ell-1, \ell} h_{\ell-1}^{t} + IW_{\ell, \ell} h_{\ell}^{t-1}) \\
-      f_\ell^t &= \sigma_f(FW_{\ell-1, \ell} h_{\ell-1}^{t} + FW_{\ell, \ell} h_{\ell}^{t-1}) \\
-      o_\ell^t &= \sigma_o(OW_{\ell-1, \ell} h_{\ell-1}^{t} + OW_{\ell, \ell} h_{\ell}^{t-1}) \\
-      z_\ell^t &= \sigma_z(ZW_{\ell-1, \ell} h_{\ell-1}^{t} + ZW_{\ell, \ell} h_{\ell}^{t-1}) \\
-      c_\ell^t &= \mathrm{LSTM}(i_\ell^t \odot z_\ell^t, f_\ell^t \odot c_\ell^{t-1}) \\
-      h_{\ell}^{t} &= \mathrm{NLSTM}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq o_\ell^t \odot \sigma_h(c_{\ell}^{t})
-    \end{aligned}"></math-latex>
-  </p>
-  <p>
-    Like in vanilla LSTM, the gate activation functions <math-latex latex="
-    \left(\sigma_i(\cdot), \sigma_f(\cdot), \text{ and } \sigma_o(\cdot)\right)
-    "></math-latex> are usually the simoid activation function. However,
-    only the <math-latex latex="\sigma_h(\cdot)"></math-latex> is set to
-    <math-latex latex="\tanh(\cdot)"></math-latex>. While,
-    <math-latex latex="\sigma_z(\cdot)"></math-latex> is just the identity
-    function, otherwise two non-linear activation functions would be applied
-    on the same scalar without any change, except for the multiplication by
-    the input gate. The activation functions for  <math-latex latex="
-    \mathrm{LSTM}(\cdot, \cdot)"></math-latex> remains the same.
-  </p>
-  <p>
-    The abstraction, of how to combine the input with the cell value, allows
-    for a lot of flexibility. Using this abstraction, it is not only possible
-    to add one extra internal memory state but the internal
-    <math-latex latex="\mathrm{LSTM}(\cdot, \cdot)"></math-latex> unit can
-    recursively be replaced by as many internal
-    <math-latex latex="\mathrm{NLSTM}(\cdot, \cdot)"></math-latex> units as
-    one would wish, thereby adding even more internal memory.
-  </p>
-  <p>
-    From a theoretical view, whether or not the Nested LSTM unit improves long-term
-    memorization is not really clear. The LSTM unit theoretically solves the vanishing
-    gradient problem and a network of LSTM units is Turing complete
-    <dt-cite key="graves2014turing"></dt-cite>. Therefore, in theory, using
-    LSTM units should be sufficient for solving problems that require long-term
-    memorization.
-  </p>
-  <p>
-    That being said, it is often very difficult to train LSTM and GRU based
-    recurrent neural networks. These difficulties often come down to the
-    curvature of the loss function and it is possible that the Nested LSTM
-    improves this curvature and therefore is easier to optimize.
+    Understanding why these differences occur is likely a very difficult
+    problem. The purpose of this article is to demonstrate a visualization
+    technique that can better highlight what these differences are. Hopefully,
+    such understanding can lead to a deeper understanding in the future.
   </p>
 </dt-article>
 
 <dt-article>
   <h2>Comparing Recurrent Units</h2>
   <p>
-    Comparing the different recurrent units is not a trivial task. Different
-    problem requires different contextual understanding and therefore requires
-    different memorization.
+    Comparing the different Recurrent Units is an important task and it is
+    often much more complex than just comparing the accuracy or cross entropy
+    loss. This is because differences in these high-level quantitative measures
+    can have many explanations and may simply come down to some small improvement
+    in predictions that only requires short-term memorization. While in reality,
+    it is often the long-term memorization that is of interest to us.
   </p>
   <p>
     A good problem for qualitatively analyzing the contextual understanding,
-    should have a humanly interpretable output and depend both on long and
-    short memorization.
+    should therefore have a humanly interpretable output and depend both on
+    long and short memorization.
   </p>
   <p id="ar-section-autocomplete">
     To this end, the autocomplete problem is used. Each character is mapped
@@ -407,15 +344,72 @@
     improved the quality of this article.
   </p>
 
-  <h3 id="appendix-lstm">Long Short-Term Memory</h3>
+  <h3 id="appendix-nestedlstm">Nested LSTM</h3>
+  <p>
+    The Nested LSTM unit attemps to solve the long-term memorization from a
+    more practical point of view. Where the classic LSTM unit solves the
+    vanishing gradient problem by adding internal memory, and the GRU attemps
+    to be a faster solution than LSTM by using no internal memory, the Nested
+    LSTM goes in the opposite direction of GRU by adding additional memory to
+    the unit <dt-cite key="moniz2018nlstm"></dt-cite>.
+    The idea here is that adding additional memory to the unit allows for more
+    long-term memorization.
+  </p>
   <figure>
-    <img style="width: 100%;" src="graphics/lstm-web.svg" alt="Long Short Term Memory Diagram">
+    <img style="width: 100%;" src="graphics/nlstm-web.svg" alt="Nested Long Short Term Memory Diagram">
     <figcaption>
-      <strong>LSTM:</strong> (Long Short-Term Memory) allows for long-term
-      memorization by gateing its update, thereby solving the vanishing gradient
-      problem.
+      <strong>Nested LSTM:</strong> makes the cell update depend on another
+      LSTM unit, supposedly this allows more long-term memory compared to
+      stacking LSTM layers.
     </figcaption>
   </figure>
+  <p>
+    The additional memory is integrated into the LSTM unit by changing how the
+    cell value <math-latex latex="c_\ell^t"></math-latex> is updated. Instead of
+    defining the cell value update as <math-latex latex="
+      c_\ell^t = i_\ell^t \odot z_\ell^t + f_\ell^t \odot c_\ell^{t-1}
+    "></math-latex>, as done in vanilla LSTM, it uses another LSTM unit:
+    <math-latex display-mode latex="
+      c_\ell^t = \mathrm{LSTM}(i_\ell^t \odot z_\ell^t, f_\ell^t \odot c_\ell^{t-1})
+    "></math-latex>
+    <span>See the defintion of <math-latex latex="
+    \mathrm{LSTM}(\cdot, \cdot)"></math-latex> futher down <a href="#appendix-lstm">
+    in the appendix</a>. </span>
+  </p>
+  <p>
+    The complete set of equations then becomes:
+    <math-latex display-mode latex="\begin{aligned}
+      i_\ell^t &= \sigma_i(IW_{\ell-1, \ell} h_{\ell-1}^{t} + IW_{\ell, \ell} h_{\ell}^{t-1}) \\
+      f_\ell^t &= \sigma_f(FW_{\ell-1, \ell} h_{\ell-1}^{t} + FW_{\ell, \ell} h_{\ell}^{t-1}) \\
+      o_\ell^t &= \sigma_o(OW_{\ell-1, \ell} h_{\ell-1}^{t} + OW_{\ell, \ell} h_{\ell}^{t-1}) \\
+      z_\ell^t &= \sigma_z(ZW_{\ell-1, \ell} h_{\ell-1}^{t} + ZW_{\ell, \ell} h_{\ell}^{t-1}) \\
+      c_\ell^t &= \mathrm{LSTM}(i_\ell^t \odot z_\ell^t, f_\ell^t \odot c_\ell^{t-1}) \\
+      h_{\ell}^{t} &= \mathrm{NLSTM}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq o_\ell^t \odot \sigma_h(c_{\ell}^{t})
+    \end{aligned}"></math-latex>
+  </p>
+  <p>
+    Like in vanilla LSTM, the gate activation functions <math-latex latex="
+    \left(\sigma_i(\cdot), \sigma_f(\cdot), \text{ and } \sigma_o(\cdot)\right)
+    "></math-latex> are usually the simoid activation function. However,
+    only the <math-latex latex="\sigma_h(\cdot)"></math-latex> is set to
+    <math-latex latex="\tanh(\cdot)"></math-latex>. While,
+    <math-latex latex="\sigma_z(\cdot)"></math-latex> is just the identity
+    function, otherwise two non-linear activation functions would be applied
+    on the same scalar without any change, except for the multiplication by
+    the input gate. The activation functions for  <math-latex latex="
+    \mathrm{LSTM}(\cdot, \cdot)"></math-latex> remains the same.
+  </p>
+  <p>
+    The abstraction, of how to combine the input with the cell value, allows
+    for a lot of flexibility. Using this abstraction, it is not only possible
+    to add one extra internal memory state but the internal
+    <math-latex latex="\mathrm{LSTM}(\cdot, \cdot)"></math-latex> unit can
+    recursively be replaced by as many internal
+    <math-latex latex="\mathrm{NLSTM}(\cdot, \cdot)"></math-latex> units as
+    one would wish, thereby adding even more internal memory.
+  </p>
+
+  <h3 id="appendix-lstm">Long Short-Term Memory</h3>
   <p>
   The equations defining <math-latex latex="
   \mathrm{LSTM}(\cdot, \cdot)"></math-latex> as used in <math-latex latex="

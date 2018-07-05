@@ -6,6 +6,7 @@ const VisualRNN = require('./visual/visual_rnn.js');
 const HeroConnectivity = require('./visual/hero_connectivity.js');
 const Connectivity = require('./visual/connectivity.js');
 const TrainingGraph = require('./visual/training_graph.js');
+const RecurrentUnitsSelect = require('./visual/recurrent_units_select.js');
 const dl = require('deeplearn');
 
 //const assertDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
@@ -70,6 +71,20 @@ async function setupHeroDiagram() {
   };
 
   window.heroReset();
+}
+
+async function setupRecurrentUnitsSelect() {
+  const recurrentUnitsSelect = new RecurrentUnitsSelect({
+    container: document.querySelector('#ar-recurrent-units')
+  });
+
+  recurrentUnitsSelect.on('select', function (id) {
+    recurrentUnitsSelect.setSelect(id);
+    recurrentUnitsSelect.draw();
+  });
+
+  recurrentUnitsSelect.setSelect('nlstm');
+  recurrentUnitsSelect.draw();
 }
 
 async function setupAutocompleteDemo(model) {
@@ -243,6 +258,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   await Promise.all([
     setupHeroDiagram(),
     setupMemorizationProblemRNN(),
+    setupRecurrentUnitsSelect(),
     setupAutocompleteDemo(model),
     setupConnectivity(),
     setupTrainingGraph()
