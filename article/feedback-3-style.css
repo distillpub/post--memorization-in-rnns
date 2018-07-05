@@ -1,0 +1,450 @@
+
+@media only screen and (max-width: 600px) {
+  math-latex[display-mode] {
+    font-size: 90%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  math-latex[display-mode] {
+    font-size: 80%;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion {
+    text-align: center;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .word {
+    float: none;
+  }
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .properbility {
+    display: none;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 60%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  math-latex[display-mode] {
+    font-size: 70%;
+  }
+  #ar-demo figcaption:not(#ar-demo-caption) {
+    font-size: 50%;
+  }
+}
+
+
+.ar-hero {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  grid-template-areas:
+    "textarea namearea";
+  margin-bottom: 10px;
+}
+
+.ar-hero:last-of-type {
+  margin-bottom: 1em;
+}
+
+.ar-hero .textarea {
+  grid-area: textarea;
+
+  font-family: monospace;
+  padding: 0.5em;
+  box-sizing: border-box;
+  background: #31688e;
+  color: white;
+  line-height: 1.4em;
+}
+
+.ar-hero .textarea span {
+  border-bottom: 0.2em solid transparent;
+  white-space: pre-wrap;
+}
+
+.ar-hero .textarea span.selected {
+  border-bottom-color: white;
+}
+
+.ar-hero .namearea {
+  grid-area: namearea;
+
+  display: flex;
+  background: #D9D9D9;
+  justify-content: center;
+}
+
+.ar-hero .namearea span {
+  align-self: center;
+  line-height: 1em;
+  text-align: center;
+}
+
+#ar-demo {
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: repeat(4, 60px);
+  grid-template-areas:
+    "input-caption input-content"
+    "rnn-caption rnn-content"
+    "output-caption output-content"
+    "final-caption final-content"
+    ". caption";
+  grid-column-gap: 10px;
+}
+
+#ar-demo > figcaption {
+  text-align: right;
+  align-self: center;
+}
+
+#ar-demo > div {
+  position: relative;
+}
+
+#ar-demo svg, #ar-demo canvas {
+  display: block;
+  width: 100%; /* Indicate the the Grid layout, that svg and canvas are
+  streachable */
+}
+
+figcaption#ar-demo-input-caption { grid-area: input-caption; }
+#ar-demo-input-content { grid-area: input-content; }
+figcaption#ar-demo-rnn-caption { grid-area: rnn-caption; }
+#ar-demo-rnn-content { grid-area: rnn-content; }
+figcaption#ar-demo-output-caption { grid-area: output-caption; }
+#ar-demo-output-content { grid-area: output-content; }
+figcaption#ar-demo-final-caption { grid-area: final-caption; }
+#ar-demo-final-content { grid-area: final-content; }
+
+#ar-demo #ar-demo-loader {
+  display: flex;
+  position: absolute;
+  top: 0;
+  height: 240px;
+  z-index: 1;
+  background: rgb(255, 255, 255, 0.8);
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#ar-demo #ar-demo-caption {
+  padding-top: 10px;
+  grid-area: caption;
+  text-align: left;
+}
+
+#ar-demo-input-content .background {
+  width: 100%;
+  height: 100%;
+  background: #f3f3f3;
+  border: solid 1px #e3e3e3;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#ar-demo-input-content .underline {
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  font-size: 1em;
+  font-family: "Courier New", monospace;
+  margin: 0 5px;
+}
+
+#ar-demo-input-content .underline-letter {
+  display: block;
+  float: left;
+  border-bottom: solid 1px black;
+  height: 0px;
+  overflow: hidden;
+  white-space: pre;
+  margin-right: 0.1em;
+}
+#ar-demo-input-content .underline-letter.empty {
+  border-bottom-color: transparent;
+}
+
+#ar-demo-input-content input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: calc(30px - 0.5em) 5px;
+  width: calc(100% - 10px);
+  height: 1em;
+  box-sizing: border-box;
+
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-family: "Courier New", monospace;
+  outline: none;
+}
+
+#ar-demo-rnn-content svg .cells rect {
+  fill: #f3f3f3;
+}
+
+#ar-demo-rnn-content svg .flow-in rect, #ar-demo-rnn-content svg .flow-out path {
+  fill: rgb(70, 130, 180);
+  opacity: 0.2;
+}
+
+#ar-demo-rnn-content svg .flow-arrow {
+  stroke-width: 2px;
+  stroke: rgb(70, 130, 180);
+  stroke-opacity: 0.5;
+}
+
+#ar-demo-output-content svg path {
+  fill: rgb(70, 130, 180);
+  opacity: 0.2;
+}
+
+#ar-demo-output-content .ar-loading {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+#ar-demo-final-content div.suggestions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  grid-column-gap: 10px;
+  height: 30px;
+}
+
+#ar-demo-final-content div.suggestions div.suggestion {
+  background: #f3f3f3;
+  border: solid 1px #e3e3e3;
+  box-sizing: border-box;
+  padding: 0px 8px;
+  font-size: 0.7em;
+  overflow: hidden;
+  line-height: 30px;
+  height: 30px;
+}
+
+#ar-demo-final-content div.suggestions div.suggestion span.word {
+  float: left;
+}
+
+
+#ar-demo-final-content div.suggestions div.suggestion span.properbility {
+  float: right;
+}
+
+#ar-demo-final-content svg path {
+  fill: rgb(70, 130, 180);
+  opacity: 0.2;
+}
+
+.ar-visual-rnn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 240px auto;
+  grid-template-areas:
+    "content-caption content"
+    ". caption";
+  grid-column-gap: 10px;
+}
+
+.ar-visual-rnn .descriptions {
+  display: grid;
+  grid-template-rows: 60px 60px 60px 60px;
+  align-items: center;
+  grid-area: content-caption;
+}
+
+.ar-visual-rnn .descriptions figcaption {
+  text-align: right;
+}
+
+.ar-visual-rnn svg {
+  grid-area: content;
+  width: 100%;
+  height: 240px;
+}
+
+.ar-visual-rnn svg rect.unit {
+  stroke: #e3e3e3;
+}
+
+.ar-visual-rnn svg path.arrow-up {
+  stroke: #9BC0DB;
+  stroke-width: 2px;
+}
+
+.ar-visual-rnn svg path.arrow-right {
+  stroke: #9BC0DB;
+  stroke-width: 2px;
+}
+
+.ar-visual-rnn > figcaption {
+  grid-area: caption;
+}
+
+.ar-connectivity {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: 40px auto;
+  grid-template-areas:
+    "predictarea namearea"
+    "textarea namearea";
+  margin-bottom: 10px;
+}
+
+.ar-connectivity:last-of-type {
+  margin-bottom: 1em;
+}
+
+.ar-connectivity .textarea {
+  grid-area: textarea;
+
+  font-family: monospace;
+  padding: 0.5em;
+  box-sizing: border-box;
+  background: #31688e;
+  color: white;
+  line-height: 1.4em;
+}
+
+.ar-connectivity .textarea span {
+  border-bottom: 0.2em solid transparent;
+  white-space: pre-wrap;
+}
+
+.ar-connectivity .textarea span.selected {
+  border-bottom-color: white;
+}
+
+.ar-connectivity .predictarea {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  background: #F3F3F3;
+}
+
+.ar-connectivity .predictarea .prediction {
+  border-left: 2px solid white;
+  height: 100%;
+  line-height: 40px;
+  padding: 0 5px;
+  text-align: center;
+}
+.ar-connectivity .predictarea .prediction:first-of-type {
+  border: none;
+}
+
+@media only screen and (max-width: 400px)  {
+  .ar-connectivity .predictarea .prediction {
+    font-size: 0.8em;
+  }
+}
+
+.ar-connectivity .namearea {
+  grid-area: namearea;
+
+  display: flex;
+  max-width: 60px;
+  background: #D9D9D9;
+  justify-content: center;
+}
+
+.ar-connectivity .namearea span {
+  align-self: center;
+  display: inline-block;
+  transform: translate(0, 0) rotate(90deg);
+  transform-origin: center center;
+  line-height: 1em;
+  text-align: center;
+}
+
+figure.ar-table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+table.ar-table {
+  margin: 0 auto 20px auto;
+  display: block;
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+table.ar-table th, table.ar-table td {
+  padding: 2px 10px;
+}
+
+svg.ar-training {
+  width: 100%;
+  shape-rendering: crispEdges;
+  font-size: 16px;
+}
+
+svg.ar-training .tick text {
+  font-size: 14px;
+  fill: #505050;
+}
+
+svg.ar-training .tick line {
+  stroke-width: 2;
+  stroke: #505050;
+}
+
+svg.ar-training .background {
+  fill: #EBEBEB;
+}
+
+svg.ar-training .facet {
+  font-size: 14px;
+}
+
+svg.ar-training .facet-background {
+  fill: #D9D9D9;
+}
+
+svg.ar-training path.line {
+  fill: none;
+  shape-rendering: geometricPrecision;
+  stroke-width: 1;
+  stroke-opacity: .7;
+}
+
+svg.ar-training .grid line {
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+svg.ar-training .grid .minor line {
+  stroke-opacity: .5;
+}
+
+svg.ar-training .grid text {
+  display: none;
+}
+
+svg.ar-training .axis path,
+svg.ar-training .grid path {
+  display: none;
+}
+
+svg.ar-training .axis.hide-axis {
+  display: none;
+}
+
+svg.ar-training .legned rect {
+  fill: #EBEBEB;
+}
+
+svg.ar-training .legned line {
+  stroke-width: 2;
+}
