@@ -85,21 +85,11 @@
 <dt-article>
   <h2>Recurrent Units</h2>
   <p>
-    To express the different recurrent units as variations of the same RNN, the
-    following <math-latex latex="\mathrm{Unit}(\cdot, \cdot)"></math-latex>
-    notation is used:
+    The networks that will be considered, uses a simple RNN structure:
     <math-latex display-mode latex="\begin{aligned}
       h_{\ell}^{t} &= \mathrm{Unit}(h_{\ell-1}^{t}, h_{\ell}^{t-1}), \text{ where: } h_{0}^t = x_t \\
-      y^t &= \mathrm{Softmax}(h_L^t) \\
-      \mathcal{L} &= - \frac{1}{T} \sum_{t=1}^T \ln(y^t_k)
+      y^t &= \mathrm{Softmax}(h_L^t)
     \end{aligned}"></math-latex>
-
-    For a vanilla recurrent neural network, the recurrent unit
-    <math-latex latex="\mathrm{Unit}(\cdot, \cdot)"></math-latex>
-    is:
-    <math-latex display-mode latex="
-      h_{\ell}^{t} = \mathrm{RNN}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq \sigma(W_{\ell-1,\ell}h_{\ell-1}^t + W_{\ell,\ell}h_{\ell}^{t-1})
-    "></math-latex>
   </p>
   <p>
     In theory, the time dependency allows it in each iteration to know
@@ -114,7 +104,10 @@
       earlier steps becomes insignificant in the gradient:
       <math-latex latex="
       \frac{\partial \mathcal{L}}{\partial h_\ell^t} = \delta_\ell^t = \sigma(z_\ell^t) \odot \left( W_{\ell, \ell+1} \delta_{\ell+1}^t +  W_{\ell, \ell} \delta_{\ell}^{t+1}\right)
-      "></math-latex>
+      "></math-latex>. This graident is for the vanilla RNN unit:
+      <math-latex latex="
+        h_{\ell}^{t} = \mathrm{RNN}(h_{\ell-1}^{t}, h_{\ell}^{t-1}) \coloneqq \sigma(W_{\ell-1,\ell}h_{\ell-1}^t + W_{\ell,\ell}h_{\ell}^{t-1})
+      "></math-latex>.
     </figcaption>
   </figure>
   <p>
