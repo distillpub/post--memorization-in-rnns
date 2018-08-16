@@ -55,15 +55,22 @@ class HeroConnectivity extends events.EventEmitter {
     const highestConnectivity = Math.max(...connectivity);
     for (const stength of connectivity) {
       // 2) Use only the middle 1/3 of the color scale
-      connectivityRescaled.push((stength / highestConnectivity)/3 + 1/3)
+      connectivityRescaled.push(stength / highestConnectivity)
     }
 
     this._textArea
       .selectAll('span')
       .data(connectivityRescaled)
-      .style('background-color', d3.interpolateViridis)
+      .style('background-color', interpolateViridisSubset)
       .classed('selected', (d, i) => this._selectedCharIndex === i);
   }
+}
+
+function interpolateViridisSubset(ratio) {
+  const low = 0.29;
+  const high = 2/3;
+
+  return d3.interpolateViridis(low + ratio * (high - low));
 }
 
 module.exports = HeroConnectivity;

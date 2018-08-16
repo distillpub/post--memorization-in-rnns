@@ -52,9 +52,10 @@
   font-family: monospace;
   padding: 0.5em;
   box-sizing: border-box;
-  background: #31688e;
+  background: #365d8d;
   color: white;
   line-height: 1.4em;
+  border-radius: 10px 0 0 10px;
 }
 
 .ar-hero .textarea span {
@@ -70,14 +71,53 @@
   grid-area: namearea;
 
   display: flex;
-  background: #D9D9D9;
+  background: #EEEEEE;
   justify-content: center;
+  color: #555555;
+  border: 1px solid #E0E0E0;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
 }
 
 .ar-hero .namearea span {
   align-self: center;
   line-height: 1em;
   text-align: center;
+}
+
+p ~ .ar-math-figure {
+  margin-top: calc(1em - 24px);
+}
+
+.ar-math-figure {
+  margin-top: 1em;
+  margin-bottom: 24px;
+}
+
+.ar-math-grid {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+    grid-column-gap: 0.2em;
+    grid-row-gap: 0.5em;
+
+    justify-items: start;
+    align-items: center;
+    justify-content: center;
+}
+.ar-math-grid > math-latex {
+  grid-row: 1;
+}
+.ar-math-grid > math-latex > .katex-display {
+  margin: 0;
+}
+.ar-math-grid > span.ar-math-annotation {
+  font-size: 12px;
+  line-height: 1.2em;
+  color: rgba(0, 0, 0, 0.6);
+  align-self: start;
 }
 
 #ar-recurrent-units ul {
@@ -317,19 +357,13 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   height: 240px;
 }
 
-.ar-visual-rnn svg rect.unit {
-  stroke: #e3e3e3;
-}
+.ar-visual-rnn svg path.arrow-up { stroke-width: 2px; }
+.ar-visual-rnn svg path.arrow-up.active { stroke: #9BC0DB; }
+.ar-visual-rnn svg path.arrow-up.inactive { stroke: #BBBBBB; }
 
-.ar-visual-rnn svg path.arrow-up {
-  stroke: #9BC0DB;
-  stroke-width: 2px;
-}
-
-.ar-visual-rnn svg path.arrow-right {
-  stroke: #9BC0DB;
-  stroke-width: 2px;
-}
+.ar-visual-rnn svg path.arrow-right { stroke-width: 2px; }
+.ar-visual-rnn svg path.arrow-right.active {stroke: #9BC0DB; }
+.ar-visual-rnn svg path.arrow-right.inactive { stroke: #BBBBBB; }
 
 .ar-visual-rnn > figcaption {
   grid-area: caption;
@@ -340,7 +374,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   grid-template-columns: 1fr 60px;
   grid-template-rows: 40px auto;
   grid-template-areas:
-    "predictarea namearea"
+    "predictarea ."
     "textarea namearea";
   margin-bottom: 10px;
 }
@@ -355,9 +389,10 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   font-family: monospace;
   padding: 0.5em;
   box-sizing: border-box;
-  background: #31688e;
+  background: #365d8d;
   color: white;
   line-height: 1.4em;
+  border-radius: 0 0 0 10px;
 }
 
 .ar-connectivity .textarea span {
@@ -372,19 +407,18 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 .ar-connectivity .predictarea {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 2px;
   align-items: center;
-  background: #F3F3F3;
 }
 
 .ar-connectivity .predictarea .prediction {
-  border-left: 2px solid white;
-  height: 100%;
-  line-height: 40px;
+  line-height: 39px;
   padding: 0 5px;
   text-align: center;
-}
-.ar-connectivity .predictarea .prediction:first-of-type {
-  border: none;
+  background: #F3F3F3;
+  border-bottom: none;
+  border: 1px solid #E0E0E0;
+  border-bottom: none;
 }
 
 @media only screen and (max-width: 400px)  {
@@ -398,8 +432,12 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 
   display: flex;
   max-width: 60px;
-  background: #D9D9D9;
+  background: #EEEEEE;
   justify-content: center;
+  color: #555555;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #E0E0E0;
+  border-left: none;
 }
 
 .ar-connectivity .namearea span {

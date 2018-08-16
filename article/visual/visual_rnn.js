@@ -48,7 +48,18 @@ class VisualRNN extends events.EventEmitter {
 
     arrowDefs
       .append('marker')
-      .attr('id', this._arrowId('right'))
+      .attr('id', this._arrowId('right-inactive'))
+      .attr('markerWidth', 3)
+      .attr('markerHeight', 3)
+      .attr('refX', 2)
+      .attr('refY', 1.5)
+      .append('path')
+        .attr('d', 'M0,0 L0,3 L3,1.5 Z')
+        .attr('fill', '#BBBBBB')
+
+    arrowDefs
+      .append('marker')
+      .attr('id', this._arrowId('right-active'))
       .attr('markerWidth', 3)
       .attr('markerHeight', 3)
       .attr('refX', 2)
@@ -59,7 +70,18 @@ class VisualRNN extends events.EventEmitter {
 
     arrowDefs
       .append('marker')
-      .attr('id', this._arrowId('up'))
+      .attr('id', this._arrowId('up-inactive'))
+      .attr('markerWidth', 3)
+      .attr('markerHeight', 3)
+      .attr('refX', 1.5)
+      .attr('refY', 2)
+      .append('path')
+        .attr('d', 'M0,3 L3,3 L1.5,0 Z')
+        .attr('fill', '#BBBBBB')
+
+    arrowDefs
+      .append('marker')
+      .attr('id', this._arrowId('up-active'))
       .attr('markerWidth', 3)
       .attr('markerHeight', 3)
       .attr('refX', 1.5)
@@ -138,6 +160,7 @@ class VisualRNN extends events.EventEmitter {
         .classed('unit', true)
         .attr('width', blockWidth)
         .attr('height', 30)
+        .attr('rx', 3)
         .attr('x', (i) => i * (blockWidth + blockSpace))
         .attr('y', 15)
         .on('mouseenter', mouseenter)
@@ -150,19 +173,23 @@ class VisualRNN extends events.EventEmitter {
   }
 
   _drawUpArrow({ blockWidth, blockSpace, blocks }) {
-    const arrowUrl = `url(#${this._arrowId('up')})`;
+    const arrowActiveUrl = `url(#${this._arrowId('up-active')})`;
+    const arrowInactiveUrl = `url(#${this._arrowId('up-inactive')})`;
+    const activeColumn = this._colorizeColumn;
 
     return function (element) {
       const selection = element
         .selectAll('path.arrow-up')
         .data(arange(blocks))
+        .attr('marker-end', (i) => i <= activeColumn ? arrowActiveUrl : arrowInactiveUrl)
+        .classed('active', (i) => i <= activeColumn)
+        .classed('inactive', (i) => i > activeColumn);
 
       selection
         .enter()
         .append('path')
         .classed('arrow-up', true)
-        .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth/2} 15 v -15`)
-        .attr('marker-end', arrowUrl);
+        .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth/2} 15 v -15`);
 
       selection
         .exit()
@@ -171,19 +198,23 @@ class VisualRNN extends events.EventEmitter {
   }
 
   _drawRightArrow({ blockWidth, blockSpace, blocks }) {
-    const arrowUrl = `url(#${this._arrowId('right')})`;
+    const arrowActiveUrl = `url(#${this._arrowId('right-active')})`;
+    const arrowInactiveUrl = `url(#${this._arrowId('right-inactive')})`;
+    const activeColumn = this._colorizeColumn;
 
     return function (element) {
       const selection = element
         .selectAll('path.arrow-right')
         .data(arange(blocks - 1))
+        .attr('marker-end', (i) => i < activeColumn ? arrowActiveUrl : arrowInactiveUrl)
+        .classed('active', (i) => i < activeColumn)
+        .classed('inactive', (i) => i >= activeColumn);
 
       selection
         .enter()
         .append('path')
         .classed('arrow-right', true)
         .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth} 30 h 10`)
-        .attr('marker-end', arrowUrl);
 
       selection
         .exit()

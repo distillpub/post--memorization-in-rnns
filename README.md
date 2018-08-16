@@ -1,7 +1,8 @@
 
-# Exploration of Recurrent Units in RNN
+# Visualizing memorization in RNNs
 
-**An exploration of recent developments of recurrent units in RNN and their effect on contextual understanding in text.**
+**Visualizing the gradient magnitudes in context, can be a powerful tool to
+see when recurrent units use short-term or long-term memorization.**
 
 1. Train the models with `make train`. This will take a very long time :)
 2. Build the data for the article with `make convert`
