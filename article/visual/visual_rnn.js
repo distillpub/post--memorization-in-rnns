@@ -189,11 +189,14 @@ class VisualRNN extends events.EventEmitter {
         .enter()
         .append('path')
         .classed('arrow-up', true)
-        .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth/2} 15 v -15`);
+        .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth/2} 15 v -15`)
+        .attr('marker-end', (i) => i <= activeColumn ? arrowActiveUrl : arrowInactiveUrl)
+        .classed('active', (i) => i <= activeColumn)
+        .classed('inactive', (i) => i > activeColumn);
 
       selection
         .exit()
-        .remove()
+        .remove();
     }
   }
 
@@ -215,10 +218,13 @@ class VisualRNN extends events.EventEmitter {
         .append('path')
         .classed('arrow-right', true)
         .attr('d', (i) => `M ${i * (blockWidth + blockSpace) + blockWidth} 30 h 10`)
+        .attr('marker-end', (i) => i < activeColumn ? arrowActiveUrl : arrowInactiveUrl)
+        .classed('active', (i) => i < activeColumn)
+        .classed('inactive', (i) => i >= activeColumn);
 
       selection
         .exit()
-        .remove()
+        .remove();
     }
   }
 }
