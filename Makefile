@@ -11,16 +11,12 @@ train:
 
 bundle:
 	browserify article/main.js --debug > article/bundle.js
-	browserify article/feedback-main.js --debug > article/feedback-bundle.js
-	browserify article/feedback-3-main.js --debug > article/feedback-3-bundle.js
 
 bundle-watch:
 	watchify article/main.js --debug -o article/bundle.js
 
 bundle-production:
 	browserify article/main.js -t babelify > article/bundle.js
-	browserify article/feedback-main.js -t babelify > article/feedback-bundle.js
-	browserify article/feedback-3-main.js -t babelify > article/feedback-3-bundle.js
 
 server:
 	http-server article
