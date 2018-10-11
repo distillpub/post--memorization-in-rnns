@@ -7,16 +7,17 @@ const HeroConnectivity = require('./visual/hero_connectivity.js');
 const Connectivity = require('./visual/connectivity.js');
 const TrainingGraph = require('./visual/training_graph.js');
 const RecurrentUnitsSelect = require('./visual/recurrent_units_select.js');
+const Walkthrough = require('./visual/walkthrough.js');
 const dl = require('deeplearn');
 
-//const assertDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
-//const assertDirectory = '/blog-recurrent-units/';
-const assertDirectory = '/';
+//const dataDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
+//const dataDirectory = '/blog-recurrent-units/';
+const dataDirectory = '/';
 
 async function setupHeroDiagram() {
   const lstmConnectivity = new HeroConnectivity({
     container: document.querySelector('#ar-hero-diagram-lstm'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_lstm.json',
     name: 'LSTM'
   });
@@ -24,7 +25,7 @@ async function setupHeroDiagram() {
 
   const nlstmConnectivity = new HeroConnectivity({
     container: document.querySelector('#ar-hero-diagram-nlstm'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_nlstm.json',
     name: 'Nested LSTM'
   });
@@ -32,7 +33,7 @@ async function setupHeroDiagram() {
 
   const gruConnectivity = new HeroConnectivity({
     container: document.querySelector('#ar-hero-diagram-gru'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_gru.json',
     name: 'GRU'
   });
@@ -88,8 +89,8 @@ async function setupRecurrentUnitsSelect() {
 }
 
 async function setupAutocompleteDemo(model) {
-  const autocomplete = new AutoComplete(assertDirectory);
-  const demo = new AutoCompleteDemo(assertDirectory, model, autocomplete);
+  const autocomplete = new AutoComplete(dataDirectory);
+  const demo = new AutoCompleteDemo(dataDirectory, model, autocomplete);
 
   let animationTimer = null;
   let inputText = '';
@@ -179,7 +180,7 @@ async function setupMemorizationProblemRNN() {
 async function setupConnectivity() {
   const lstmConnectivity = new Connectivity({
     container: document.querySelector('#ar-connectivity-lstm'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_lstm.json',
     name: 'LSTM'
   });
@@ -187,7 +188,7 @@ async function setupConnectivity() {
 
   const nlstmConnectivity = new Connectivity({
     container: document.querySelector('#ar-connectivity-nlstm'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_nlstm.json',
     name: 'Nested LSTM'
   });
@@ -195,7 +196,7 @@ async function setupConnectivity() {
 
   const gruConnectivity = new Connectivity({
     container: document.querySelector('#ar-connectivity-gru'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     filename: 'connectivity_gru.json',
     name: 'GRU'
   });
@@ -213,9 +214,29 @@ async function setupConnectivity() {
   await drawConnectivity(105);
 
   window.connectivitySetIndex = function (index) {
+    document.querySelector('#ar-connectivity-gru').scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
+
     drawConnectivity(index === null ? 105 : index)
       .catch((err) => { throw err; });
   };
+}
+
+async function setupWalkthrough() {
+  const walkthrough = new Walkthrough({
+    container: document.querySelector('#ar-walkthrough')
+  });
+
+  walkthrough.select(1);
+  walkthrough.draw();
+
+  walkthrough.on('click', function (pageNumber) {
+    walkthrough.select(pageNumber);
+    walkthrough.draw();
+  });
 }
 
 async function setupTrainingGraph() {
@@ -224,7 +245,7 @@ async function setupTrainingGraph() {
 
   const autocomplete = new TrainingGraph({
     container: document.querySelector('#ar-autocomplete-training'),
-    assertDirectory: assertDirectory,
+    dataDirectory: dataDirectory,
     name: 'autocomplete',
     filename: 'autocomplete-training.csv',
     ylim: [0.5, 10.5],
@@ -254,13 +275,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 		});
 	});
 
-  const model = new PureGRU(assertDirectory);
+  const model = new PureGRU(dataDirectory);
   await Promise.all([
     setupHeroDiagram(),
     setupMemorizationProblemRNN(),
     setupRecurrentUnitsSelect(),
     setupAutocompleteDemo(model),
     setupConnectivity(),
+    setupWalkthrough(),
     setupTrainingGraph()
   ]);
 

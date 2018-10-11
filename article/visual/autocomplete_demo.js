@@ -23,14 +23,14 @@ function smoothFlowPathSameWidth({ x, borderWidth, midWidth }) {
 }
 
 class AutoCompleteDemo extends events.EventEmitter {
-  constructor(assertDirectory, model, dataset) {
+  constructor(dataDirectory, model, dataset) {
     super();
     this._model = model;
     this._text = ' ';
     this._properbilityCacheGood = false;
     this._properbilityCache = null;
     this._properbilityPrecomputed = d3.json(
-      assertDirectory + 'data/demo-precompute.json'
+      dataDirectory + 'data/demo-precompute.json'
     ).then((val) => new Map(val));
 
     this._dataset = dataset;
@@ -229,6 +229,7 @@ class AutoCompleteDemo extends events.EventEmitter {
       .sort((a, b) => b.properbility - a.properbility)
     const wordMap = await this._dataset.getWordMap();
     const mostLikelyWords = sorted.slice(0, 3)
+      .sort((a, b) => a.index - b.index)
       .map(({properbility, index}) => ({
         properbility: properbility,
         index: index,

@@ -23,9 +23,9 @@ class LoaderCache {
 }
 
 class AbstactModel {
-  constructor(params, assertDirectory, name='unnamed') {
+  constructor(params, dataDirectory, name='unnamed') {
     this._params = params;
-    this._loader = new LoaderCache(assertDirectory + `save/${name}`);
+    this._loader = new LoaderCache(dataDirectory + `save/${name}`);
     this._variables = new VariableScope(this._loader, 'model');
     this.ready = false;
   }

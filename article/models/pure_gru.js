@@ -8,11 +8,11 @@ const dynamicRnn = require('../operator/dynamic_rnn.js');
 const denseLayer = require('../operator/dense_layer.js');
 
 class PureGRU extends AbstactModel {
-  constructor(assertDirectory, name='autocomplete_gru') {
+  constructor(dataDirectory, name='autocomplete_gru') {
     super({
       'embedding_size': 600,
       'layers': 2
-    }, assertDirectory, name);
+    }, dataDirectory, name);
   }
 
   async _model_fn(features, variables, params) {

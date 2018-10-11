@@ -8,11 +8,11 @@ const dynamicRnn = require('../operator/dynamic_rnn.js');
 const denseLayer = require('../operator/dense_layer.js');
 
 class PureLSTM extends AbstactModel {
-  constructor(assertDirectory, name='autocomplete_lstm') {
+  constructor(dataDirectory, name='autocomplete_lstm') {
     super({
       'embedding_size': 600,
       'layers': 2
-    }, assertDirectory, name);
+    }, dataDirectory, name);
   }
 
   async _model_fn(features, variables, params) {

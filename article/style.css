@@ -449,6 +449,62 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   text-align: center;
 }
 
+#ar-walkthrough .ar-walkthrough-step {
+  min-height: 125px;
+}
+
+#ar-walkthrough .ar-walkthrough-step {
+  display: none;
+  grid-template-columns: 48px 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "number text"
+    ". warning";
+  grid-column-gap: 10px;
+}
+#ar-walkthrough .ar-walkthrough-step.ar-walkthrough-selected {
+  display: grid;
+}
+
+#ar-walkthrough .ar-walkthrough-step .ar-walkthrough-number {
+  grid-area: number;
+
+  width: 48px;
+  height: 48px;
+  background: #E7C9F6;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 48px;
+  font-size: 1.5em;
+}
+
+#ar-walkthrough .ar-walkthrough-step .ar-walkthrough-text {
+  grid-area: text;
+}
+
+#ar-walkthrough .ar-walkthrough-step .ar-walkthrough-text p:first-of-type {
+  margin-top: 0;
+}
+
+#ar-walkthrough .ar-walkthrough-pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 25px);
+  grid-column-gap: 10px;
+  justify-content: center;
+  margin: 0 0 0.5em 0;
+}
+
+#ar-walkthrough .ar-walkthrough-pages .ar-walkthrough-page {
+  height: 25px;
+  width: 25px;
+  background: #E7C9F6;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 25px;
+  font-size: 0.7em;
+  cursor: pointer;
+}
+
 figure.ar-table-container {
   display: flex;
   flex-direction: column;

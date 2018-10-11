@@ -181,9 +181,9 @@ class SubGraph {
 }
 
 class TrainingGraph {
-  constructor({ container, assertDirectory, name, filename, height, xlimTime, xlimEpochs, ylim }) {
+  constructor({ container, dataDirectory, name, filename, height, xlimTime, xlimEpochs, ylim }) {
     this._data = d3.csv(
-      assertDirectory + 'data/' + filename,
+      dataDirectory + 'data/' + filename,
       (d) => ({
         dataset: d.dataset,
         loss: parseFloat(d.loss),

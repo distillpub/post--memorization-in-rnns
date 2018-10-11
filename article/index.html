@@ -262,6 +262,12 @@
       </span>
     </div>
   </figure>
+  <p>
+    Exploring the connectivity gives a surprising amount of insight into the
+    different models' ability for long-term contextual understanding. You should
+    try and interact with the figure below yourself, to see what information the
+    different models use.
+  </p>
   <figure>
     <div id="ar-connectivity-nlstm" class="ar-connectivity"></div>
     <div id="ar-connectivity-lstm" class="ar-connectivity"></div>
@@ -273,41 +279,59 @@
     </figcaption>
   </figure>
   <p>
-    Exploring the connectivity gives a surprising amount of insight into the
-    different models' ability for long-term contextual understanding. You should
-    try and interact with the figure yourself, to see what information the
-    different models use.
+    In case you missed it, here are two important observations:
   </p>
-  <p>
-    Here are two interesting observations:
-  </p>
-  <ul>
-    <li>
-  The first observation is when the <a href="javascript:connectivitySetIndex(105);">
-  models should predict "learning" and is only given data
-  until the first character</a>. Here it is clear, that the Nested LSTM
-  model uses no past information and thus only suggests common words starting
-  with the letter "l".<br>
+  <figure>
+    <div id="ar-walkthrough">
+      <div class="ar-walkthrough-step">
+        <div class="ar-walkthrough-number">1</div>
+        <div class="ar-walkthrough-text">
+          <p>
+          The first observation is when the <a href="javascript:connectivitySetIndex(105);">
+          models should predict "learning" and is only given data
+          until the first character</a>. Here it is clear, that the Nested LSTM
+          model uses no past information and thus only suggests common words starting
+          with the letter "l".
+          </p>
+          <p>
+          The LSTM model suggests variations on the word "language",
+          which makes sense given the text is about learning grammar. The GRU model
+          does one better, by using the words "study" and "education" to also suggests
+          the correct word "learning".
+        </p>
+        </div>
+      </div>
+      <div class="ar-walkthrough-step">
+        <div class="ar-walkthrough-number">2</div>
+        <div class="ar-walkthrough-text">
+          <p>
+          The second observation is when the models should predict the word "grammar".
+          This word appears twice, for the first case very little is known
+          about the context. Thus, the models don't suggest "grammar" until they have
+          <a href="javascript:connectivitySetIndex(31);">seen 3</a> or
+          <a href="javascript:connectivitySetIndex(32);">4 characters</a>.
+          </p>
+          <p>
+          For the second occurrence, there is much more text for the models to
+          understand the context of the word. The GRU model is thus able to predict
+          the word "grammar" with only <a href="javascript:connectivitySetIndex(159);">
+          1 character from the word itself</a>. While the LSTM and Nested LSTM again
+          needs <a href="javascript:connectivitySetIndex(162);">4 characters</a>.
+          </p>
+        </div>
+      </div>
+      <div class="ar-walkthrough-pages">
+        <span class="ar-walkthrough-page">1</span>
+        <span class="ar-walkthrough-page">2</span>
+      </div>
+    </div>
+    <figcaption>
+      <strong>Important observations:</strong> showing how the networks use
+      past information. <em>Clicking on the links above will change what is
+      viewed in connectivity figure.</em>
+    </figcaption>
+  </figure>
 
-  The LSTM model suggests variations on the word "language",
-  which makes sense given the text is about learning grammar. The GRU model
-  does one better, by using the words "study" and "education" to also suggests
-  the correct word "learning".
-    </li>
-    <li>
-  The second observation is when the models should predict the word "grammar".
-  This word appears twice, for the first case very little is known
-  about the context. Thus, the models don't suggest "grammar" until they have
-  <a href="javascript:connectivitySetIndex(31);">seen 3</a> or
-  <a href="javascript:connectivitySetIndex(32);">4 characters</a>.<br>
-
-  For the second occurrence, there is much more text for the models to
-  understand the context of the word. The GRU model is thus able to predict
-  the word "grammar" with only <a href="javascript:connectivitySetIndex(159);">
-  1 character from the word itself</a>. While the LSTM and Nested LSTM again
-  needs <a href="javascript:connectivitySetIndex(162);">4 characters</a>.
-    </li>
-  </ul>
   <p>
     These observations show that this visualization method is a powerful tool
     for comparing long-term memorization. Although, it is only possible to
@@ -323,29 +347,27 @@
     Looking at accuracy and cross entropy loss in itself is not that
     interesting. A reasonable high accuracy can be obtained, with reasonably
     low contextual understanding. It is only for the first couple of characters,
-    that long-term memorization and contextual understanding really matters.
+    where long-term memorization and contextual understanding really matters.
   </p>
   <p>
     A qualitative analysis, where one looks at how previous input is used in
     the prediction is therefore also important when judging models. In this
     case, the connectivity visualization together with the autocomplete
-    predictions, reveals that the Nested LSTM model isn’t capable of long-term
-    contextual understanding. This contradicts the original design hypothesis
-    and findings for the Nested LSTM model, that more internal memory leads to
-    more long-term memorization <dt-cite key="moniz2018nlstm"></dt-cite>.
-    In fact, the GRU model, which has no internal memory, is the model that has
-    the highest accuracy and shows the most contextual understanding in the
-    connectivity analysis.
+    predictions, reveals that the GRU model is much more capable of long-term
+    contextual understanding, compared to LSTM and Nested LSTM. Perhaps much
+    greater, than one would guess from just looking at the accuracy and cross
+    entropy loss alone. This observation is not that interesting in itself as
+    it's likely very dependent on the random initialization, hyperparameters,
+    and the specific application.
   </p>
   <p>
-    It is entirely possible, that these results are highly dependent on the
-    random initialization, hyperparameters, and the specific application. The
-    importance of this article is therefore not to judge Nested LSTM overall
-    but to show a better way of qualitatively comparing different RNNs in
-    terms of their memorization abilities. In this case, the connectivity
-    visualization has revealed much greater differences between the models,
-    than one would guess from just looking at the accuracy and cross entropy
-    loss alone.
+    Much more valuable is that this visualization method makes it possible
+    to understand how the models are different, to a much greater degree
+    than just looking at accuracy and cross entropy. For this application,
+    it is clear that the GRU model uses repeating words and semantic meaning
+    of past words to make its prediction, while the LSTM and Nested LSTM models
+    do not. This is both a valuable insight when choosing the final model,
+    but also important knowledge when developing better models in the future.
   </p>
 </dt-article>
 

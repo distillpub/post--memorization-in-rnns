@@ -3,13 +3,13 @@ const d3 = require('../d3.js');
 const events = require('events');
 
 class HeroConnectivity extends events.EventEmitter {
-  constructor({container, assertDirectory, filename, name}) {
+  constructor({container, dataDirectory, filename, name}) {
     super();
 
     this._name = name;
     this._textLimit = 70;
 
-    this._data = d3.json(assertDirectory + 'data/' + filename);
+    this._data = d3.json(dataDirectory + 'data/' + filename);
     this._isInitialized = false;
     this._selectedCharIndex = 0;
 
