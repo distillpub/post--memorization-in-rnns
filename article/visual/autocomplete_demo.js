@@ -27,9 +27,9 @@ class AutoCompleteDemo extends events.EventEmitter {
     super();
     this._model = model;
     this._text = ' ';
-    this._properbilityCacheGood = false;
-    this._properbilityCache = null;
-    this._properbilityPrecomputed = d3.json(
+    this._probabilityCacheGood = false;
+    this._probabilityCache = null;
+    this._probabilityPrecomputed = d3.json(
       dataDirectory + 'data/demo-precompute.json'
     ).then((val) => new Map(val));
 
@@ -176,7 +176,7 @@ class AutoCompleteDemo extends events.EventEmitter {
 
     // For the input to start with a space
     this._text = (' ' + validText).slice(0, this._getMaxLength());
-    if (this._text !== oldText) this._properbilityCacheGood = false;
+    if (this._text !== oldText) this._probabilityCacheGood = false;
   }
 
   _showLoader() {
@@ -188,13 +188,13 @@ class AutoCompleteDemo extends events.EventEmitter {
   }
 
   async getProperbility(text) {
-    const precomputed = await this._properbilityPrecomputed;
-    if (this._properbilityCacheGood) return this._properbilityCache;
+    const precomputed = await this._probabilityPrecomputed;
+    if (this._probabilityCacheGood) return this._probabilityCache;
 
     if (precomputed.has(text)) {
-      this._properbilityCacheGood = true;
-      this._properbilityCache = precomputed.get(text);
-      return this._properbilityCache;
+      this._probabilityCacheGood = true;
+      this._probabilityCache = precomputed.get(text);
+      return this._probabilityCache;
     }
 
     let shouldLoad = !this._model.ready;
@@ -205,33 +205,33 @@ class AutoCompleteDemo extends events.EventEmitter {
     // Compute properbiliies
     const inputDataset = await this._dataset.encodeSource([text]);
     for await (const output of this._model.predict(inputDataset)) {
-      this._properbilityCache = output.properbility;
+      this._probabilityCache = output.probability;
       break;
     }
-    this._properbilityCacheGood = true;
+    this._probabilityCacheGood = true;
 
     if (shouldLoad) {
       this._hideLoader();
     }
 
-    return this._properbilityCache;
+    return this._probabilityCache;
   }
 
   async draw() {
     this._inputField.property('value', this._text);
 
     // Compute properbiliies
-    const properbility = await this.getProperbility(this._text);
+    const probability = await this.getProperbility(this._text);
 
     // The 3 most likely words
-    const sorted = Array.from(properbility)
-      .map((d, i) => ({ properbility: d, index: i }))
-      .sort((a, b) => b.properbility - a.properbility)
+    const sorted = Array.from(probability)
+      .map((d, i) => ({ probability: d, index: i }))
+      .sort((a, b) => b.probability - a.probability)
     const wordMap = await this._dataset.getWordMap();
     const mostLikelyWords = sorted.slice(0, 3)
       .sort((a, b) => a.index - b.index)
-      .map(({properbility, index}) => ({
-        properbility: properbility,
+      .map(({probability, index}) => ({
+        probability: probability,
         index: index,
         word: wordMap[index]
       }))
@@ -240,8 +240,8 @@ class AutoCompleteDemo extends events.EventEmitter {
 
     const cellSizing = this._getCellSizing();
     this._drawRnn(cellSizing);
-    this._drawOutput(cellSizing, properbility, mostLikelyWords);
-    this._drawFinal(properbility, mostLikelyWords);
+    this._drawOutput(cellSizing, probability, mostLikelyWords);
+    this._drawFinal(probability, mostLikelyWords);
   }
 
   _getCellSizing() {
@@ -330,13 +330,13 @@ class AutoCompleteDemo extends events.EventEmitter {
       .attr('d', arrowPath)
   }
 
-  _drawOutput(cellSizing, properbility, mostLikelyWords) {
+  _drawOutput(cellSizing, probability, mostLikelyWords) {
     const lastCellSizing = cellSizing[this._text.length - 1];
     const parentWidth = this._outputContainer
       .node()
       .clientWidth;
     const suggestionWidth = (parentWidth - 20) / 3;
-    const wordsPerPixed = Math.floor(properbility.length / (parentWidth / 4));
+    const wordsPerPixed = Math.floor(probability.length / (parentWidth / 4));
 
     // draw flow
     this._outputFlowInPath
@@ -363,12 +363,12 @@ class AutoCompleteDemo extends events.EventEmitter {
     const ctx = this._outputCanvas.node().getContext('2d');
 
     // Interpolate data into a color array of width parentWidth
-    const highestProperbility = Math.max(...properbility);
+    const highestProperbility = Math.max(...probability);
     for (let i = 0; i < parentWidth; i++) {
       const highestInRange = Math.max(
-        ...properbility.slice(i * wordsPerPixed, (i + 1) * wordsPerPixed)
+        ...probability.slice(i * wordsPerPixed, (i + 1) * wordsPerPixed)
       );
-      // 1) Rescale such the highest properbility is 1
+      // 1) Rescale such the highest probability is 1
       // 2) Use only the middle 1/3 of the color scale
       const colorRatio = (highestInRange / highestProperbility)/3 + 1/3;
       const colorHex = d3.interpolateViridis(colorRatio);
@@ -380,12 +380,12 @@ class AutoCompleteDemo extends events.EventEmitter {
     }
   }
 
-  _drawFinal(properbility, mostLikelyWords) {
+  _drawFinal(probability, mostLikelyWords) {
     const parentWidth = this._outputContainer
       .node()
       .clientWidth;
     const suggestionWidth = (parentWidth - 20) / 3;
-    const wordsPerPixed = Math.floor(properbility.length / (parentWidth / 4));
+    const wordsPerPixed = Math.floor(probability.length / (parentWidth / 4));
 
     // draw flow
     const flowInSelection = this._finalFlowInGroup
@@ -407,8 +407,8 @@ class AutoCompleteDemo extends events.EventEmitter {
           .select('span.word')
           .text(d.word)
         d3.select(this)
-          .select('span.properbility')
-          .text(`(${(d.properbility * 100).toFixed(2)}%)`)
+          .select('span.probability')
+          .text(`(${(d.probability * 100).toFixed(2)}%)`)
       })
     contentSelection.enter()
       .append('div')
@@ -420,8 +420,8 @@ class AutoCompleteDemo extends events.EventEmitter {
           .text(d.word)
         d3.select(this)
           .append('span')
-          .classed('properbility', true)
-          .text(`(${(d.properbility * 100).toFixed(2)}%)`)
+          .classed('probability', true)
+          .text(`(${(d.probability * 100).toFixed(2)}%)`)
       })
     contentSelection.exit()
       .remove()

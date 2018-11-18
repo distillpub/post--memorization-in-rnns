@@ -59,9 +59,9 @@ class PureNLSTM extends AbstactModel {
     const predict = dl.argMax(logits, 1)
 
     // Compute softmax
-    const properbility = dl.softmax(logits)
+    const probability = dl.softmax(logits)
 
-    return [logits, properbility]
+    return [logits, probability]
   }
 }
 

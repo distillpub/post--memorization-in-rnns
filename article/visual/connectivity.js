@@ -16,25 +16,37 @@ class Connectivity extends events.EventEmitter {
 
     this._textArea = this._container
       .append('div')
-      .classed('textarea', true)
+      .classed('textarea', true);
 
     this._predictArea = this._container
       .append('div')
-      .classed('predictarea', true)
+      .classed('predictarea', true);
 
     this._predictArea
       .selectAll('.prediction')
-      .data(["", "", ""])
+      .data([
+        {word: "", probability: 0.0},
+        {word: "", probability: 0.0},
+        {word: "", probability: 0.0}
+      ])
       .enter()
       .append('div')
       .classed('prediction', true)
+      .each(function (d) {
+        d3.select(this)
+          .append('span')
+          .classed('word', true);
+        d3.select(this)
+          .append('span')
+          .classed('probability', true);
+      });
 
     this._nameArea = this._container
       .append('div')
-      .classed('namearea', true)
+      .classed('namearea', true);
     this._nameArea
       .append('span')
-      .text(name)
+      .text(name);
   }
 
   _initializeTextDraw(data) {
@@ -68,10 +80,22 @@ class Connectivity extends events.EventEmitter {
       connectivityRescaled.push(stength / highestConnectivity)
     }
 
-    this._predictArea
+    const predictSelect = this._predictArea
       .selectAll('.prediction')
-      .data(charData.predict.slice(0, 3))
-      .text((d) => d)
+      .data(
+        charData.predict.slice(0, 3).map((word, i) => ({
+          word: word,
+          probability: charData.probability[i]
+        }))
+      )
+      .each(function (d) {
+        d3.select(this)
+          .select('span.word')
+          .text(d.word);
+        d3.select(this)
+          .select('span.probability')
+          .text(`(${(d.probability * 100).toFixed(2)}%)`);
+      });
 
     this._textArea
       .selectAll('span')

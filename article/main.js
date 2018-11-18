@@ -84,7 +84,7 @@ async function setupRecurrentUnitsSelect() {
     recurrentUnitsSelect.draw();
   });
 
-  recurrentUnitsSelect.setSelect('nlstm');
+  recurrentUnitsSelect.setSelect('lstm');
   recurrentUnitsSelect.draw();
 }
 
@@ -267,13 +267,17 @@ async function setupTrainingGraph() {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
-  // Render LaTeX elements first, as their size is unknown.
-	var elements = document.querySelectorAll('math-latex');
-	Array.from(elements).forEach(function processElement(element) {
-		window.katex.render(element.getAttribute('latex'), element, {
-			displayMode: element.hasAttribute('display-mode')
-		});
-	});
+  try {
+    // Render LaTeX elements first, as their size is unknown.
+  	var elements = document.querySelectorAll('math-latex');
+  	Array.from(elements).forEach(function processElement(element) {
+  		window.katex.render(element.getAttribute('latex'), element, {
+  			displayMode: element.hasAttribute('display-mode')
+  		});
+  	});
+  } catch (e) {
+    console.error(e);
+  }
 
   const model = new PureGRU(dataDirectory);
   await Promise.all([

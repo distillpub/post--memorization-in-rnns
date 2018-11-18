@@ -112,7 +112,7 @@ class SubGraph {
           const hour = Math.floor(d.getTime() / (60 * 60 * 1000));
           return `0${hour}:00:00`;
         });
-    } else if (xAxisName === 'epochs') {
+    } else if (xAxisName === 'mini-batches') {
       this.dataColumn = 'step';
       this.xScale = d3.scaleLinear()
         .domain(this.xlimEpochs);
@@ -132,7 +132,7 @@ class SubGraph {
       return function (d) {
         return !xTicksMajors.includes(d.getTime());
       }
-    } else if (this.xAxisName === 'epochs') {
+    } else if (this.xAxisName === 'mini-batches') {
       const xTicksMajors = this.xScale.ticks(4)
 
       return function (d) {

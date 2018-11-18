@@ -31,15 +31,17 @@ for output_i, output in enumerate(
     model.predict(dataset=test_dataset)
 ):
     probabilities = output['probabilities']
-    predict_sorted = np.argsort(probabilities, axis=1)[:, ::-1]
+    predict_index_sorted = np.argsort(probabilities, axis=1)[:, ::-1]
+    predict_value_sorted = np.sort(probabilities, axis=1)[:, ::-1]
 
     source = test_dataset.decode_source(output['source'])
     target = test_dataset.decode_target(output['target'])
-    predict = test_dataset.decode_target(predict_sorted)
+    predict = test_dataset.decode_target(predict_index_sorted)
     connectivity = output['connectivity']
 
     char = source[output_i]
     words_sorted = predict[output_i]
+    props_sorted = predict_value_sorted[output_i]
     target_word = target[output_i]
 
     print(f' {char} -> {words_sorted[0]}, {words_sorted[1]},'
@@ -49,7 +51,8 @@ for output_i, output in enumerate(
     data.append({
         'char': char,
         'target': target_word,
-        'predict': words_sorted[:5].tolist(),
+        'predict': words_sorted[:3].tolist(),
+        'probability': np.round(props_sorted[:3], 3).tolist(),
         'connectivity': connectivity.tolist()
     })
 

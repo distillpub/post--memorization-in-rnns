@@ -32,7 +32,7 @@ class AbstactModel {
 
   async load() {
     await this._loader.initialize();
-    const [logitsTensor, properbilityTensor] = await this._model_fn(
+    const [logitsTensor, probabilityTensor] = await this._model_fn(
       {
         source: dl.tensor([0], [1], 'int32'),
         length: dl.tensor(1, [], 'int32')
@@ -52,16 +52,16 @@ class AbstactModel {
         dataset.source[i].length
       ], 'int32');
 
-      const [logitsTensor, properbilityTensor] = await this._model_fn(
+      const [logitsTensor, probabilityTensor] = await this._model_fn(
         { source, length }, this._variables, this._params
       );
       this.ready = true;
 
-      const [logits, properbility] = await Promise.all([
-        logitsTensor.data(), properbilityTensor.data()
+      const [logits, probability] = await Promise.all([
+        logitsTensor.data(), probabilityTensor.data()
       ])
 
-      yield { logits, properbility };
+      yield { logits, probability };
     }
   }
 }

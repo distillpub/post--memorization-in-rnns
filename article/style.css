@@ -17,7 +17,7 @@
   #ar-demo #ar-demo-final-content .suggestions .suggestion .word {
     float: none;
   }
-  #ar-demo #ar-demo-final-content .suggestions .suggestion .properbility {
+  #ar-demo #ar-demo-final-content .suggestions .suggestion .probability {
     display: none;
   }
   #ar-demo figcaption:not(#ar-demo-caption) {
@@ -321,7 +321,7 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 }
 
 
-#ar-demo-final-content div.suggestions div.suggestion span.properbility {
+#ar-demo-final-content div.suggestions div.suggestion span.probability {
   float: right;
 }
 
@@ -419,6 +419,29 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   border-bottom: none;
   border: 1px solid #E0E0E0;
   border-bottom: none;
+  height: 39px;
+  overflow: hidden;
+  font-size: 0.9em;
+}
+
+.ar-connectivity .predictarea .prediction span.word {
+  float: left;
+}
+
+.ar-connectivity .predictarea .prediction span.probability {
+  float: right;
+}
+
+@media only screen and (max-width: 550px) {
+  .ar-connectivity .predictarea .prediction {
+    text-align: center;
+  }
+  .ar-connectivity .predictarea .prediction span.word {
+    float: none;
+  }
+  .ar-connectivity .predictarea .prediction span.probability {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 400px)  {
