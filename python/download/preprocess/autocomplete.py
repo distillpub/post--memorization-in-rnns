@@ -13,13 +13,16 @@ from tqdm import tqdm
 from python.download.util.content_dir import ContentDir
 from python.operator import make_sequence_example
 
+random_seed = 450849059  # From random.org
+
+
 def word_vocabulary(words, vocab_size):
     unique, counts = np.unique(words, return_counts=True)
     unique_sorted = unique[np.argsort(counts)[::-1]]
 
     # Extract most occuring words and shuffle the order
     most_occuring_words = unique_sorted[:vocab_size]
-    np.random.RandomState(2).shuffle(most_occuring_words)
+    np.random.RandomState(random_seed).shuffle(most_occuring_words)
 
     vocabulary_index = np.concatenate([
         np.array(['<eos>']),
@@ -125,7 +128,7 @@ def build_dataset(text,
 def split_dataset(dataset, train_ratio=0.9, valid_ratio=0.05, **kwargs):
     # Create indices permutation array
     observations = len(dataset['length'])
-    shuffle_indices = np.random.RandomState(2).permutation(observations)
+    shuffle_indices = np.random.RandomState(random_seed).permutation(observations)
 
     # Compute number of observations in each dataset
     train_size = math.floor(observations * train_ratio)
