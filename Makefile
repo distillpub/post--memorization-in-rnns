@@ -32,16 +32,16 @@ sync:
 		--exclude 'python/save-old' --exclude 'python/save' --exclude 'python/download/content' \
 		--exclude 'article/save' --exclude 'article/node_modules' \
 		--exclude 'article/bundle.js' --exclude 'article/data' \
-		-e ssh ./ nearform-gpu:~/workspace/01-nested-lstm
+		-e ssh ./ amazon-gpu:~/workspace/connectivity
 
 fetch-python:
 	rsync --info=progress2 -urltv --delete \
-	-e ssh nearform-gpu:~/workspace/01-nested-lstm/python/save/ ./python/save
+	-e ssh amazon-gpu:~/workspace/connectivity/python/save/ ./python/save
 	rsync --info=progress2 -urltv --delete \
-	-e ssh nearform-gpu:~/workspace/01-nested-lstm/python/download/content/ ./python/download/content
+	-e ssh amazon-gpu:~/workspace/connectivity/python/download/content/ ./python/download/content
 
 fetch-article:
 	rsync --info=progress2 -urltv --delete \
-	-e ssh nearform-gpu:~/workspace/01-nested-lstm/article/save/ ./article/save
+	-e ssh amazon-gpu:~/workspace/connectivity/article/save/ ./article/save
 	rsync --info=progress2 -urltv --delete \
-	-e ssh nearform-gpu:~/workspace/01-nested-lstm/article/data/ ./article/data
+	-e ssh amazon-gpu:~/workspace/connectivity/article/data/ ./article/data

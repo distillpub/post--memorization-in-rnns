@@ -13,6 +13,8 @@ from tqdm import tqdm
 from python.download.util.content_dir import ContentDir
 from python.operator import make_sequence_example
 
+random_seed = 450849059  # From random.org
+
 
 def char_vocabulary():
     vocabulary_index = np.concatenate([
@@ -103,7 +105,7 @@ def build_dataset(text, max_length=200, verbose=False, **kwargs):
 def split_dataset(dataset, train_ratio=0.9, valid_ratio=0.05, **kwargs):
     # Create indices permutation array
     observations = len(dataset['length'])
-    shuffle_indices = np.random.RandomState(2).permutation(observations)
+    shuffle_indices = np.random.RandomState(random_seed).permutation(observations)
 
     # Compute number of observations in each dataset
     train_size = math.floor(observations * train_ratio)

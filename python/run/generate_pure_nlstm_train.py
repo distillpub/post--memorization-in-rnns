@@ -4,6 +4,7 @@ import tensorflow as tf
 from python.dataset import Generate
 from python.model import PureNLSTM
 
+tf.random.set_random_seed(450849059)  # From random.org
 tf.logging.set_verbosity(tf.logging.INFO)
 
 train_dataset = Generate(repeat=True, batch_size=64)
