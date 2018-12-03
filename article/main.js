@@ -8,6 +8,7 @@ const Connectivity = require('./visual/connectivity.js');
 const TrainingGraph = require('./visual/training_graph.js');
 const RecurrentUnitsSelect = require('./visual/recurrent_units_select.js');
 const Walkthrough = require('./visual/walkthrough.js');
+const AccuracyGraph = require('./visual/accuracy_graph.js');
 const dl = require('deeplearn');
 
 //const dataDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
@@ -239,6 +240,19 @@ async function setupWalkthrough() {
   });
 }
 
+async function setupAccuracyGraph() {
+  const accuracyGraph = new AccuracyGraph({
+    container: document.querySelector('#ar-accuracy-graph'),
+    height: 360
+  });
+
+  accuracyGraph.draw();
+
+  window.addEventListener('resize', function () {
+    accuracyGraph.draw();
+  });
+}
+
 async function setupTrainingGraph() {
   const offset = 10 * 60 * 1000;
   const hour = 60 * 60 * 1000;
@@ -249,8 +263,8 @@ async function setupTrainingGraph() {
     name: 'autocomplete',
     filename: 'autocomplete-training.csv',
     ylim: [0.5, 10.5],
-    xlimTime: [-offset, 2.5 * hour + offset],
-    xlimEpochs: [-200, 7300],
+    xlimTime: [-offset, 7 * hour + offset],
+    xlimEpochs: [-200, 15200],
     height: 360
   });
 
@@ -287,6 +301,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     setupAutocompleteDemo(model),
     setupConnectivity(),
     setupWalkthrough(),
+    setupAccuracyGraph(),
     setupTrainingGraph()
   ]);
 

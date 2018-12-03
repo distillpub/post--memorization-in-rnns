@@ -56,7 +56,7 @@ class AutoCompleteDemo extends events.EventEmitter {
     this._rnnContainer = d3.select('#ar-demo-rnn-content');
     this._rnnSvg = this._rnnContainer
       .append('svg')
-      .attr('height', 60)
+      .attr('height', 75)
       .attr('width', '100%');
     this._rnnSvgCells = this._rnnSvg
       .append('g')
@@ -71,6 +71,7 @@ class AutoCompleteDemo extends events.EventEmitter {
       .classed('flow-out', true);
     this._rnnFlowOutPath = this._rnnFlowOutSvg
       .append('path')
+
     this._rnnFlowArrow = this._rnnSvg
       .append('path')
       .attr('transform', 'translate(0, 30)')
@@ -108,19 +109,12 @@ class AutoCompleteDemo extends events.EventEmitter {
     this._loader.append('span').text('custom input, loading ...')
 
     this._outputContainer = d3.select('#ar-demo-output-content');
-    this._outputFlowInSvg = this._outputContainer
-      .append('svg')
-      .attr('height', 15)
-      .attr('width', '100%');
-    this._outputFlowInPath = this._outputFlowInSvg
-      .append('path')
-      .attr('transform', 'translate(0, -15)');
     this._outputCanvas = this._outputContainer
       .append('canvas')
       .attr('height', 30);
     this._outputFlowOutSvg = this._outputContainer
       .append('svg')
-      .attr('height', 15)
+      .attr('height', 30)
       .attr('width', '100%');
     this._outputFlowOutSvg
       .selectAll('path')
@@ -128,17 +122,6 @@ class AutoCompleteDemo extends events.EventEmitter {
       .enter().append('path')
 
     this._finalContainer = d3.select('#ar-demo-final-content');
-    this._finalFlowInSvg = this._finalContainer
-      .append('svg')
-      .attr('height', 15)
-      .attr('width', '100%');
-    this._finalFlowInGroup = this._finalFlowInSvg
-      .append('g')
-      .attr('transform', 'translate(0, -15)');
-    this._finalFlowInGroup
-      .selectAll('path')
-      .data([0, 0, 0])
-      .enter().append('path')
     this._finalSuggestions = this._finalContainer
       .append('div')
       .classed('suggestions', true);
@@ -339,14 +322,6 @@ class AutoCompleteDemo extends events.EventEmitter {
     const wordsPerPixed = Math.floor(probability.length / (parentWidth / 4));
 
     // draw flow
-    this._outputFlowInPath
-      .attr('d', smoothFlowPathNarrow({
-        topX: lastCellSizing.left,
-        topWidth: lastCellSizing.width,
-        bottomX: 0,
-        bottomWidth: parentWidth
-      }));
-
     const flowOutSelection = this._outputFlowOutSvg
       .selectAll('path')
       .data(mostLikelyWords)
@@ -386,17 +361,6 @@ class AutoCompleteDemo extends events.EventEmitter {
       .clientWidth;
     const suggestionWidth = (parentWidth - 20) / 3;
     const wordsPerPixed = Math.floor(probability.length / (parentWidth / 4));
-
-    // draw flow
-    const flowInSelection = this._finalFlowInGroup
-      .selectAll('path')
-      .data(mostLikelyWords)
-      .attr('d', (d, i) => smoothFlowPathNarrow({
-        topX: Math.floor(d.index / wordsPerPixed) * 4,
-        topWidth: 4,
-        bottomX: (suggestionWidth + 10) * i,
-        bottomWidth: suggestionWidth
-      }));
 
     // draw content
     const contentSelection = this._finalSuggestions

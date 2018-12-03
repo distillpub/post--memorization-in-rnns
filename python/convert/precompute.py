@@ -35,7 +35,7 @@ for output_i, output in enumerate(
         print(f'  "{prefix}"')
         data.append([prefix, probs.tolist()])
 
-with open(path.join(article_dir, 'data/demo–precompute.json'), 'w') as file:
+with open(path.join(article_dir, 'data/demo-precompute.json'), 'w') as file:
     json.dump(data, file)
 
 print('done')

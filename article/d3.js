@@ -7,6 +7,7 @@ Object.assign(
   require('d3-shape'),
   require('d3-path'),
   require('d3-fetch'),
+  require('d3-format'),
   require('d3-interpolate'),
   require('d3-collection'),
   require('d3-axis'),

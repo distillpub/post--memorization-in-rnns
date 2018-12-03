@@ -14,4 +14,4 @@ test_dataset = AutoComplete(repeat=False, dataset='test', batch_size=64)
 model = PureGRU(train_dataset, name='autocomplete_gru_600',
                 embedding_size=600,
                 verbose=True)
-model.train(max_steps=train_dataset.batches, valid_dataset=valid_dataset)
+model.train(max_steps=train_dataset.batches * 2, valid_dataset=valid_dataset)

@@ -9,6 +9,27 @@ train:
 	PYTHONPATH=./ python3 python/run/generate_pure_lstm_train.py
 	PYTHONPATH=./ python3 python/run/generate_pure_nlstm_train.py
 
+quantitative:
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_quantitative.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_lstm_quantitative.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_nlstm_quantitative.py
+
+convert:
+	PYTHONPATH=./ python3 python/convert/export-checkpoint.py
+	PYTHONPATH=./ python3 python/convert/dataset-maps.py autocomplete > article/data/autocomplete.json
+	PYTHONPATH=./ python3 python/convert/precompute.py
+	PYTHONPATH=./ python3 python/convert/tfsummary.py
+
+connectivity:
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_connectivity.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_lstm_connectivity.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_nlstm_connectivity.py
+
+evaluate:
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_test.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_lstm_test.py
+	PYTHONPATH=./ python3 python/run/autocomplete_pure_nlstm_test.py
+
 bundle:
 	browserify article/main.js --debug > article/bundle.js
 
@@ -20,12 +41,6 @@ bundle-production:
 
 server:
 	http-server article
-
-convert:
-	PYTHONPATH=./ python3 python/convert/export-checkpoint.py
-	PYTHONPATH=./ python3 python/convert/dataset-maps.py autocomplete > article/data/autocomplete.json
-	PYTHONPATH=./ python3 python/convert/precompute.py
-	PYTHONPATH=./ python3 python/convert/tfsummary.py
 
 sync:
 	rsync --info=progress2 -urltv --delete \

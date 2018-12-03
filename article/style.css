@@ -168,10 +168,10 @@ p ~ .ar-math-figure {
   grid-template-columns: 20% auto;
   grid-template-rows: repeat(4, 60px);
   grid-template-areas:
-    "input-caption input-content"
-    "rnn-caption rnn-content"
-    "output-caption output-content"
-    "final-caption final-content"
+    "input-caption content"
+    "rnn-caption content"
+    "output-caption content"
+    "final-caption content"
     ". caption";
   grid-column-gap: 10px;
 }
@@ -192,13 +192,10 @@ p ~ .ar-math-figure {
 }
 
 figcaption#ar-demo-input-caption { grid-area: input-caption; }
-#ar-demo-input-content { grid-area: input-content; }
+#ar-demo-content { grid-area: content; }
 figcaption#ar-demo-rnn-caption { grid-area: rnn-caption; }
-#ar-demo-rnn-content { grid-area: rnn-content; }
 figcaption#ar-demo-output-caption { grid-area: output-caption; }
-#ar-demo-output-content { grid-area: output-content; }
 figcaption#ar-demo-final-caption { grid-area: final-caption; }
-#ar-demo-final-content { grid-area: final-content; }
 
 #ar-demo #ar-demo-loader {
   display: flex;
@@ -216,6 +213,11 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   padding-top: 10px;
   grid-area: caption;
   text-align: left;
+}
+
+#ar-demo-input-content {
+  height: 60px;
+  position: relative;
 }
 
 #ar-demo-input-content .background {
@@ -528,6 +530,43 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   cursor: pointer;
 }
 
+#ar-accuracy-graph .legend {
+  display: grid;
+  margin-bottom: 10px;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 145px);
+  justify-content: center;
+}
+
+@media screen and (max-width: 536px) {
+  #ar-accuracy-graph .legend {
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  }
+}
+
+#ar-accuracy-graph .legend svg.legend-item {
+  display: block;
+  width: 145px;
+}
+
+#ar-accuracy-graph .legend svg.legend-item .legend-background {
+  fill: #EBEBEB;
+}
+
+#ar-accuracy-graph .legend svg.legend-item .legend-color {
+  text-anchor: middle;
+  alignment-baseline: middle;
+  dominant-baseline: middle;
+  font: 12px sans-serif;
+}
+
+#ar-accuracy-graph .legend svg.legend-item .legend-text {
+  text-anchor: start;
+  alignment-baseline: middle;
+  dominant-baseline: middle;
+  font: 12px sans-serif;
+}
+
 figure.ar-table-container {
   display: flex;
   flex-direction: column;
@@ -544,67 +583,67 @@ table.ar-table th, table.ar-table td {
   padding: 2px 10px;
 }
 
-svg.ar-training {
+svg.ar-line-graph {
   width: 100%;
   shape-rendering: crispEdges;
   font-size: 16px;
 }
 
-svg.ar-training .tick text {
+svg.ar-line-graph .tick text {
   font-size: 14px;
   fill: #505050;
 }
 
-svg.ar-training .tick line {
+svg.ar-line-graph .tick line {
   stroke-width: 2;
   stroke: #505050;
 }
 
-svg.ar-training .background {
+svg.ar-line-graph .background {
   fill: #EBEBEB;
 }
 
-svg.ar-training .facet {
+svg.ar-line-graph .facet {
   font-size: 14px;
 }
 
-svg.ar-training .facet-background {
+svg.ar-line-graph .facet-background {
   fill: #D9D9D9;
 }
 
-svg.ar-training path.line {
+svg.ar-line-graph path.line {
   fill: none;
   shape-rendering: geometricPrecision;
   stroke-width: 1;
   stroke-opacity: .7;
 }
 
-svg.ar-training .grid line {
+svg.ar-line-graph .grid line {
   stroke: #fff;
   stroke-width: 2;
 }
 
-svg.ar-training .grid .minor line {
+svg.ar-line-graph .grid .minor line {
   stroke-opacity: .5;
 }
 
-svg.ar-training .grid text {
+svg.ar-line-graph .grid text {
   display: none;
 }
 
-svg.ar-training .axis path,
-svg.ar-training .grid path {
+svg.ar-line-graph .axis path,
+svg.ar-line-graph .grid path {
   display: none;
 }
 
-svg.ar-training .axis.hide-axis {
+svg.ar-line-graph .axis.hide-axis {
   display: none;
 }
 
-svg.ar-training .legned rect {
+svg.ar-line-graph .legned rect {
   fill: #EBEBEB;
 }
 
-svg.ar-training .legned line {
+svg.ar-line-graph .legned line {
   stroke-width: 2;
 }

@@ -12,33 +12,46 @@ article_data_dir = path.join(dirname, '..', '..', 'article', 'data')
 
 def read_tf_summary(name, alpha=0.25):
     files = os.listdir(path.join(save_dir, name))
-    eventfile = None
+
+    eventfiles = []
     for filename in files:
         if filename[:19] == 'events.out.tfevents':
-            eventfile = path.join(save_dir, name, filename)
+            eventfiles.append(path.join(save_dir, name, filename))
+    eventfiles = sorted(eventfiles)
 
     rows = []
 
-    for event in tf.train.summary_iterator(eventfile):
-        for value in event.summary.value:
-            if value.tag == 'loss':
-                rows.append({
-                    'dataset': 'train',
-                    'wall time': event.wall_time,
-                    'loss': value.simple_value,
-                    'step': event.step
-                })
-            elif value.tag == 'model_1/validation-loss':
-                rows.append({
-                    'dataset': 'valid',
-                    'wall time': event.wall_time,
-                    'loss': value.simple_value,
-                    'step': event.step
-                })
+    prev_wall_time = 0
+    file_wall_time_offset = 0
 
-    df = pd.DataFrame(rows, columns=('dataset', 'wall time', 'loss', 'step'))
-    df['sec'] = df['wall time'] - df['wall time'][0]
-    df.set_index(['dataset', 'wall time', 'sec', 'step'], inplace=True)
+    for eventfile in eventfiles:
+        first_event_in_file = True
+
+        for event in tf.train.summary_iterator(eventfile):
+            if first_event_in_file:
+                file_wall_time_offset = prev_wall_time - event.wall_time
+                first_event_in_file = False
+
+            for value in event.summary.value:
+                if value.tag == 'loss':
+                    rows.append({
+                        'dataset': 'train',
+                        'sec': event.wall_time + file_wall_time_offset,
+                        'loss': value.simple_value,
+                        'step': event.step
+                    })
+                elif value.tag == 'model_1/validation-loss':
+                    rows.append({
+                        'dataset': 'valid',
+                        'sec': event.wall_time + file_wall_time_offset,
+                        'loss': value.simple_value,
+                        'step': event.step
+                    })
+
+        prev_wall_time = event.wall_time + file_wall_time_offset
+
+    df = pd.DataFrame(rows, columns=('dataset', 'sec', 'loss', 'step'))
+    df.set_index(['dataset', 'sec', 'step'], inplace=True)
     df['loss smooth'] = df['loss'].ewm(alpha=alpha).mean()
 
     return df

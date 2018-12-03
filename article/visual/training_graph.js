@@ -117,10 +117,10 @@ class SubGraph {
       this.xScale = d3.scaleLinear()
         .domain(this.xlimEpochs);
       this.xGrid = d3.axisBottom(this.xScale)
-        .ticks(8)
+        .ticks(17)
         .tickSize(-this.height);
       this.xAxis = d3.axisBottom(this.xScale)
-        .ticks(4);
+        .ticks(9);
     }
   }
 
