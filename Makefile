@@ -25,10 +25,15 @@ connectivity:
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_lstm_connectivity.py
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_nlstm_connectivity.py
 
-evaluate:
+evaluate-autocomplete:
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_test.py
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_lstm_test.py
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_nlstm_test.py
+
+evaluate-generate:
+	PYTHONPATH=./ python3 python/run/generate_pure_gru_test.py
+	PYTHONPATH=./ python3 python/run/generate_pure_lstm_test.py
+	PYTHONPATH=./ python3 python/run/generate_pure_nlstm_test.py
 
 bundle:
 	browserify article/main.js --debug > article/bundle.js

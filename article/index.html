@@ -618,8 +618,8 @@
       <strong>Model training:</strong> shows the training loss and
       validation loss for the GRU, LSTM, and Nested LSTM models when training
       on the autocomplete problem. The x-axis is
-      <a href="javascript:setTrainingGraphXAxis('time')">time</a> or
-      <a href="javascript:setTrainingGraphXAxis('mini-batches')">mini-batches</a>.
+      <a href="javascript:setAutocompleteTrainingGraphXAxis('time')">time</a> or
+      <a href="javascript:setAutocompleteTrainingGraphXAxis('mini-batches')">mini-batches</a>.
     </figcaption>
   </figure>
   <p>
@@ -646,6 +646,50 @@
     The implementation is available at
     <a href="https://github.com/distillpub/post--connectivity-visualization"></a>.
   </p>
+
+  <h3 id="appendix-generate">text8 Generation Problem</h3>
+  <p>
+    To validate the implementation of Nested LSTM, all three models were
+    appiled on the text8 generation problem, like in the Nested LSTM paper
+    <dt-cite key="moniz2018nlstm"></dt-cite>, where the max sequence length was
+    set to 180 charecters, likewise two layers are used, each with 1200 units.
+    Or in the case of Nested LSTM, a two levels deep Nested LSTM, also with
+    1200 units.
+  </p>
+  <p>
+    Some minor differences are that the mini-batch size is only 64 sequences
+    and that no gradient clipping is used.
+  </p>
+  <figure>
+    <svg id="ar-generate-training" class="ar-line-graph"></svg>
+    <figcaption>
+      <strong>Model training:</strong> shows the training loss and
+      validation loss for the GRU, LSTM, and Nested LSTM models when training
+      on the text8 generation problem. The x-axis is
+      <a href="javascript:setGenerateTrainingGraphXAxis('time')">time</a> or
+      <a href="javascript:setGenerateTrainingGraphXAxis('mini-batches')">mini-batches</a>.
+    </figcaption>
+  </figure>
+  <p>
+    Evaluating the model on the test-dataset, yields the folllowing cross
+    entropy losses and accuracies.
+  </p>
+  <figure class="ar-table-container">
+    <table class="ar-table">
+      <thead>
+        <tr><th>Model</th><th>Cross Entropy</th><th>Accuracy</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GRU</td><td>1.1228</td><td>63.69%</td>
+        <tr><td>LSTM</td><td>1.0693</td><td>65.16%</td>
+        <tr><td>Nested LSTM</td><td>1.1203</td><td>63.55%</td>
+      </tbody>
+    </table>
+    <figcaption>
+      <strong>Model testing:</strong> shows the testing loss and accuracy
+      for the GRU, LSTM, and Nested LSTM models on the text8 generation problem.
+    </figcaption>
+  </figure>
 </dt-appendix>
 
 <script type="text/bibliography">
