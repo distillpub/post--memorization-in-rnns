@@ -31,7 +31,7 @@
     <figcaption><strong>Connectivity visualization:</strong> visualizes
     the connectivity between the desired target and the input characters,
     for the <a href="#ar-section-autocomplete">autocomplete problem</a>. A
-    green color indicates the output is influenced by these charecters.
+    green color indicates these characters influence the output.
     For example, in the prediction of "gramma" the RNN
     <a href="javascript:heroSetIndex(28);">initially</a> uses long-term
     memorization but as <a href="javascript:heroSetIndex(34);">more characters
@@ -46,9 +46,9 @@
   <h2>Introduction</h2>
   <p>
     Memorization in Recurrent Neural Networks (RNNs) continues to pose a challenge
-    in many applications. It is often seen that RNNs can only memorize a few
-    "time" iterations back, when the desired behavior is for them to store
-    relevant data for an indefinete amount of time and then retrive it again
+    in many applications. It is common to see that RNNs can only memorize a few
+    "time" iterations back. Although, the desired behavior is for them to store
+    relevant data for an indefinite amount of time and then retrieve it again
     when it becomes relevant.
   </p>
   <p>
@@ -70,19 +70,19 @@
   </p>
   <p>
     While quantitative comparisons are useful, they only provide partial
-    insight into the how a recurrent unit memorizes. A model can, for example,
+    insight into the how a recurrent unit memories. A model can, for example,
     achieve high accuracy and cross entropy loss by just providing highly accurate
     predictions in cases that only require short-term memorization, while
-    being very inaccurate regarding predictions that requires long-term
+    being very inaccurate regarding predictions that require long-term
     memorization. For auto-completing words in a sentence, which will be studied
-    here, a model may prioritize high accuracy when most of the charecters
-    in a word is known, but not have any long-term contextual understanding
-    that allows it to predict a word when only the first few charecters are
+    here, a model may prioritize high accuracy when most of the characters
+    in a word are known, but not have any long-term contextual understanding
+    that allows it to predict a word when only the first few characters are
     known.
   </p>
   <p>
     This article presents a qualitative visualization method for comparing
-    recurrent units, in terms of memorization and contextual understanding.
+    recurrent units, regarding memorization and contextual understanding.
     This method is then applied to some well known and recently proposed
     recurrent units, which are briefly covered in the first section.
   </p>
@@ -95,7 +95,7 @@
 <dt-article>
   <h2>Recurrent Units</h2>
   <p>
-    The networks that will be considered use a simple RNN structure:
+    The networks that will be analyzed, all use a simple RNN structure:
   </p>
   <figure class="ar-math-figure">
     <div class="ar-math-grid" style="grid-template-rows: repeat(auto, 3);">
@@ -133,7 +133,7 @@
     </figcaption>
   </figure>
   <p>
-    Several solutions to the vanishing gradient problem have been made over
+    Several solutions to the vanishing gradient problem have been proposed over
     the years. Most popular is the Long Short-Term Memory (LSTM)
     <dt-cite key="graves2008phd"></dt-cite> unit and the
     Gated Recurrent Unit (GRU)<dt-cite key="cho2014gru"></dt-cite>.
@@ -165,15 +165,15 @@
   <p>
     It is not entirely clear why one recurrent unit is better than another
     in some applications, while in other applications it is another type of
-    recurrent unit that is better. Theoretically they all solve the vanishing
+    recurrent unit that is better. Theoretically, they all solve the vanishing
     gradient problem, but in practice, their performance is highly application
     dependent.
   </p>
   <p>
-    Understanding why these differences occur is likely a difficult and opaque
-    problem. The purpose of this article is to demonstrate a visualization
-    technique that can better highlight what these differences are. Hopefully,
-    such understanding can lead to a deeper understanding in the future.
+    Understanding why these differences occur is likely an opaque and
+    challenging problem. The purpose of this article is to demonstrate a
+    visualization technique that can better highlight what these differences
+    are. Hopefully, such an understanding can lead to a deeper understanding.
   </p>
 </dt-article>
 
@@ -181,16 +181,16 @@
   <h2>Comparing Recurrent Units</h2>
   <p>
     Comparing the different Recurrent Units is an important task, and it is
-    often much more complex than just comparing the accuracy or cross entropy
-    loss. This is because differences in these high-level quantitative measures
-    can have many explanations and may simply come down to some small improvement
+    often much more involved than just comparing the accuracy or cross entropy
+    loss. For example, differences in these high-level quantitative measures
+    can have many explanations and may only be because of some small improvement
     in predictions that only requires short-term memorization. While in reality,
     it is often the long-term memorization that is of interest to us.
   </p>
   <h3>A problem for qualitative analysis</h3>
   <p>
-    A good problem for qualitatively analyzing the contextual understanding,
-    should therefore have a human-interpretable output and depend both on
+    Therefore, a good problem for qualitatively analyzing the contextual
+    understanding, should have a human-interpretable output and depend both on
     long and short memorization. The typical problems that are often used,
     such as Penn Treebank, Chinese Poetry Generation, or text8 generation
     do not have outputs that are easy to reason about. As they require an
@@ -206,11 +206,11 @@
   </p>
   <p>
     This makes the autocomplete problem quite similar to the text8 generation
-    problem, the only difference is that instead of predicting the next letter
-    the entire word is predicted. Doing this, makes the output much more
+    problem, where the only difference is that instead of predicting the next letter
+    the entire word is predicted. Doing this makes the output much more
     interpretable. Finally, because of its close relation to text8 generation,
-    existing literature on text8 generation is relevant and compareable,
-    in the sense that models that works well on text8 generation should work
+    existing literature on text8 generation is relevant and comparable,
+    in the sense that models that work well on text8 generation should work
     well on the autocomplete problem.
   </p>
   <figure id="ar-demo">
@@ -228,14 +228,14 @@
 
     <figcaption id="ar-demo-caption">
       <strong>Autocomplete:</strong> An application that has a humanly
-      interpretable output, while depending on both short and long term
+      interpretable output, while depending on both short and long-term
       contextual understanding. In this case, the network uses past information
       and understands the next word should be a country. Try
       <a href="javascript:arDemoShort();">removing the last letters</a> to see
       that the network continues to give meaningful suggestions
       (<a href="javascript:arDemoReset();">reset</a>).
       <span style="font-style: italic" id="ar-demo-input-notice"></span> –
-      The output here is the GRU model, <a href="#appendix-autocomplete">
+      The output here is the GRU model; <a href="#appendix-autocomplete">
         all model setups are described in the appendix</a>.
     </figcaption>
   </figure>
@@ -243,7 +243,7 @@
     The autocomplete dataset is constructed from the full
     <a href="http://mattmahoney.net/dc/textdata.html">text8</a> dataset. The
     recurrent neural networks used to solve the problem have two layers, each
-    with 600 units. There are 3 models, using GRU, LSTM, and Nested LSTM.
+    with 600 units. There are three models, using GRU, LSTM, and Nested LSTM.
     See <a href="#appendix-autocomplete">the appendix</a> for more details.
   </p>
   <h3>Connectivity in the Autocomplete Problem</h3>
@@ -256,7 +256,7 @@
   <p>
     This visualization was inspired by Karpathy et al.
     <dt-cite key="karpathy2015rnnvis"></dt-cite> where they identify cells
-    that captures a specific feature. For the purpose of identifying a specific
+    that captures a specific feature. For identifying a specific
     feature, this visualization approach works well. However, it is not a useful
     argument for memorization in general as the output is entirely dependent
     on what feature the specific cell captures.
@@ -305,7 +305,7 @@
     </figcaption>
   </figure>
   <p>
-    In case you missed it, here are three important observations:
+    In case you missed it, here are three critial observations:
   </p>
   <figure>
     <div id="ar-walkthrough">
@@ -314,14 +314,14 @@
         <div class="ar-walkthrough-text">
           <p>
           The first observation is how the <a href="javascript:connectivitySetIndex(106);">
-          models predict the word "learning" and is only given the first two
+          models predict the word "learning" while only being given the first two
           characters</a>. Here it is clear, that the Nested LSTM
           model uses no past information and thus only suggests common words starting
           with the letter "l".
           </p>
           <p>
           The LSTM and GRU model both suggests the word "learning". However, as
-          the GRU model has a much stronger connectivity with the word
+          the GRU model has much stronger connectivity with the word
           "advanced", it sets the probability much higher.
           </p>
         </div>
@@ -332,7 +332,7 @@
           <p>
           The second observation is how the models predict the word "grammar".
           This word appears twice, for the first case very little is known
-          about the context. Thus, the models don't suggest "grammar" until they have
+          about the context. Thus, the models do not suggest "grammar" until they have
           <a href="javascript:connectivitySetIndex(32);">seen 4 characters</a>.
           </p>
           <p>
@@ -350,14 +350,14 @@
           <p>
             Finally, predicting the word "schools"
             <a href="javascript:connectivitySetIndex(159);">
-              given only the first charecter</a>. Shows, like the other cases,
-              that the GRU model is better at using past information for
-              contextual understanding.
+            given only the first character</a>. Shows, like in the other cases
+            that the GRU model is better at using past information for
+            contextual understanding.
           </p>
           <p>
-            What is special for this case is that the LSTM model, appears to
+            What is unusual for this case is that the LSTM model, appears to
             use words from almost the entire sentence as context. However,
-            its predictions are far from correct and has little to do
+            its predictions are far from correct and have little to do
             with the previous words it uses. This suggests that the LSTM
             model is capable of long-term memorization, but not a contextual
             understanding.
@@ -380,32 +380,32 @@
     These observations show that this visualization method is a powerful tool
     for comparing long-term memorization. Although, it is only possible to
     compare given the same dataset, and only for one specific example.
-    As such, while these observations may show that Nested LSTM isn't very
+    As such, while these observations may show that Nested LSTM is not very
     capable of long-term memorization; these observations may not generalize
     to other datasets or hyperparameters.
   </p>
   <h3>A quantitative metric</h3>
   <p>
-    From the above observations it is clear that short-term memorization
-    often involve the word itself. That is the neural network swtich to
-    use previusely seen letters from the word iself, as more letters become
-    available. While in the beginning of predicting a word, especially the
-    GRU network, uses previusely seen words as context for the prediction.
+    From the above observations, it is clear that short-term memorization
+    often involves the word itself. That is the neural network switch to
+    use previously seen letters from the word itself, as more letters become
+    available. While at the beginning of predicting a word, especially the
+    GRU network, uses previously seen words as context for the prediction.
   </p>
   <p>
-    This observation leads to a quantitative metrics, where one measures
+    This observation leads to a quantitative metric, where one measures
     the accuracy, depending on how many letters from the word
-    is already known. If no letters are known and the metric is high, this
+    is already known. If no letters are known, and the metric is high, this
     suggests the model is capable of long-term contextual understanding.
-    However, if many letters are known and the metric is high, this suggests
-    the model is capable of short-term contextual understanding.
+    However, if many letters from the word are known, and the metric is high,
+    this suggests the model is capable of short-term contextual understanding.
    </p>
    <figure>
      <div id="ar-accuracy-graph"></div>
      <figcaption>
        <strong>Accuracy Graph</strong>: shows the accuracy
-       given a fixed number of charecters in a word that the RNN has seen.
-       0 charecters means that the RNN has only seen the space leading up
+       given a fixed number of characters in a word that the RNN has seen.
+       0 characters mean that the RNN has only seen the space leading up
        to the word, including all the previous text which should provide context.
        The different line styles, indicates if the correct word should appear
        among the top 1, 2, or 3 suggests.
@@ -414,18 +414,18 @@
    <p>
      These results suggest that the GRU model is better at long-term contextual
      understanding, while the LSTM model is better at short-term contextual
-     understanding. Finally the Nested LSTM, appears to be generally worse.
-     This observation is valuable, as it justify why the
+     understanding. Finally, the Nested LSTM, appears to be generally worse.
+     This observation is valuable, as it justifies why the
      <a href="#ar-overall-accuracy">overall accuracy of the GRU and LSTM models
      </a> are almost identical, while the connectivity visualization shows that
-     the GRU models is far better at long-term contextual understanding.
+     the GRU models are far better at long-term contextual understanding.
    </p>
    <p>
      While more detailed qualitative metrics like this provides new insight,
      qualitative analysis like the connectivity figure presented
-     in this article still have great value. The visualization gives an
+     in this article still has great value. As the connectivity visualization gives an
      intuitive understanding of how the model works, which a quantitative metric
-     can't. It also shows that a wrong prediction can still be considered a
+     cannot. It also shows that a wrong prediction can still be considered a
      useful prediction, such as a synonym or a contextually reasonable
      prediction.
    </p>
@@ -445,19 +445,19 @@
     case, the connectivity visualization together with the autocomplete
     predictions, reveals that the GRU model is much more capable of long-term
     contextual understanding, compared to LSTM and Nested LSTM. In the case of
-    LSTM, the difference is much greater than one would guess from just looking
+    LSTM, the difference is much higher than one would guess from just looking
     at the overall accuracy and cross entropy loss alone. This observation is
-    not that interesting in itself as it's likely very dependent on the
+    not that interesting in itself as it is likely very dependent on the
     hyperparameters, and the specific application.
   </p>
   <p>
-    Much more valuable, is that this visualization method makes it possible
-    to intuitively understand how the models are different, to a much greater
+    Much more valuable is that this visualization method makes it possible
+    to intuitively understand how the models are different, to a much higher
     degree than just looking at accuracy and cross entropy. For this application,
     it is clear that the GRU model uses repeating words and semantic meaning
     of past words to make its prediction, while the LSTM and Nested LSTM models
     do not. This is both a valuable insight when choosing the final model,
-    but also important knowledge when developing better models in the future.
+    but also essential knowledge when developing better models in the future.
   </p>
 </dt-article>
 
@@ -466,12 +466,12 @@
   <p>
     Many thanks to the authors of the original Nested LSTM paper
     <dt-cite key="moniz2018nlstm"></dt-cite>, Joel Ruben, Antony Moniz,
-    and David Krueger. Even though our findings weren't the same, they
-    have inspired much of this article and shown that something as used
-    as the recurrent unit is still an open research area.
+    and David Krueger. Even though the findings here were not the same, the
+    paper have inspired much of this article, as it shows that something as
+    familiar as the recurrent unit is still an open research area.
   </p>
   <p>
-    I'm also grateful for the excellent feedback and patience from the Distill
+    I am also grateful for the excellent feedback and patience from the Distill
     team, especially Christopher Olah, as well as the feedback from the
     peer-reviewers. Their feedback has dramatically improved the quality of this
     article.
@@ -480,7 +480,7 @@
   <h3 id="appendix-nestedlstm">Nested LSTM</h3>
   <p>
     The Nested LSTM unit attempt to solve the long-term memorization from a
-    more practical point of view. Where the classic LSTM unit solves the
+    more practical point of view. Where the standard LSTM unit solves the
     vanishing gradient problem by adding internal memory, and the GRU attempt
     to be a faster solution than LSTM by using no internal memory, the Nested
     LSTM goes in the opposite direction of GRU by adding additional memory to
@@ -569,10 +569,10 @@
 
   <h3 id="appendix-autocomplete">Autocomplete Problem</h3>
   <p>
-    The autocomplete dataset is constructed form the full
+    The autocomplete dataset is constructed from the full
     <a href="http://mattmahoney.net/dc/textdata.html">text8</a> dataset, where
-    each observation consists of maximum 200 characters and is ensured to
-    not contain partial words. 90% of the observations are used for training,
+    each observation consists of maximum 200 characters and is ensured not to
+    contain partial words. 90% of the observations are used for training,
     5% for validation and 5% for testing.
   </p>
   <p>
@@ -601,12 +601,12 @@
       </tbody>
     </table>
     <figcaption>
-      <strong>Model Configurations:</strong> shows the number of layers, units and parameters
-      for each model.
+      <strong>Model Configurations:</strong> shows the number of layers, units,
+      and parameters for each model.
     </figcaption>
   </figure>
   <p>
-    There are 456896 sequences in the training dataset and a mini-batch size
+    There are 456896 sequences in the training dataset, and a mini-batch size
     of 64 observations is used. A single iteration over the entire dataset
     then corresponds to 7139 mini-batches. The training runs twice over the
     dataset, thus corresponding to trained for 14278 mini-batches. For training,
@@ -623,7 +623,7 @@
     </figcaption>
   </figure>
   <p>
-    Evaluating the model on the test-dataset, yields the folllowing cross
+    Evaluating the model on the test-dataset yields the following cross
     entropy losses and accuracies.
   </p>
   <figure class="ar-table-container" id="ar-overall-accuracy">
@@ -644,52 +644,10 @@
   </figure>
   <p>
     The implementation is available at
-    <a href="https://github.com/distillpub/post--connectivity-visualization"></a>.
+    <a href="https://github.com/distillpub/post--connectivity-visualization">
+      https://github.com/distillpub/post--connectivity-visualization
+    </a>.
   </p>
-
-  <h3 id="appendix-generate">text8 Generation Problem</h3>
-  <p>
-    To validate the implementation of Nested LSTM, all three models were
-    appiled on the text8 generation problem, like in the Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, where the max sequence length was
-    set to 180 charecters, likewise two layers are used, each with 1200 units.
-    Or in the case of Nested LSTM, a two levels deep Nested LSTM, also with
-    1200 units.
-  </p>
-  <p>
-    Some minor differences are that the mini-batch size is only 64 sequences
-    and that no gradient clipping is used.
-  </p>
-  <figure>
-    <svg id="ar-generate-training" class="ar-line-graph"></svg>
-    <figcaption>
-      <strong>Model training:</strong> shows the training loss and
-      validation loss for the GRU, LSTM, and Nested LSTM models when training
-      on the text8 generation problem. The x-axis is
-      <a href="javascript:setGenerateTrainingGraphXAxis('time')">time</a> or
-      <a href="javascript:setGenerateTrainingGraphXAxis('mini-batches')">mini-batches</a>.
-    </figcaption>
-  </figure>
-  <p>
-    Evaluating the model on the test-dataset, yields the folllowing cross
-    entropy losses and accuracies.
-  </p>
-  <figure class="ar-table-container">
-    <table class="ar-table">
-      <thead>
-        <tr><th>Model</th><th>Cross Entropy</th><th>Accuracy</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>GRU</td><td>1.1228</td><td>63.69%</td>
-        <tr><td>LSTM</td><td>1.0693</td><td>65.16%</td>
-        <tr><td>Nested LSTM</td><td>1.1203</td><td>63.55%</td>
-      </tbody>
-    </table>
-    <figcaption>
-      <strong>Model testing:</strong> shows the testing loss and accuracy
-      for the GRU, LSTM, and Nested LSTM models on the text8 generation problem.
-    </figcaption>
-  </figure>
 </dt-appendix>
 
 <script type="text/bibliography">

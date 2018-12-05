@@ -280,33 +280,6 @@ async function setupAutocompleteTrainingGraph() {
   };
 }
 
-async function setupGenerateTrainingGraph() {
-  const offset = 10 * 60 * 1000;
-  const hour = 60 * 60 * 1000;
-
-  const generate = new TrainingGraph({
-    container: document.querySelector('#ar-generate-training'),
-    dataDirectory: dataDirectory,
-    name: 'generate',
-    filename: 'generate-training.csv',
-    ylim: [0.5, 4.5],
-    xlimTime: [-offset, 5 * hour + offset],
-    xlimEpochs: [-200, 8200],
-    height: 360
-  });
-
-  await generate.draw();
-
-  window.addEventListener('resize', function () {
-    generate.draw().catch((err) => { throw err; });
-  });
-
-  window.setGenerateTrainingGraphXAxis = function (xAxisName) {
-    generate.setXAxis(xAxisName);
-    generate.draw().catch((err) => { throw err; });
-  };
-}
-
 document.addEventListener('DOMContentLoaded', async function () {
   try {
     // Render LaTeX elements first, as their size is unknown.
@@ -329,8 +302,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     setupConnectivity(),
     setupWalkthrough(),
     setupAccuracyGraph(),
-    setupAutocompleteTrainingGraph(),
-    setupGenerateTrainingGraph()
+    setupAutocompleteTrainingGraph()
   ]);
 
   // Do this last, as it takes some time to load
