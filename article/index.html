@@ -12,7 +12,8 @@
   title: "Visualizing memorization in RNNs"
   description: >
     Visualizing the gradient magnitudes in context can be a powerful tool to
-    see when recurrent units use short-term or long-term memorization.
+    see when recurrent units use short-term or long-term contextual
+    understanding.
   authors:
   - Andreas Madsen: https://github.com/AndreasMadsen
   affiliations:
@@ -22,7 +23,8 @@
 <dt-article>
   <h1>Visualizing memorization in RNNs</h1>
   <h2>Visualizing the gradient magnitudes in context can be a powerful tool to
-    see when recurrent units use short-term or long-term memorization.
+    see when recurrent units use short-term or long-term contextual
+    understanding.
   </h2>
   <figure id="ar-hero">
     <div id="ar-hero-diagram-nlstm" class="ar-hero"></div>
@@ -74,7 +76,7 @@
     achieve high accuracy and cross entropy loss by just providing highly accurate
     predictions in cases that only require short-term memorization, while
     being very inaccurate regarding predictions that require long-term
-    memorization. For auto-completing words in a sentence, which will be studied
+    memorization. For autocompleting words in a sentence, which will be studied
     here, a model may prioritize high accuracy when most of the characters
     in a word are known, but not have any long-term contextual understanding
     that allows it to predict a word when only the first few characters are
@@ -184,18 +186,19 @@
     often much more involved than just comparing the accuracy or cross entropy
     loss. For example, differences in these high-level quantitative measures
     can have many explanations and may only be because of some small improvement
-    in predictions that only requires short-term memorization. While in reality,
-    it is often the long-term memorization that is of interest to us.
+    in predictions that only requires short-term contextual understanding. While
+    in reality, it is often the long-term contextual understanding that is of
+    interest to us.
   </p>
   <h3>A problem for qualitative analysis</h3>
   <p>
     Therefore, a good problem for qualitatively analyzing the contextual
     understanding, should have a human-interpretable output and depend both on
-    long and short memorization. The typical problems that are often used,
-    such as Penn Treebank, Chinese Poetry Generation, or text8 generation
-    do not have outputs that are easy to reason about. As they require an
-    extensive understanding of either grammar, Chinese poetry, or only outputs
-    a single letter.
+    long-term and short-term contextual understanding. The typical problems
+    that are often used, such as Penn Treebank, Chinese Poetry Generation, or
+    text8 generation do not have outputs that are easy to reason about. As they
+    require an extensive understanding of either grammar, Chinese poetry, or
+    only outputs a single letter.
   </p>
   <p id="ar-section-autocomplete">
     To this end, the autocomplete problem is used. Each character is mapped
@@ -292,7 +295,7 @@
     Exploring the connectivity gives a surprising amount of insight into the
     different models' ability for long-term contextual understanding. You should
     try and interact with the figure below yourself, to see what information the
-    different models use.
+    different models use for their predictions.
   </p>
   <figure>
     <div id="ar-connectivity-nlstm" class="ar-connectivity"></div>
@@ -359,8 +362,8 @@
             use words from almost the entire sentence as context. However,
             its predictions are far from correct and have little to do
             with the previous words it uses. This suggests that the LSTM
-            model is capable of long-term memorization, but not a contextual
-            understanding.
+            model in this setup is capable of long-term memorization, but not
+            long-term contextual understanding.
           </p>
         </div>
       </div>
@@ -377,16 +380,16 @@
     </figcaption>
   </figure>
   <p>
-    These observations show that this visualization method is a powerful tool
-    for comparing long-term memorization. Although, it is only possible to
-    compare given the same dataset, and only for one specific example.
-    As such, while these observations may show that Nested LSTM is not very
-    capable of long-term memorization; these observations may not generalize
-    to other datasets or hyperparameters.
+    These observations show that the connectivity visualization is a powerful tool
+    for comparing models in terms of what they use for contextual understanding.
+    Although, it is only possible to compare given the same dataset, and only
+    for one specific example. As such, while these observations may show that
+    Nested LSTM is not very capable of long-term contextual understanding;
+    these observations may not generalize to other datasets or hyperparameters.
   </p>
   <h3>A quantitative metric</h3>
   <p>
-    From the above observations, it is clear that short-term memorization
+    From the above observations, it is clear that short-term contextual understanding
     often involves the word itself. That is the neural network switch to
     use previously seen letters from the word itself, as more letters become
     available. While at the beginning of predicting a word, especially the
@@ -408,17 +411,17 @@
        0 characters mean that the RNN has only seen the space leading up
        to the word, including all the previous text which should provide context.
        The different line styles, indicates if the correct word should appear
-       among the top 1, 2, or 3 suggests.
+       among the top 1, 2, or 3 suggestions.
       </figcaption>
    </figure>
    <p>
      These results suggest that the GRU model is better at long-term contextual
      understanding, while the LSTM model is better at short-term contextual
-     understanding. Finally, the Nested LSTM, appears to be generally worse.
+     understanding. Finally, the Nested LSTM model, appears to be generally worse.
      This observation is valuable, as it justifies why the
      <a href="#ar-overall-accuracy">overall accuracy of the GRU and LSTM models
      </a> are almost identical, while the connectivity visualization shows that
-     the GRU models are far better at long-term contextual understanding.
+     the GRU model is far better at long-term contextual understanding.
    </p>
    <p>
      While more detailed qualitative metrics like this provides new insight,
@@ -435,9 +438,9 @@
   <h2>Conclusion</h2>
   <p>
     Looking at overall accuracy and cross entropy loss in itself is not that
-    interesting. Different models may prioritize either long-term contextual
-    understanding or short-term contextual understanding, while both models
-    can have similar accuracy and cross entropy.
+    interesting. Different models may prioritize either long-term or
+    short-term contextual understanding, while both models can have similar
+    accuracy and cross entropy.
   </p>
   <p>
     A qualitative analysis, where one looks at how previous input is used in
@@ -455,9 +458,10 @@
     to intuitively understand how the models are different, to a much higher
     degree than just looking at accuracy and cross entropy. For this application,
     it is clear that the GRU model uses repeating words and semantic meaning
-    of past words to make its prediction, while the LSTM and Nested LSTM models
-    do not. This is both a valuable insight when choosing the final model,
-    but also essential knowledge when developing better models in the future.
+    of past words to make its prediction, to a much higher degree than the LSTM
+    and Nested LSTM models. This is both a valuable insight when choosing the
+    final model, but also essential knowledge when developing better models
+    in the future.
   </p>
 </dt-article>
 
