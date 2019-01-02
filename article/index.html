@@ -387,9 +387,9 @@
     Nested LSTM is not very capable of long-term contextual understanding;
     these observations may not generalize to other datasets or hyperparameters.
   </p>
-  <h3>A quantitative metric</h3>
+  <h3>Future works; quantitative metric</h3>
   <p>
-    From the above observations, it is clear that short-term contextual understanding
+    From the above observations, it appears that short-term contextual understanding
     often involves the word itself. That is the neural network switch to
     use previously seen letters from the word itself, as more letters become
     available. While at the beginning of predicting a word, especially the
@@ -398,10 +398,10 @@
   <p>
     This observation leads to a quantitative metric, where one measures
     the accuracy, depending on how many letters from the word
-    is already known. If no letters are known, and the metric is high, this
-    suggests the model is capable of long-term contextual understanding.
-    However, if many letters from the word are known, and the metric is high,
-    this suggests the model is capable of short-term contextual understanding.
+    is already known. However, it is not clear that this is best quantitative
+    metric, for one it is highly problem dependent, and it also doesn't
+    summarize the model to a single number, which one may wish for a more
+    direct comparison.
    </p>
    <figure>
      <div id="ar-accuracy-graph"></div>
@@ -417,8 +417,7 @@
    <p>
      These results suggest that the GRU model is better at long-term contextual
      understanding, while the LSTM model is better at short-term contextual
-     understanding. Finally, the Nested LSTM model, appears to be generally worse.
-     This observation is valuable, as it justifies why the
+     understanding. These observations are valuable, as it justifies why the
      <a href="#ar-overall-accuracy">overall accuracy of the GRU and LSTM models
      </a> are almost identical, while the connectivity visualization shows that
      the GRU model is far better at long-term contextual understanding.
