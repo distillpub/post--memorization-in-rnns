@@ -1,12 +1,10 @@
 __pycache__
 node_modules/
-article/save/
-article/data/
+article/data/generate-training.csv
+article/save/*
+!article/save/autocomplete_gru/
 article/bundle.js
-article/feedback-bundle.js
-article/feedback-3-bundle.js
 python/save/
 python/save-old/
 python/data/
 python/download/content
-run.sh

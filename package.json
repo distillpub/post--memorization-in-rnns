@@ -1,4 +1,13 @@
 {
+  "name": "article-connectivity-visualization",
+  "private": true,
+  "scripts": {
+    "bundle": "browserify article/main.js --debug > article/bundle.js",
+    "bundle-watch": "watchify article/main.js --debug -o article/bundle.js",
+    "bundle-production": "browserify article/main.js -t babelify > article/bundle.js",
+    "start": "http-server article",
+    "postinstall" : "npm run bundle-production"
+  },
   "dependencies": {
     "d3-array": "^1.2.1",
     "d3-axis": "^1.0.8",
@@ -21,6 +30,9 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.3.0",
-    "babelify": "^8.0.0"
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.3",
+    "http-server": "^0.11.1",
+    "watchify": "^3.11.0"
   }
 }

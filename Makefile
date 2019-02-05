@@ -36,16 +36,16 @@ evaluate-generate:
 	PYTHONPATH=./ python3 python/run/generate_pure_nlstm_test.py
 
 bundle:
-	browserify article/main.js --debug > article/bundle.js
+	npm run bundle
 
 bundle-watch:
-	watchify article/main.js --debug -o article/bundle.js
+	npm run bundle-watch
 
 bundle-production:
-	browserify article/main.js -t babelify > article/bundle.js
+	npm run bundle-production
 
 server:
-	http-server article
+	npm run start
 
 sync:
 	rsync --info=progress2 -urltv --delete \

@@ -1,0 +1,74 @@
+{
+  "model/dense/bias": {
+    "filename": "model_dense_bias",
+    "shape": [
+      16386
+    ]
+  },
+  "model/dense/kernel": {
+    "filename": "model_dense_kernel",
+    "shape": [
+      600,
+      16386
+    ]
+  },
+  "model/embedding-source": {
+    "filename": "model_embeddingsource",
+    "shape": [
+      27,
+      600
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_0/gru_cell/candidate/bias": {
+    "filename": "model_rnn_multi_rnn_cell_cell_0_gru_cell_candidate_bias",
+    "shape": [
+      600
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_0/gru_cell/candidate/kernel": {
+    "filename": "model_rnn_multi_rnn_cell_cell_0_gru_cell_candidate_kernel",
+    "shape": [
+      1200,
+      600
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_0/gru_cell/gates/bias": {
+    "filename": "model_rnn_multi_rnn_cell_cell_0_gru_cell_gates_bias",
+    "shape": [
+      1200
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_0/gru_cell/gates/kernel": {
+    "filename": "model_rnn_multi_rnn_cell_cell_0_gru_cell_gates_kernel",
+    "shape": [
+      1200,
+      1200
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_1/gru_cell/candidate/bias": {
+    "filename": "model_rnn_multi_rnn_cell_cell_1_gru_cell_candidate_bias",
+    "shape": [
+      600
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_1/gru_cell/candidate/kernel": {
+    "filename": "model_rnn_multi_rnn_cell_cell_1_gru_cell_candidate_kernel",
+    "shape": [
+      1200,
+      600
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_1/gru_cell/gates/bias": {
+    "filename": "model_rnn_multi_rnn_cell_cell_1_gru_cell_gates_bias",
+    "shape": [
+      1200
+    ]
+  },
+  "model/rnn/multi_rnn_cell/cell_1/gru_cell/gates/kernel": {
+    "filename": "model_rnn_multi_rnn_cell_cell_1_gru_cell_gates_kernel",
+    "shape": [
+      1200,
+      1200
+    ]
+  }
+}
