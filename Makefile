@@ -1,5 +1,5 @@
 
-.PHONEY: train bundle convert server convert sync fetch-python fetch-article
+.PHONEY: train build convert bundle bundle-watch bundle-production server convert sync fetch-python fetch-article
 
 train:
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_train.py
@@ -8,6 +8,8 @@ train:
 	PYTHONPATH=./ python3 python/run/generate_pure_gru_train.py
 	PYTHONPATH=./ python3 python/run/generate_pure_lstm_train.py
 	PYTHONPATH=./ python3 python/run/generate_pure_nlstm_train.py
+
+build: quantitative convert connectivity
 
 quantitative:
 	PYTHONPATH=./ python3 python/run/autocomplete_pure_gru_quantitative.py
