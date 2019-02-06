@@ -155,7 +155,7 @@ class AutoCompleteDemo extends events.EventEmitter {
     const oldText = this._text;
 
     // remove invalid charecters
-    const validText = originalText.replace(/[^a-z ]/g, '');
+    const validText = originalText.toLowerCase().replace(/[^a-z ]/g, '');
 
     // For the input to start with a space
     this._text = (' ' + validText).slice(0, this._getMaxLength());
