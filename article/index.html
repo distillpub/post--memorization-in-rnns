@@ -1,51 +1,60 @@
-<!doctype html>
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
 
-<script src="https://distill.pub/template.v1.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
+    <script src="https://staging.distill.pub/template.v2.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
 
-<script defer src="bundle.js"></script>
-<link href="style.css" rel="stylesheet">
+    <script defer src="bundle.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
 
-<script type="text/front-matter">
-  title: "Visualizing memorization in RNNs"
-  description: >
-    Visualizing the gradient magnitudes in context can be a powerful tool to
-    see when recurrent units use short-term or long-term contextual
-    understanding.
-  authors:
-  - Andreas Madsen: https://github.com/AndreasMadsen
-  affiliations:
-  - nearForm: https://nearform.com
-</script>
+<body>
 
-<dt-article>
-  <h1>Visualizing memorization in RNNs</h1>
-  <h2>Visualizing the gradient magnitudes in context can be a powerful tool to
-    see when recurrent units use short-term or long-term contextual
-    understanding.
-  </h2>
-  <figure id="ar-hero">
-    <div id="ar-hero-diagram-nlstm" class="ar-hero"></div>
-    <div id="ar-hero-diagram-lstm" class="ar-hero"></div>
-    <div id="ar-hero-diagram-gru" class="ar-hero"></div>
-    <figcaption><strong>Connectivity visualization:</strong> visualizes
-    the connectivity between the desired target and the input characters,
-    for the <a href="#ar-section-autocomplete">autocomplete problem</a>. A
-    green color indicates these characters influence the output.
-    For example, in the prediction of "gramma" the RNN
-    <a href="javascript:heroSetIndex(28);">initially</a> uses long-term
-    memorization but as <a href="javascript:heroSetIndex(34);">more characters
-    become available</a> the RNN switches to short-term memorization
-    (<a href="javascript:heroReset();">reset</a>).
-    </figcaption>
-  </figure>
-  <dt-byline></dt-byline>
-</dt-article>
+<d-front-matter>
+  <script type="text/json">{
+  "title": "Visualizing memorization in RNNs",
+  "description": "Visualizing gradient magnitudes in context can be a powerful tool to see when recurrent units use short-term or long-term contextual understanding.",
+  "authors": [
+    {
+      "author": "Andreas Madsen",
+      "authorURL": "https://github.com/AndreasMadsen",
+      "affiliation": "nearForm Ltd",
+      "affiliationURL": "https://nearform.com"
+    }
+  ]
+  }</script>
+</d-front-matter>
 
-<dt-article>
-  <h2>Introduction</h2>
+<d-title>
+    <h1>Visualizing memorization in RNNs</h1>
+    <p>
+      Visualizing the gradient magnitudes in context can be a powerful tool to
+      see when recurrent units use short-term or long-term contextual
+      understanding.
+    </p>
+    <figure class="l-body" id="ar-hero">
+      <div id="ar-hero-diagram-nlstm" class="ar-hero"></div>
+      <div id="ar-hero-diagram-lstm" class="ar-hero"></div>
+      <div id="ar-hero-diagram-gru" class="ar-hero"></div>
+      <figcaption><strong>Connectivity visualization:</strong> visualizes
+      the connectivity between the desired target and the input characters,
+      for the <a href="#ar-section-autocomplete">autocomplete problem</a>. A
+      green color indicates these characters influence the output.
+      For example, in the prediction of "gramma" the RNN
+      <a href="javascript:heroSetIndex(28);">initially</a> uses long-term
+      memorization but as <a href="javascript:heroSetIndex(34);">more characters
+      become available</a> the RNN switches to short-term memorization
+      (<a href="javascript:heroReset();">reset</a>).
+      </figcaption>
+    </figure>
+    <d-byline></d-byline>
+
+</d-title>
+
+<d-article>
   <p>
     Memorization in Recurrent Neural Networks (RNNs) continues to pose a challenge
     in many applications. It is common to see that RNNs can only memorize a few
@@ -64,7 +73,7 @@
   <p>
     To compare a recurrent unit with other alternatives, both past and recent
     papers, such as the Nested LSTM paper by Monzi et al.
-    <dt-cite key="moniz2018nlstm"></dt-cite>, heavily rely on quantitative
+    <d-cite key="moniz2018nlstm"></d-cite>, heavily rely on quantitative
     comparisons. These comparisons often measure the accuracy or
     cross entropy loss on standard problems such as Penn Treebank, Chinese
     Poetry Generation, or text8 generation where the task is to predict the
@@ -92,9 +101,7 @@
     It is the hope that this visualization method, will help advance the
     dialogue when comparing recurrent units.
   </p>
-</dt-article>
 
-<dt-article>
   <h2>Recurrent Units</h2>
   <p>
     The networks that will be analyzed, all use a simple RNN structure:
@@ -125,7 +132,7 @@
     about every part of the sequence that came before. However, this time
     dependency typically causes a vanishing gradient problem that results in
     long-term dependencies being ignored during training
-    <dt-cite key="pascanu2013vanishing"></dt-cite>.
+    <d-cite key="pascanu2013vanishing"></d-cite>.
   </p>
   <figure id="ar-memorization-problem-rnn">
     <figcaption>
@@ -137,10 +144,10 @@
   <p>
     Several solutions to the vanishing gradient problem have been proposed over
     the years. Most popular is the Long Short-Term Memory (LSTM)
-    <dt-cite key="graves2008phd"></dt-cite> unit and the
-    Gated Recurrent Unit (GRU)<dt-cite key="cho2014gru"></dt-cite>.
+    <d-cite key="graves2008phd"></d-cite> unit and the
+    Gated Recurrent Unit (GRU)<d-cite key="cho2014gru"></d-cite>.
     Recently, the Nested LSTM unit has also been proposed
-    <dt-cite key="moniz2018nlstm"></dt-cite>. Both LSTM and GRU are well known
+    <d-cite key="moniz2018nlstm"></d-cite>. Both LSTM and GRU are well known
     and <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
     thoroughly explained in the literature</a>. An explanation on Nested LSTM
     can be found <a href="#appendix-nestedlstm">in the appendix</a>.
@@ -177,9 +184,7 @@
     visualization technique that can better highlight what these differences
     are. Hopefully, such an understanding can lead to a deeper understanding.
   </p>
-</dt-article>
 
-<dt-article>
   <h2>Comparing Recurrent Units</h2>
   <p>
     Comparing the different Recurrent Units is an important task, and it is
@@ -252,13 +257,13 @@
   <h3>Connectivity in the Autocomplete Problem</h3>
   <p>
     In the recently published Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, they qualitatively compared their
+    <d-cite key="moniz2018nlstm"></d-cite>, they qualitatively compared their
     Nested LSTM unit to other recurrent units, to show how it memorizes in
     comparison, by visualizing individual cell activations.
   </p>
   <p>
     This visualization was inspired by Karpathy et al.
-    <dt-cite key="karpathy2015rnnvis"></dt-cite> where they identify cells
+    <d-cite key="karpathy2015rnnvis"></d-cite> where they identify cells
     that captures a specific feature. For identifying a specific
     feature, this visualization approach works well. However, it is not a useful
     argument for memorization in general as the output is entirely dependent
@@ -431,9 +436,7 @@
      useful prediction, such as a synonym or a contextually reasonable
      prediction.
    </p>
-</dt-article>
 
-<dt-article>
   <h2>Conclusion</h2>
   <p>
     Looking at overall accuracy and cross entropy loss in itself is not that
@@ -462,13 +465,13 @@
     final model, but also essential knowledge when developing better models
     in the future.
   </p>
-</dt-article>
+</d-article>
 
-<dt-appendix>
+<d-appendix>
   <h3>Acknowledgments</h3>
   <p>
     Many thanks to the authors of the original Nested LSTM paper
-    <dt-cite key="moniz2018nlstm"></dt-cite>, Joel Ruben, Antony Moniz,
+    <d-cite key="moniz2018nlstm"></d-cite>, Joel Ruben, Antony Moniz,
     and David Krueger. Even though the findings here were not the same, the
     paper have inspired much of this article, as it shows that something as
     familiar as the recurrent unit is still an open research area.
@@ -487,7 +490,7 @@
     vanishing gradient problem by adding internal memory, and the GRU attempt
     to be a faster solution than LSTM by using no internal memory, the Nested
     LSTM goes in the opposite direction of GRU by adding additional memory to
-    the unit <dt-cite key="moniz2018nlstm"></dt-cite>.
+    the unit <d-cite key="moniz2018nlstm"></d-cite>.
     The idea here is that adding additional memory to the unit allows for more
     long-term memorization.
   </p>
@@ -651,53 +654,8 @@
       https://github.com/distillpub/post--connectivity-visualization
     </a>.
   </p>
-</dt-appendix>
+  <d-citation-list></d-citation-list>
+  <d-bibliography src="bibliography.bib"></d-bibliography>
+</d-appendix>
 
-<script type="text/bibliography">
-  @article{moniz2018nlstm,
-    title={Nested LSTMs},
-    author={Joel Ruben Antony Moniz and David Krueger},
-    journal={arXivreprint arXiv:1801.10308},
-    year={2018},
-    url={https://arxiv.org/pdf/1801.10308.pdf}
-  }
-
-  @article{karpathy2015rnnvis,
-    title={Visualizing and Understanding Recurrent Networks},
-    author={Andrej Karpathy and Justin Johnson and Li Fei-Fei},
-    journal={arXivreprint arXiv:1506.02078},
-    year={2015},
-    url={https://arxiv.org/pdf/1506.02078.pdf}
-  }
-
-  @article{graves2008phd,
-    title={Supervised Sequence Labelling with Recurrent Neural Networks},
-    author={Alex Graves},
-    year={2008},
-    url={https://www.cs.toronto.edu/~graves/phd.pdf}
-  }
-
-  @article{cho2014gru,
-    title={Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation},
-    author={Kyunghyun Cho and Bart van Merrienboer and Caglar Gulcehre and Dzmitry Bahdanau and Fethi Bougares and Holger Schwenk and Yoshua Bengio},
-    journal={arXivreprint arXiv:1406.1078},
-    year={2014},
-    url={https://arxiv.org/pdf/1406.1078.pdf}
-  }
-
-  @article{graves2014turing,
-    title={Neural Turing Machines},
-    author={Alex Graves and Greg Wayne and Ivo Danihelka},
-    journal={arXivreprint arXiv:1410.5401},
-    year={2014},
-    url={https://arxiv.org/pdf/1410.5401.pdf}
-  }
-
-  @article{pascanu2013vanishing,
-    title={On the difficulty of training recurrent neural networks},
-    author={Razvan Pascanu and Tomas Mikolov and Yoshua Bengio},
-    journal={arXivreprint arXiv:1211.5063},
-    year={2013},
-    url={https://arxiv.org/pdf/1211.5063.pdf}
-  }
-</script>
+</body>
