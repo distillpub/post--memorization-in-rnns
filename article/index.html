@@ -102,7 +102,7 @@
     dialogue when comparing recurrent units.
   </p>
 
-  <h2>Recurrent Units</h2>
+  <h2 id="recurrent-units">Recurrent Units</h2>
   <p>
     The networks that will be analyzed, all use a simple RNN structure:
   </p>
@@ -185,7 +185,7 @@
     are. Hopefully, such an understanding can lead to a deeper understanding.
   </p>
 
-  <h2>Comparing Recurrent Units</h2>
+  <h2 id="comparing-recurrent-units">Comparing Recurrent Units</h2>
   <p>
     Comparing the different Recurrent Units is an important task, and it is
     often much more involved than just comparing the accuracy or cross entropy
@@ -195,7 +195,7 @@
     in reality, it is often the long-term contextual understanding that is of
     interest to us.
   </p>
-  <h3>A problem for qualitative analysis</h3>
+  <h3 id="a-problem-for-qualitative-analysis">A problem for qualitative analysis</h3>
   <p>
     Therefore, a good problem for qualitatively analyzing the contextual
     understanding, should have a human-interpretable output and depend both on
@@ -254,7 +254,7 @@
     with 600 units. There are three models, using GRU, LSTM, and Nested LSTM.
     See <a href="#appendix-autocomplete">the appendix</a> for more details.
   </p>
-  <h3>Connectivity in the Autocomplete Problem</h3>
+  <h3 id="comparing-recurrent-units">Connectivity in the Autocomplete Problem</h3>
   <p>
     In the recently published Nested LSTM paper
     <d-cite key="moniz2018nlstm"></d-cite>, they qualitatively compared their
@@ -392,7 +392,7 @@
     Nested LSTM is not very capable of long-term contextual understanding;
     these observations may not generalize to other datasets or hyperparameters.
   </p>
-  <h3>Future works; quantitative metric</h3>
+  <h3 id="future-work">Future work; quantitative metric</h3>
   <p>
     From the above observations, it appears that short-term contextual understanding
     often involves the word itself. That is the neural network switch to
@@ -437,7 +437,7 @@
      prediction.
    </p>
 
-  <h2>Conclusion</h2>
+  <h2 id="conclusion">Conclusion</h2>
   <p>
     Looking at overall accuracy and cross entropy loss in itself is not that
     interesting. Different models may prioritize either long-term or
@@ -468,7 +468,7 @@
 </d-article>
 
 <d-appendix>
-  <h3>Acknowledgments</h3>
+  <h3 id="acknowledgments">Acknowledgments</h3>
   <p>
     Many thanks to the authors of the original Nested LSTM paper
     <d-cite key="moniz2018nlstm"></d-cite>, Joel Ruben, Antony Moniz,
