@@ -4,9 +4,9 @@
   "scripts": {
     "bundle": "browserify article/main.js --debug > article/bundle.js",
     "bundle-watch": "watchify article/main.js --debug -o article/bundle.js",
-    "bundle-production": "browserify article/main.js -t babelify > article/bundle.js",
+    "bundle-production": "browserify article/main.js -t babelify -g uglifyify > article/bundle.js",
     "start": "http-server article",
-    "postinstall" : "npm run bundle-production"
+    "postinstall": "npm run bundle-production"
   },
   "dependencies": {
     "d3-array": "^1.2.1",
@@ -25,14 +25,16 @@
     "deeplearn": "0.5.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-async-generator-functions": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-minify": "^0.3.0",
-    "babelify": "^8.0.0",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-async-to-generator": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/runtime": "^7.3.1",
+    "babel-preset-minify": "^0.5.0",
+    "babelify": "^10.0.0",
     "browserify": "^16.2.3",
     "http-server": "^0.11.1",
+    "uglifyify": "^5.0.1",
     "watchify": "^3.11.0"
   }
 }

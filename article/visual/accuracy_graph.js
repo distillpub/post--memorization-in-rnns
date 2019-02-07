@@ -165,7 +165,6 @@ class AccuracyGraph {
           .attr('d', (d) => lineDrawer(d));
       });
 
-    console.log(innerWidth);
     this._xLabel.attr('x', innerWidth / 2 + margin.left + yLabelWidth + yAxisWidth);
   }
 

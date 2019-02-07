@@ -24,6 +24,9 @@ def read_tf_summary(name, alpha=0.25):
     prev_wall_time = 0
     file_wall_time_offset = 0
 
+    loss_index = 0
+    valid_index = 0
+
     for eventfile in eventfiles:
         first_event_in_file = True
 
@@ -34,26 +37,30 @@ def read_tf_summary(name, alpha=0.25):
 
             for value in event.summary.value:
                 if value.tag == 'loss':
-                    rows.append({
-                        'dataset': 'train',
-                        'sec': event.wall_time + file_wall_time_offset,
-                        'loss': value.simple_value,
-                        'step': event.step
-                    })
+                    if loss_index % 10 == 0:
+                        rows.append({
+                            'dataset': 'train',
+                            'sec': round(event.wall_time + file_wall_time_offset, 1),
+                            'loss': value.simple_value,
+                            'step': event.step
+                        })
+                    loss_index += 1
                 elif value.tag == 'model_1/validation-loss':
-                    rows.append({
-                        'dataset': 'valid',
-                        'sec': event.wall_time + file_wall_time_offset,
-                        'loss': value.simple_value,
-                        'step': event.step
-                    })
+                    if valid_index % 10 == 0:
+                        rows.append({
+                            'dataset': 'valid',
+                            'sec': round(event.wall_time + file_wall_time_offset, 1),
+                            'loss': value.simple_value,
+                            'step': event.step
+                        })
+                    valid_index += 1
 
         prev_wall_time = event.wall_time + file_wall_time_offset
 
     df = pd.DataFrame(rows, columns=('dataset', 'sec', 'loss', 'step'))
     df.set_index(['dataset', 'sec', 'step'], inplace=True)
     df['loss smooth'] = df['loss'].ewm(alpha=alpha).mean()
-
+    df = df.round(3)
     return df
 
 

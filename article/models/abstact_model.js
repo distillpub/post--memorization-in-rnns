@@ -14,11 +14,11 @@ class LoaderCache {
 
   async get(path) {
     if (this._cache.has(path)) {
-      return this._cache.get(path);
+      return await this._cache.get(path);
     }
 
-    this._cache.set(path, await this._loader.getVariable(path));
-    return this._cache.get(path);
+    this._cache.set(path, this._loader.getVariable(path));
+    return await this._cache.get(path);
   }
 }
 

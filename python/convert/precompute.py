@@ -33,7 +33,7 @@ for output_i, output in enumerate(
     for index, probs in enumerate(probabilities):
         prefix = ''.join(source[0:index + 1].tolist())
         print(f'  "{prefix}"')
-        data.append([prefix, probs.tolist()])
+        data.append([prefix, np.around(probs, 3).tolist()])
 
 with open(path.join(article_dir, 'data/demo-precompute.json'), 'w') as file:
     json.dump(data, file)
