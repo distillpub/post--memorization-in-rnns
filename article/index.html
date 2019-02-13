@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="https://staging.distill.pub/template.v2.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
@@ -31,7 +32,7 @@
 <d-title>
     <h1>Visualizing memorization in RNNs</h1>
     <p>
-      Visualizing the gradient magnitudes in context can be a powerful tool to
+      Inspecting gradient magnitudes in context can be a powerful tool to
       see when recurrent units use short-term or long-term contextual
       understanding.
     </p>
@@ -39,15 +40,14 @@
       <div id="ar-hero-diagram-nlstm" class="ar-hero"></div>
       <div id="ar-hero-diagram-lstm" class="ar-hero"></div>
       <div id="ar-hero-diagram-gru" class="ar-hero"></div>
-      <figcaption><strong>Connectivity visualization:</strong> visualizes
-      the connectivity between the desired target and the input characters,
-      for the <a href="#ar-section-autocomplete">autocomplete problem</a>. A
-      green color indicates these characters influence the output.
-      For example, in the prediction of "gramma" the RNN
+      <figcaption>This <strong>connectivity visualization</strong> shows
+      how strongly previous input characters influence the current target character
+      in an <a href="#ar-section-autocomplete">autocomplete problem</a>.
+      For example, in the prediction of "grammar" the GRU RNN
       <a href="javascript:heroSetIndex(28);">initially</a> uses long-term
       memorization but as <a href="javascript:heroSetIndex(34);">more characters
-      become available</a> the RNN switches to short-term memorization
-      (<a href="javascript:heroReset();">reset</a>).
+      become available</a> the RNN switches to short-term memorization.
+      (<a href="javascript:heroReset();">reset</a>)
       </figcaption>
     </figure>
     <d-byline></d-byline>
@@ -57,26 +57,24 @@
 <d-article>
   <p>
     Memorization in Recurrent Neural Networks (RNNs) continues to pose a challenge
-    in many applications. It is common to see that RNNs can only memorize a few
-    "time" iterations back. Although, the desired behavior is for them to store
-    relevant data for an indefinite amount of time and then retrieve it again
-    when it becomes relevant.
+    in many applications. We'd like RNNs to be able to store information over many
+    timesteps and retrieve it when it becomes relevant — but vanilla RNNs often struggle to do this.
   </p>
   <p>
-    The Long-Short-Term Memory (LSTM) unit and Gated Recurrent Unit (GRU) are
-    typically used to solve this memorization problem, by
-    solving the vanishing gradient problem. However, the practical problem
-    of memorization still poses a challenge. As such, developing new recurrent
-    units that are better at memorization continues to an active field of
-    research.
+    Several network architectures have been proposed to tackle aspects of this problem, such
+    as Long-Short-Term Memory (LSTM)<d-cite key="hochreiter1997lstm"></d-cite>
+    units and Gated Recurrent Units (GRU)<d-cite key="cho2014gru"></d-cite>.
+    However, the practical problem of memorization still poses a challenge.
+    As such, developing new recurrent units that are better at memorization
+    continues to an active field of research.
   </p>
   <p>
-    To compare a recurrent unit with other alternatives, both past and recent
+    To compare a recurrent unit against its alternatives, both past and recent
     papers, such as the Nested LSTM paper by Monzi et al.
     <d-cite key="moniz2018nlstm"></d-cite>, heavily rely on quantitative
-    comparisons. These comparisons often measure the accuracy or
-    cross entropy loss on standard problems such as Penn Treebank, Chinese
-    Poetry Generation, or text8 generation where the task is to predict the
+    comparisons. These comparisons often measure accuracy or
+    cross entropy loss on standard problems such as Penn Treebank<d-cite key="penntreebank"></d-cite>, Chinese
+    Poetry Generation, or text8<d-cite key="text8"></d-cite> generation where the task is to predict the
     next character given existing input.
   </p>
   <p>
@@ -92,14 +90,10 @@
     known.
   </p>
   <p>
-    This article presents a qualitative visualization method for comparing
-    recurrent units, regarding memorization and contextual understanding.
-    This method is then applied to some well known and recently proposed
-    recurrent units, which are briefly covered in the first section.
-  </p>
-  <p>
-    It is the hope that this visualization method, will help advance the
-    dialogue when comparing recurrent units.
+    In this article we present a qualitative visualization method for comparing
+    recurrent units with regards to memorization and contextual understanding.
+    This method is applied to some well known and recently proposed
+    recurrent units, which we briefly review in the first section.
   </p>
 
   <h2 id="recurrent-units">Recurrent Units</h2>
@@ -143,13 +137,11 @@
   </figure>
   <p>
     Several solutions to the vanishing gradient problem have been proposed over
-    the years. Most popular is the Long Short-Term Memory (LSTM)
-    <d-cite key="graves2008phd"></d-cite> unit and the
-    Gated Recurrent Unit (GRU)<d-cite key="cho2014gru"></d-cite>.
-    Recently, the Nested LSTM unit has also been proposed
+    the years. Most popular are the aforementioned LSTM and GRU units, but this
+    is an active area of research, and recently Nested LSTMs have also been proposed
     <d-cite key="moniz2018nlstm"></d-cite>. Both LSTM and GRU are well known
     and <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
-    thoroughly explained in the literature</a>. An explanation on Nested LSTM
+    thoroughly explained in literature</a>. An explanation of Nested LSTMs
     can be found <a href="#appendix-nestedlstm">in the appendix</a>.
   </p>
   <figure id="ar-recurrent-units" data-show="nlstm">
@@ -200,8 +192,8 @@
     Therefore, a good problem for qualitatively analyzing the contextual
     understanding, should have a human-interpretable output and depend both on
     long-term and short-term contextual understanding. The typical problems
-    that are often used, such as Penn Treebank, Chinese Poetry Generation, or
-    text8 generation do not have outputs that are easy to reason about. As they
+    that are often used, such as Penn Treebank<d-cite key="penntreebank"></d-cite>, Chinese Poetry Generation, or
+    <d-cite key="text8"></d-cite> generation do not have outputs that are easy to reason about. As they
     require an extensive understanding of either grammar, Chinese poetry, or
     only outputs a single letter.
   </p>
