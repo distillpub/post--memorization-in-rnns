@@ -5,11 +5,12 @@ const d3 = require('../d3.js');
 class Walkthrough extends events.EventEmitter {
   constructor({ container }) {
     super();
+    const self = this;
     this._container = d3.select(container);
 
     this._steps = this._container.selectAll('.ar-walkthrough-step');
     this._pages = this._container.selectAll('.ar-walkthrough-page')
-      .on('click', (d) => this.emit('click', d));
+      .on('click', function (d) { self.emit('click', d, this); });
 
     const itemNumbers = this._steps.nodes()
       .map((element, index) => index + 1);

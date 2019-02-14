@@ -212,7 +212,7 @@ async function setupConnectivity() {
     await gruConnectivity.draw();
   }
 
-  await drawConnectivity(105);
+  await drawConnectivity(106);
 
   window.connectivitySetIndex = function (index) {
     document.querySelector('#ar-connectivity-gru').scrollIntoView({
@@ -221,7 +221,7 @@ async function setupConnectivity() {
       inline: "start"
     });
 
-    drawConnectivity(index === null ? 105 : index)
+    drawConnectivity(index === null ? 106 : index)
       .catch((err) => { throw err; });
   };
 }
@@ -234,9 +234,10 @@ async function setupWalkthrough() {
   walkthrough.select(1);
   walkthrough.draw();
 
-  walkthrough.on('click', function (pageNumber) {
+  walkthrough.on('click', function (pageNumber, element) {
     walkthrough.select(pageNumber);
     walkthrough.draw();
+    window.connectivitySetIndex(parseInt(element.dataset.connectivityIndex, 10));
   });
 }
 
