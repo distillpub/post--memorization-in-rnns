@@ -655,3 +655,28 @@ figure .word {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+
+/* remove medium width view as this article doesn't use margin notes.
+   -> Use full from 768px instead of from 1000px */
+
+@media(min-width: 768px) and (max-width: 999px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 50px 50px 50px 50px 50px 50px 50px 50px [text-end gutter-start] 50px [middle-end] 50px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+  }
