@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://staging.distill.pub/template.v2.js"></script>
+    <script src="https://distill.pub/template.v2.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js" integrity="sha384-jmxIlussZWB7qCuB+PgKG1uLjjxbVVIayPJwi6cG6Zb4YKq0JIw+OMnkkEC7kYCq" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
 
@@ -189,8 +189,8 @@
   </p>
   <h3 id="a-problem-for-qualitative-analysis">A problem for qualitative analysis</h3>
   <p>
-    Therefore, a good problem for qualitatively analyzing the contextual
-    understanding, should have a human-interpretable output and depend both on
+    Therefore, a good problem for qualitatively analyzing contextual
+    understanding should have a human-interpretable output and depend both on
     long-term and short-term contextual understanding. The typical problems
     that are often used, such as Penn Treebank<d-cite key="penntreebank"></d-cite>, Chinese Poetry Generation, or
     <d-cite key="text8"></d-cite> generation do not have outputs that are easy to reason about. As they
@@ -227,16 +227,23 @@
     </div>
 
     <figcaption id="ar-demo-caption">
-      <strong>Autocomplete:</strong> An application that has a humanly
-      interpretable output, while depending on both short and long-term
-      contextual understanding. In this case, the network uses past information
-      and understands the next word should be a country. Try
-      <a href="javascript:arDemoShort();">removing the last letters</a> to see
-      that the network continues to give meaningful suggestions
-      (<a href="javascript:arDemoReset();">reset</a>).
-      <span style="font-style: italic" id="ar-demo-input-notice"></span> –
-      The output here is the GRU model; <a href="#appendix-autocomplete">
-        all model setups are described in the appendix</a>.
+      <p>
+        <strong>Autocomplete:</strong> An application that has a humanly
+        interpretable output, while depending on both short and long-term
+        contextual understanding. In this case, the network uses past information
+        and understands the next word should be a country.
+      </p>
+      <p>
+        The output in this figure was produced by the GRU model;
+        all model setups are <a href="#appendix-autocomplete">described in the appendix</a>.
+
+        <span style="font-style: italic">
+            Try <a href="javascript:arDemoShort();">removing the last letters</a> to see
+            that the network continues to give meaningful suggestions.
+        </span>
+        <span style="font-style: italic" id="ar-demo-input-notice"></span>
+        (<a href="javascript:arDemoReset();">reset</a>).
+      </p>
     </figcaption>
   </figure>
   <p>
@@ -290,8 +297,8 @@
   </figure>
   <p>
     Exploring the connectivity gives a surprising amount of insight into the
-    different models' ability for long-term contextual understanding. You should
-    try and interact with the figure below yourself, to see what information the
+    different models' ability for long-term contextual understanding. Try and
+    interact with the figure below yourself to see what information the
     different models use for their predictions.
   </p>
   <figure>
@@ -299,13 +306,14 @@
     <div id="ar-connectivity-lstm" class="ar-connectivity"></div>
     <div id="ar-connectivity-gru" class="ar-connectivity"></div>
     <figcaption>
-      <strong>Connectivity:</strong> shows the connection strength between
-      the target for the selected character and the input characters
+      <strong>Connectivity:</strong> the connection strength between
+      the target for the selected character and the input characters is highlighted in green
       (<a href="javascript:connectivitySetIndex(null);">reset</a>).
+      <em>Hover over or tap the text to change the selected character.</em>
     </figcaption>
   </figure>
   <p>
-    In case you missed it, here are three critial observations:
+    Let's highlight three specific situations:
   </p>
   <figure>
     <div id="ar-walkthrough">
@@ -313,16 +321,14 @@
         <div class="ar-walkthrough-number">1</div>
         <div class="ar-walkthrough-text">
           <p>
-          The first observation is how the <a href="javascript:connectivitySetIndex(106);">
-          models predict the word "learning" while only being given the first two
-          characters</a>. Here it is clear, that the Nested LSTM
-          model uses no past information and thus only suggests common words starting
-          with the letter "l".
+          Observe how the models predict the word "learning" with <a href="javascript:connectivitySetIndex(106);">only the first two
+          characters as input</a>. The Nested LSTM model barely uses past
+          information and thus only suggests common words starting with the letter "l".
           </p>
           <p>
-          The LSTM and GRU model both suggests the word "learning". However, as
-          the GRU model has much stronger connectivity with the word
-          "advanced", it sets the probability much higher.
+          In contrast, the LSTM and GRU models both suggests the word "learning".
+          The GRU model shows stronger connectivity with the word "advanced",
+          and we see in the suggestions that it predicts a higher probability for "learning" than the LSTM model.
           </p>
         </div>
       </div>
@@ -330,17 +336,16 @@
         <div class="ar-walkthrough-number">2</div>
         <div class="ar-walkthrough-text">
           <p>
-          The second observation is how the models predict the word "grammar".
-          This word appears twice, for the first case very little is known
-          about the context. Thus, the models do not suggest "grammar" until they have
-          <a href="javascript:connectivitySetIndex(32);">seen 4 characters</a>.
+          Examine how the models predict the word "grammar".
+          This word appears twice; when it appears for the first time the models have very little context.
+          Thus, no model suggests "grammar" until it has
+          <a href="javascript:connectivitySetIndex(32);">seen at least 4 characters</a>.
           </p>
           <p>
-          For the second occurrence, there is much more text for the models to
-          understand the context of the word. The GRU model is thus able to predict
-          the word "grammar" with only <a href="javascript:connectivitySetIndex(159);">
-          1 character from the word itself</a>. While the LSTM and Nested LSTM again
-          needs <a href="javascript:connectivitySetIndex(162);">4 characters</a>.
+          When "grammar" appears for the second time, the models have more context.
+          The GRU model is able to predict the word "grammar" with only <a href="javascript:connectivitySetIndex(159);">
+          1 character from the word itself</a>. The LSTM and Nested LSTM again
+          need <a href="javascript:connectivitySetIndex(162);">at least 4 characters</a>.
           </p>
         </div>
       </div>
@@ -348,19 +353,19 @@
         <div class="ar-walkthrough-number">3</div>
         <div class="ar-walkthrough-text">
           <p>
-            Finally, predicting the word "schools"
+            Finally, let's look at predicting the word "schools"
             <a href="javascript:connectivitySetIndex(141);">
-            given only the first character</a>. Shows, like in the other cases
-            that the GRU model is better at using past information for
+            given only the first character</a>. As in the other cases,
+            the GRU model seems better at using past information for
             contextual understanding.
           </p>
           <p>
-            What is unusual for this case is that the LSTM model, appears to
+            What makes this case noteworthy is how the LSTM model appears to
             use words from almost the entire sentence as context. However,
-            its predictions are far from correct and have little to do
-            with the previous words it uses. This suggests that the LSTM
-            model in this setup is capable of long-term memorization, but not
-            long-term contextual understanding.
+            its suggestions are far from correct and have little to do
+            with the previous words it seems to use in its prediction.
+            This suggests that the LSTM model in this setup is capable of
+            long-term memorization, but not long-term contextual understanding.
           </p>
         </div>
       </div>
@@ -371,34 +376,30 @@
       </div>
     </div>
     <figcaption>
-      <strong>Important observations:</strong> showing how the networks use
-      past information. <strong><em>Clicking on the links above will change what is
-      viewed in connectivity figure.</em></strong>
+      <em>The colored number links above change the connectivity figure's displayed timestep and explanation.</em>
     </figcaption>
   </figure>
   <p>
     These observations show that the connectivity visualization is a powerful tool
-    for comparing models in terms of what they use for contextual understanding.
-    Although, it is only possible to compare given the same dataset, and only
-    for one specific example. As such, while these observations may show that
-    Nested LSTM is not very capable of long-term contextual understanding;
+    for comparing models in terms of which previous inputs they use for contextual understanding.
+    However, it is only possible to compare models on the same dataset, and
+    on a specific example. As such, while these observations may show that
+    Nested LSTM is not very capable of long-term contextual understanding in this example;
     these observations may not generalize to other datasets or hyperparameters.
   </p>
   <h3 id="future-work">Future work; quantitative metric</h3>
   <p>
-    From the above observations, it appears that short-term contextual understanding
-    often involves the word itself. That is the neural network switch to
-    use previously seen letters from the word itself, as more letters become
-    available. While at the beginning of predicting a word, especially the
-    GRU network, uses previously seen words as context for the prediction.
+    From the above observations it appears that short-term contextual understanding
+    often involves the word that is being predicted itself. That is, the models switch to
+    using previously seen letters from the word itself, as more letters become
+    available. In contrast, at the beginning of predicting a word, models--especially the
+    GRU network--use previously seen words as context for the prediction.
   </p>
   <p>
-    This observation leads to a quantitative metric, where one measures
-    the accuracy, depending on how many letters from the word
-    is already known. However, it is not clear that this is best quantitative
-    metric, for one it is highly problem dependent, and it also doesn't
-    summarize the model to a single number, which one may wish for a more
-    direct comparison.
+    This observation suggests a quantitative metric: measure the accuracy given
+    how many letters from the word being predicted are already known.
+    It is not clear that this is best quantitative metric: it is highly problem dependent,
+    and it also doesn't summarize the model to a single number, which one may wish for a more direct comparison.
    </p>
    <figure>
      <div id="ar-accuracy-graph"></div>

@@ -270,6 +270,10 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
   outline: none;
 }
 
+#ar-demo-input-content input:focus{
+
+}
+
 #ar-demo-rnn-content svg .cells rect {
   fill: #f3f3f3;
 }
@@ -481,12 +485,12 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 
 #ar-walkthrough .ar-walkthrough-step {
   display: none;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 32px 1fr;
   grid-template-rows: auto auto;
   grid-template-areas:
     "number text"
     ". warning";
-  grid-column-gap: 10px;
+  grid-column-gap: 1em;
 }
 #ar-walkthrough .ar-walkthrough-step.ar-walkthrough-selected {
   display: grid;
@@ -495,13 +499,16 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 #ar-walkthrough .ar-walkthrough-step .ar-walkthrough-number {
   grid-area: number;
 
-  width: 48px;
-  height: 48px;
-  background: #E7C9F6;
+  width: 32px;
+  height: 32px;
+  color: hsl(280, 50%, 22%);
+  background: hsl(280, 71%, 88%);
+  border: 1px solid hsl(280, 71%, 84%);
   border-radius: 100%;
   text-align: center;
-  line-height: 48px;
-  font-size: 1.5em;
+  line-height: 32px;
+  font-size: 1.25em;
+  font-weight: 300;
 }
 
 #ar-walkthrough .ar-walkthrough-step .ar-walkthrough-text {
@@ -515,19 +522,21 @@ figcaption#ar-demo-final-caption { grid-area: final-caption; }
 #ar-walkthrough .ar-walkthrough-pages {
   display: grid;
   grid-template-columns: repeat(auto-fit, 25px);
-  grid-column-gap: 10px;
+  grid-column-gap: 25px;
   justify-content: center;
-  margin: 0 0 0.5em 0;
+  margin: 0 0 1em 0;
 }
 
 #ar-walkthrough .ar-walkthrough-pages .ar-walkthrough-page {
   height: 25px;
   width: 25px;
-  background: #E7C9F6;
+  color: hsl(280, 50%, 22%);
+  background: hsl(280, 71%, 88%);
+  border: 1px solid hsl(280, 71%, 84%);
   border-radius: 100%;
   text-align: center;
   line-height: 25px;
-  font-size: 0.7em;
+  font-size: 0.75em;
   cursor: pointer;
 }
 
