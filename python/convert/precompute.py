@@ -8,7 +8,7 @@ from python.dataset import AutoComplete, AutoCompleteFixed
 from python.model import PureGRU
 
 dirname = path.dirname(path.realpath(__file__))
-article_dir = path.join(dirname, '..', '..', 'article')
+article_dir = path.join(dirname, '..', '..', 'public')
 
 tf.logging.set_verbosity(tf.logging.INFO)
 

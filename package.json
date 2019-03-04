@@ -1,11 +1,11 @@
 {
-  "name": "article-connectivity-visualization",
+  "name": "post--memorization-in-rnns",
   "private": true,
   "scripts": {
-    "bundle": "browserify article/main.js --debug > article/bundle.js",
-    "bundle-watch": "watchify article/main.js --debug -o article/bundle.js",
-    "bundle-production": "browserify article/main.js -t babelify -g uglifyify > article/bundle.js",
-    "start": "http-server article",
+    "bundle": "browserify public/main.js --debug > public/bundle.js",
+    "bundle-watch": "watchify public/main.js --debug -o public/bundle.js",
+    "bundle-production": "browserify public/main.js -t babelify -g uglifyify > public/bundle.js",
+    "start": "http-server public",
     "postinstall": "npm run bundle-production"
   },
   "dependencies": {

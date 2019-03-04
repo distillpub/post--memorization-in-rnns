@@ -18,7 +18,7 @@ quantitative:
 
 convert:
 	PYTHONPATH=./ python3 python/convert/export-checkpoint.py
-	PYTHONPATH=./ python3 python/convert/dataset-maps.py autocomplete > article/data/autocomplete.json
+	PYTHONPATH=./ python3 python/convert/dataset-maps.py autocomplete > public/data/autocomplete.json
 	PYTHONPATH=./ python3 python/convert/precompute.py
 	PYTHONPATH=./ python3 python/convert/tfsummary.py
 
@@ -52,8 +52,8 @@ server:
 sync:
 	rsync --info=progress2 -urltv --delete \
 		--exclude 'python/save-old' --exclude 'python/save' --exclude 'python/download/content' \
-		--exclude 'article/save' --exclude 'article/node_modules' \
-		--exclude 'article/bundle.js' --exclude 'article/data' \
+		--exclude 'public/save' --exclude 'public/node_modules' \
+		--exclude 'public/bundle.js' --exclude 'public/data' \
 		-e ssh ./ amazon-gpu:~/workspace/connectivity
 
 fetch-python:
@@ -64,6 +64,6 @@ fetch-python:
 
 fetch-article:
 	rsync --info=progress2 -urltv --delete \
-	-e ssh amazon-gpu:~/workspace/connectivity/article/save/ ./article/save
+	-e ssh amazon-gpu:~/workspace/connectivity/article/save/ ./public/save
 	rsync --info=progress2 -urltv --delete \
-	-e ssh amazon-gpu:~/workspace/connectivity/article/data/ ./article/data
+	-e ssh amazon-gpu:~/workspace/connectivity/article/data/ ./public/data

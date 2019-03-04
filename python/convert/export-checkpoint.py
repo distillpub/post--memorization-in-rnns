@@ -9,7 +9,7 @@ import tensorflow as tf
 
 dirname = path.dirname(path.realpath(__file__))
 save_dir = path.join(dirname, '..', 'save')
-article_save_dir = path.join(dirname, '..', '..', 'article', 'save')
+article_save_dir = path.join(dirname, '..', '..', 'public', 'save')
 
 
 class ExportCheckpoint:

@@ -1,10 +1,11 @@
 __pycache__
 node_modules/
-article/data/generate-training.csv
-article/save/*
-!article/save/autocomplete_gru/
-article/bundle.js
+public/data/generate-training.csv
+public/save/*
+!public/save/autocomplete_gru/
+
 python/save/
 python/save-old/
 python/data/
 python/download/content
+.DS_Store

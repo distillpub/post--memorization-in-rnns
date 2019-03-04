@@ -7,7 +7,7 @@ import pandas as pd
 
 dirname = path.dirname(path.realpath(__file__))
 save_dir = path.join(dirname, '..', 'save')
-article_data_dir = path.join(dirname, '..', '..', 'article', 'data')
+article_data_dir = path.join(dirname, '..', '..', 'public', 'data')
 
 
 def read_tf_summary(name, alpha=0.25):
