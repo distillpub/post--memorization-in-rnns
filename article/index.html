@@ -74,31 +74,28 @@
     <d-cite key="moniz2018nlstm"></d-cite>, heavily rely on quantitative
     comparisons. These comparisons often measure accuracy or
     cross entropy loss on standard problems such as Penn Treebank<d-cite key="penntreebank"></d-cite>, Chinese
-    Poetry Generation, or text8<d-cite key="text8"></d-cite> generation where the task is to predict the
+    Poetry Generation, or text8<d-cite key="text8"></d-cite>, where the task is to predict the
     next character given existing input.
   </p>
   <p>
     While quantitative comparisons are useful, they only provide partial
-    insight into the how a recurrent unit memories. A model can, for example,
+    insight into the how a recurrent unit memorizes. A model can, for example,
     achieve high accuracy and cross entropy loss by just providing highly accurate
     predictions in cases that only require short-term memorization, while
-    being very inaccurate regarding predictions that require long-term
-    memorization. For autocompleting words in a sentence, which will be studied
-    here, a model may prioritize high accuracy when most of the characters
-    in a word are known, but not have any long-term contextual understanding
-    that allows it to predict a word when only the first few characters are
-    known.
+    being inaccurate at predictions that require long-term
+    memorization.
+    For example, when autocompleting words in a sentence, a model with only short-term understanding could still exhibit high accuracy completing the ends of words once most of the characters are present.
+    However, without longer term contextual understanding it won't be able to predict words when only a few characters are known.
   </p>
   <p>
     This article presents a qualitative visualization method for comparing
     recurrent units with regards to memorization and contextual understanding.
-    This method is applied to some well known and recently proposed
-    recurrent units, which are briefly reviewed in the first section.
+    The method is applied to the three recurrent units mentioned above: Nested LSTMs, LSTMs, and GRUs.
   </p>
 
   <h2 id="recurrent-units">Recurrent Units</h2>
   <p>
-    The networks that will be analyzed, all use a simple RNN structure:
+    The networks that will be analyzed all use a simple RNN structure:
   </p>
   <figure class="ar-math-figure">
     <div class="ar-math-grid" style="grid-template-rows: repeat(auto, 3);">
@@ -137,11 +134,11 @@
   </figure>
   <p>
     Several solutions to the vanishing gradient problem have been proposed over
-    the years. Most popular are the aforementioned LSTM and GRU units, but this
-    is an active area of research, and recently Nested LSTMs have also been proposed
-    <d-cite key="moniz2018nlstm"></d-cite>. Both LSTM and GRU are well known
+    the years. The most popular are the aforementioned LSTM and GRU units, but this
+    is still an area of active research. Both LSTM and GRU are well known
     and <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
-    thoroughly explained in literature</a>. An explanation of Nested LSTMs
+    thoroughly explained in literature</a>. Recently, Nested LSTMs have also been proposed
+    <d-cite key="moniz2018nlstm"></d-cite>--an explanation of Nested LSTMs
     can be found <a href="#appendix-nestedlstm">in the appendix</a>.
   </p>
   <figure id="ar-recurrent-units" data-show="nlstm">
@@ -164,10 +161,10 @@
     </figcaption>
   </figure>
   <p>
-    It is not entirely clear why one recurrent unit is better than another
+    It is not entirely clear why one recurrent unit performs better than another
     in some applications, while in other applications it is another type of
-    recurrent unit that is better. Theoretically, they all solve the vanishing
-    gradient problem, but in practice, their performance is highly application
+    recurrent unit that performs better. Theoretically they all solve the vanishing
+    gradient problem, but in practice their performance is highly application
     dependent.
   </p>
   <p>
@@ -179,35 +176,31 @@
 
   <h2 id="comparing-recurrent-units">Comparing Recurrent Units</h2>
   <p>
-    Comparing the different Recurrent Units is an important task, and it is
-    often much more involved than just comparing the accuracy or cross entropy
-    loss. For example, differences in these high-level quantitative measures
+    Comparing different Recurrent Units is often more involved than simply comparing the accuracy or cross entropy
+    loss. Differences in these high-level quantitative measures
     can have many explanations and may only be because of some small improvement
-    in predictions that only requires short-term contextual understanding. While
-    in reality, it is often the long-term contextual understanding that is of
-    interest to us.
+    in predictions that only requires short-term contextual understanding,
+    while it is often the long-term contextual understanding that is of interest.
   </p>
   <h3 id="a-problem-for-qualitative-analysis">A problem for qualitative analysis</h3>
   <p>
-    Therefore, a good problem for qualitatively analyzing contextual
+    Therefore a good problem for qualitatively analyzing contextual
     understanding should have a human-interpretable output and depend both on
     long-term and short-term contextual understanding. The typical problems
     that are often used, such as Penn Treebank<d-cite key="penntreebank"></d-cite>, Chinese Poetry Generation, or
-    <d-cite key="text8"></d-cite> generation do not have outputs that are easy to reason about. As they
+    <d-cite key="text8"></d-cite> generation do not have outputs that are easy to reason about, as they
     require an extensive understanding of either grammar, Chinese poetry, or
-    only outputs a single letter.
+    only output a single letter.
   </p>
   <p id="ar-section-autocomplete">
-    To this end, the autocomplete problem is used. Each character is mapped
-    to a target that represents the entire word. To make it extra challenging,
-    the space leading up to the word should also map to that word. The
-    prediction for the space character is in particular useful for showing
-    contextual understanding.
+    To this end, this article studies the autocomplete problem. Each character is mapped
+    to a target that represents the entire word. The space leading up to the word should also map to that target.
+    This prediction based on the space character is in particular useful for showing contextual understanding.
   </p>
   <p>
-    This makes the autocomplete problem quite similar to the text8 generation
-    problem, where the only difference is that instead of predicting the next letter
-    the entire word is predicted. Doing this makes the output much more
+    The autocomplete problem is quite similar to the text8 generation
+    problem: the only difference is that instead of predicting the next letter,
+    the model predicts an entire word. This makes the output much more
     interpretable. Finally, because of its close relation to text8 generation,
     existing literature on text8 generation is relevant and comparable,
     in the sense that models that work well on text8 generation should work
