@@ -84,7 +84,7 @@ class AccuracyGraph {
     this._xLabel = this._svg.append('text')
       .attr('text-anchor', 'middle')
       .attr('y', height - margin.bottom - xLabelHeight)
-      .text('charecters from word');
+      .text('characters from word');
 
     const yLabelTextPath = this._svg.append('path')
       .attr('d', `M${margin.left + yLabelWidth / 2},${margin.top + this._innerHeight} V${margin.top}`)
