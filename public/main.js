@@ -13,7 +13,7 @@ const dl = require('deeplearn');
 
 //const dataDirectory = '/uploads/blogpost-recurrent-units-in-rnn/';
 //const dataDirectory = '/blog-recurrent-units/';
-const dataDirectory = '/';
+const dataDirectory = '';
 
 async function setupHeroDiagram() {
   const lstmConnectivity = new HeroConnectivity({
