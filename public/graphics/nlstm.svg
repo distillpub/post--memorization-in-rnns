@@ -6046,7 +6046,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="237.12474"
+     inkscape:cx="252.79296"
      inkscape:cy="195.64494"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -6075,7 +6075,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -7298,7 +7298,7 @@
          id="flowPara9553"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9555">Forget Gates:</flowSpan> controls how much of the old cell value is used in the new cell value.</flowPara></flowRoot>    <flowRoot
+   id="flowSpan9555">Forget Gates:</flowSpan> control how much of the old cell value is used in the new cell value.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-46.327702,-115.87663)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="flowRoot9565"
@@ -7314,7 +7314,9 @@
          style="font-size:10.66666698px"
          id="flowPara9563"><flowSpan
    id="flowSpan9561"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Outer Output Gate:</flowSpan> controls how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Outer Output Gate:</flowSpan> </flowPara><flowPara
+         style="font-size:10.66666698px"
+         id="flowPara16376">control how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot9595"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -7330,7 +7332,7 @@
          id="flowPara9593"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9591">Input Gates:</flowSpan> controls how much of input is used in the new cell value.</flowPara></flowRoot>    <path
+   id="flowSpan9591">Input Gates:</flowSpan> control how much of input is used in the new cell value.</flowPara></flowRoot>    <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path12802"
@@ -7358,7 +7360,9 @@
          id="flowPara19919"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan19917">Inner Output Gate:</flowSpan> controls how much of the new inner cell value is outputted to the outer cell value.</flowPara><flowPara
+   id="flowSpan19917">Inner Output Gate:</flowSpan> </flowPara><flowPara
+         style="font-size:10.66666698px"
+         id="flowPara16378">control how much of the new inner cell value is outputted to the outer cell value.</flowPara><flowPara
          style="font-size:10.66666698px"
          id="flowPara19923">. </flowPara></flowRoot>  </g>
 </svg>

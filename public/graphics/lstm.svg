@@ -2280,8 +2280,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="275.55348"
-     inkscape:cy="65.03584"
+     inkscape:cx="258.58291"
+     inkscape:cy="93.32011"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -2749,7 +2749,9 @@
          id="flowPara9553"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9555">Forget Gate:</flowSpan> controls how much of the old cell value is used in the new cell value.</flowPara></flowRoot>    <flowRoot
+   id="flowSpan9555">Forget Gate:</flowSpan> control how</flowPara><flowPara
+         style="font-size:10.66666698px"
+         id="flowPara9634"> much of the old cell value is used in the new cell value.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-46.226522,-114.67418)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="flowRoot9565"
@@ -2765,7 +2767,7 @@
          style="font-size:10.66666698px"
          id="flowPara9563"><flowSpan
    id="flowSpan9561"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Output Gate:</flowSpan> controls how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Output Gate:</flowSpan> control how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot9595"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2781,7 +2783,7 @@
          id="flowPara9593"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9591">Input Gate:</flowSpan> controls how much of input is used in the new cell value.</flowPara></flowRoot>    <g
+   id="flowSpan9591">Input Gate:</flowSpan> control how much of input is used in the new cell value.</flowPara></flowRoot>    <g
        id="g8240"
        transform="translate(24.656694,-114.63502)">
       <g
@@ -2798,19 +2800,15 @@
            cx="53.453884"
            id="circle8131"
            style="opacity:1;fill:#e0cef5;fill-opacity:1;stroke:#666666;stroke-width:0.35600001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-        <text
-           id="text8137"
-           y="181.86954"
-           x="52.1124"
+        <g
+           aria-label="σ"
            style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.35600001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           xml:space="preserve"><tspan
+           id="text8137">
+          <path
+             d="m 54.234579,180.90698 q 0,0.29748 -0.117478,0.52675 -0.115583,0.22738 -0.333485,0.35054 -0.216007,0.12316 -0.507807,0.12316 -0.445279,0 -0.695393,-0.27285 -0.250114,-0.27285 -0.250114,-0.75413 0,-1.08762 1.121724,-1.08762 h 0.945506 v 0.26907 h -0.500228 q 0.337275,0.31643 0.337275,0.84508 z m -1.578371,-0.0265 q 0,0.36759 0.161059,0.56655 0.161058,0.19706 0.466121,0.19706 0.301274,0 0.462332,-0.18569 0.162953,-0.18759 0.162953,-0.53244 0,-0.5116 -0.329696,-0.86403 h -0.123162 q -0.420646,0 -0.610126,0.19706 -0.189481,0.19705 -0.189481,0.62149 z"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055587px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#666666;fill-opacity:1;stroke-width:0.35600001;stroke-miterlimit:4;stroke-dasharray:none"
-             y="181.86954"
-             x="52.1124"
-             id="tspan8135"
-             sodipodi:role="line">σ<tspan
-   id="tspan8133"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.11666656px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';baseline-shift:sub" /></tspan></text>
+             id="path23026" />
+        </g>
       </g>
     </g>
     <g
@@ -2859,19 +2857,15 @@
            cx="53.453884"
            cy="180.76712"
            r="2.8220186" />
-        <text
-           xml:space="preserve"
+        <g
+           aria-label="σ"
            style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.35600001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           x="52.1124"
-           y="181.86954"
-           id="text8311"><tspan
-             sodipodi:role="line"
-             id="tspan8309"
-             x="52.1124"
-             y="181.86954"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055587px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#666666;fill-opacity:1;stroke-width:0.35600001;stroke-miterlimit:4;stroke-dasharray:none">σ<tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.11666656px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';baseline-shift:sub"
-   id="tspan8307" /></tspan></text>
+           id="text8311">
+          <path
+             d="m 54.234579,180.90698 q 0,0.29748 -0.117478,0.52675 -0.115583,0.22738 -0.333485,0.35054 -0.216007,0.12316 -0.507807,0.12316 -0.445279,0 -0.695393,-0.27285 -0.250114,-0.27285 -0.250114,-0.75413 0,-1.08762 1.121724,-1.08762 h 0.945506 v 0.26907 h -0.500228 q 0.337275,0.31643 0.337275,0.84508 z m -1.578371,-0.0265 q 0,0.36759 0.161059,0.56655 0.161058,0.19706 0.466121,0.19706 0.301274,0 0.462332,-0.18569 0.162953,-0.18759 0.162953,-0.53244 0,-0.5116 -0.329696,-0.86403 h -0.123162 q -0.420646,0 -0.610126,0.19706 -0.189481,0.19705 -0.189481,0.62149 z"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055587px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#666666;fill-opacity:1;stroke-width:0.35600001;stroke-miterlimit:4;stroke-dasharray:none"
+             id="path23023" />
+        </g>
       </g>
     </g>
     <g
