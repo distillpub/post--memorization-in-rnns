@@ -4875,7 +4875,7 @@
          id="flowPara9553"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9555">Update Gate:</flowSpan> control if the new output is the new input or the old output.</flowPara></flowRoot>    <flowRoot
+   id="flowSpan9555">Update Gate:</flowSpan> controls if the new output is the new input or the old output.</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot9595"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -4891,7 +4891,7 @@
          id="flowPara9593"
          style="font-size:10.66666698px"><flowSpan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan9591">Reset Gate:</flowSpan> control how much of the old output is part of the new input.</flowPara></flowRoot>    <g
+   id="flowSpan9591">Reset Gate:</flowSpan> controls how much of the old output is part of the new input.</flowPara></flowRoot>    <g
        transform="matrix(0.26458333,0,0,0.26458333,29.717224,-14.704757)"
        data-name="&lt;Group&gt;"
        id="g10294"
