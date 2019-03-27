@@ -6046,7 +6046,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="252.79296"
+     inkscape:cx="258.44981"
      inkscape:cy="195.64494"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -7313,10 +7313,10 @@
            id="rect9557" /></flowRegion><flowPara
          style="font-size:10.66666698px"
          id="flowPara9563"><flowSpan
-   id="flowSpan9561"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Outer Output Gate:</flowSpan> </flowPara><flowPara
+           id="flowSpan9561"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Outer Output Gate:</flowSpan></flowPara><flowPara
          style="font-size:10.66666698px"
-         id="flowPara16376">control how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
+         id="flowPara16376">controls how much of the new cell value is outputted.</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot9595"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -7359,10 +7359,10 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.33333302px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#666666;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara19919"
          style="font-size:10.66666698px"><flowSpan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
-   id="flowSpan19917">Inner Output Gate:</flowSpan> </flowPara><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"
+           id="flowSpan19917">Inner Output Gate:</flowSpan></flowPara><flowPara
          style="font-size:10.66666698px"
-         id="flowPara16378">control how much of the new inner cell value is outputted to the outer cell value.</flowPara><flowPara
+         id="flowPara16378">controls how much of the new inner cell value is outputted to the outer cell value.</flowPara><flowPara
          style="font-size:10.66666698px"
          id="flowPara19923">. </flowPara></flowRoot>  </g>
 </svg>
